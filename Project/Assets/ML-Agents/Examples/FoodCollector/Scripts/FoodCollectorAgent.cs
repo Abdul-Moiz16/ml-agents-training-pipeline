@@ -251,6 +251,11 @@ public class FoodCollectorAgent : Agent
                 m_FoodCollecterSettings.totalScore -= 1;
             }
         }
+        if (collision.gameObject.CompareTag("obstacle"))
+        {
+            // Small penalty for hitting obstacles
+            AddReward(-1f);
+        }
     }
 
     public void SetLaserLengths()

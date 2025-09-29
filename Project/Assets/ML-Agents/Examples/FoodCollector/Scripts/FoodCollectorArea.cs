@@ -9,6 +9,7 @@ public class FoodCollectorArea : Area
     public int numBadFood;
     public bool respawnFood;
     public float range;
+    public ObstacleSpawner obstacleSpawner;
 
     void CreateFood(int num, GameObject type)
     {
@@ -37,6 +38,12 @@ public class FoodCollectorArea : Area
 
         CreateFood(numFood, food);
         CreateFood(numBadFood, badFood);
+
+        // Respawn obstacles if applicable
+        if (obstacleSpawner != null)
+        {
+            obstacleSpawner.RespawnObstacles(transform.position, range);
+        }
     }
 
     public override void ResetArea()
