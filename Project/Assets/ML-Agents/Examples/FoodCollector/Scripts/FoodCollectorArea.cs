@@ -4,7 +4,9 @@ using Unity.MLAgentsExamples;
 public class FoodCollectorArea : Area
 {
     public GameObject food;
+    public GameObject yellowFood;
     public GameObject badFood;
+    public int numYellowFood;
     public int numFood;
     public int numBadFood;
     public bool respawnFood;
@@ -38,6 +40,7 @@ public class FoodCollectorArea : Area
 
         CreateFood(numFood, food);
         CreateFood(numBadFood, badFood);
+        CreateFood(numYellowFood, yellowFood);
 
         // Respawn obstacles if applicable
         if (obstacleSpawner != null)
@@ -48,5 +51,19 @@ public class FoodCollectorArea : Area
 
     public override void ResetArea()
     {
+    }
+
+    public void OnFoodCollision(GameObject collision)
+    {
+        if (collision.gameObject.CompareTag("yellowFood"))
+        {
+            Satiate();
+            collision.gameObject.GetComponent<FoodLogic>().OnEaten();
+            AddReward(0.5f);
+            if (contribute)
+            {
+                m_FoodCollecterSettings.totalScore += 0.5f;
+            }
+        }
     }
 }
