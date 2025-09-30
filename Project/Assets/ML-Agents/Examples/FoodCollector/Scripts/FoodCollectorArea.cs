@@ -4,11 +4,11 @@ using Unity.MLAgentsExamples;
 public class FoodCollectorArea : Area
 {
     public GameObject food;
-    public GameObject yellowFood;
     public GameObject badFood;
-    public int numYellowFood;
+    public GameObject yellowFood; // New yellow food prefab
     public int numFood;
     public int numBadFood;
+    public int numYellowFood; // Number of yellow food
     public bool respawnFood;
     public float range;
     public ObstacleSpawner obstacleSpawner;
@@ -40,7 +40,7 @@ public class FoodCollectorArea : Area
 
         CreateFood(numFood, food);
         CreateFood(numBadFood, badFood);
-        CreateFood(numYellowFood, yellowFood);
+        CreateFood(numYellowFood, yellowFood); // Spawn yellow food
 
         // Respawn obstacles if applicable
         if (obstacleSpawner != null)
