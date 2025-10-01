@@ -5,10 +5,10 @@ public class FoodCollectorArea : Area
 {
     public GameObject food;
     public GameObject badFood;
-    public GameObject yellowFood; // New yellow food prefab
+    // public GameObject yellowFood; // New yellow food prefab
     public int numFood;
     public int numBadFood;
-    public int numYellowFood; // Number of yellow food
+    // public int numYellowFood; // Number of yellow food
     public bool respawnFood;
     public float range;
     public ObstacleSpawner obstacleSpawner;
@@ -40,7 +40,7 @@ public class FoodCollectorArea : Area
 
         CreateFood(numFood, food);
         CreateFood(numBadFood, badFood);
-        CreateFood(numYellowFood, yellowFood); // Spawn yellow food
+        // CreateFood(numYellowFood, yellowFood); // Spawn yellow food
 
         // Respawn obstacles if applicable
         if (obstacleSpawner != null)
@@ -53,17 +53,17 @@ public class FoodCollectorArea : Area
     {
     }
 
-    public void OnFoodCollision(GameObject collision)
-    {
-        if (collision.gameObject.CompareTag("yellowFood"))
-        {
-            Satiate();
-            collision.gameObject.GetComponent<FoodLogic>().OnEaten();
-            AddReward(0.5f);
-            if (contribute)
-            {
-                m_FoodCollecterSettings.totalScore += 0.5f;
-            }
-        }
-    }
+    // public void OnFoodCollision(GameObject collision)
+    // {
+    //     if (collision.gameObject.CompareTag("yellowFood"))
+    //     {
+    //         Satiate();
+    //         collision.gameObject.GetComponent<FoodLogic>().OnEaten();
+    //         AddReward(0.5f);
+    //         if (contribute)
+    //         {
+    //             m_FoodCollecterSettings.totalScore += 0.5f;
+    //         }
+    //     }
+    // }
 }

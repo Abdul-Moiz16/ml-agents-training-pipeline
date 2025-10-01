@@ -240,16 +240,16 @@ public class FoodCollectorAgent : Agent
                 m_FoodCollecterSettings.totalScore += 1;
             }
         }
-        if (collision.gameObject.CompareTag("yellowFood"))
-        {
-            Satiate();
-            collision.gameObject.GetComponent<FoodLogic>().OnEaten();
-            AddReward(0.5f);
-            if (contribute)
-            {
-                m_FoodCollecterSettings.totalScore += 0.5f;
-            }
-        }
+        // if (collision.gameObject.CompareTag("yellowFood"))
+        // {
+        //     Satiate();
+        //     collision.gameObject.GetComponent<FoodLogic>().OnEaten();
+        //     AddReward(0.5f);
+        //     if (contribute)
+        //     {
+        //         m_FoodCollecterSettings.totalScore += 0.5f;
+        //     }
+        // }
         if (collision.gameObject.CompareTag("badFood"))
         {
             Poison();
