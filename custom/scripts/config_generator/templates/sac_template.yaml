@@ -1,0 +1,31 @@
+behaviors:
+  3DBall:
+
+    trainer_type: sac
+
+    hyperparameters:
+      learning_rate: {{learning_rate}}
+      learning_rate_schedule: {{learning_rate_schedule}}
+      batch_size: {{batch_size}}
+      buffer_size: {{buffer_size}}
+      buffer_init_steps: {{buffer_init_steps}}
+      tau: {{tau}}
+      steps_per_update: {{steps_per_update}}
+      save_replay_buffer: {{save_replay_buffer}}
+      init_entcoef: {{init_entcoef}}
+      reward_signal_steps_per_update: {{reward_signal_per_step}}
+
+    network_settings:
+      normalize: {{normalize}}
+      hidden_units: {{hidden_units}}
+      num_layers: {{num_layers}}
+      vis_encode_type: {{vis_encode_type}}
+
+    reward_signals:
+      extrinsic:
+        gamma: {{gammma}}
+        strength: {{strength}}
+    keep_checkpoints: {{keep_checkpoints}}
+    max_steps: {{max_steps}}
+    time_horizon: {{time_horizon}}
+    summary_freq: {{summary_freq}}
