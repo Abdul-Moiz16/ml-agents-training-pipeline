@@ -33,8 +33,8 @@ conda activate mlagents
 Install ML-Agents and ML-Agents Environments from the local source. Navigate to directory where you have this repository downloaded, then run:
 ```bash
 cd path\to\ml-agents
-python -m pip install ./ml-agents-envs
-python -m pip install ./ml-agents
+python -m pip install ./mlagents-envs
+python -m pip install ./mlagents
 ```
 
 ## How to run training
