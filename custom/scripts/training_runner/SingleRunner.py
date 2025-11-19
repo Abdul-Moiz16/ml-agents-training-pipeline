@@ -5,10 +5,12 @@ from datetime import datetime
 import psutil
 import os
 
+import socket
+
 from pathlib import Path
 
 # --- ABSOLUTE FIXED PROJECT ROOT ---
-PROJECT_ROOT = Path(r"C:\Users\nico\PycharmProjects\Group8-AI-ML") # please change before use
+PROJECT_ROOT = Path(__file__).resolve().parents[3] 
 
 CUSTOM_DIR = PROJECT_ROOT / "custom"
 
@@ -18,7 +20,8 @@ RESULTS_DIR = CUSTOM_DIR / "data" / "results"
 
 UNITY_ENV_PATH = CUSTOM_DIR / "builds" / "3DBall" / "UnityEnvironment.exe"
 
-INITIALS = "NM" # please change before use
+MACHINE_NAME = hostname = socket.gethostname()
+
 
 class Runner:
     """starts a single ml agent training"""
@@ -95,8 +98,8 @@ class Runner:
 
 def make_run_id(config_file: Path) -> str:
 
-   # date = datetime.now().strftime("%Y-%m-%d")
-    return f"{INITIALS}_{config_file.stem}"
+    # date = datetime.now().strftime("%Y-%m-%d")
+    return f"{MACHINE_NAME}_{config_file.stem}"
 
 
 
