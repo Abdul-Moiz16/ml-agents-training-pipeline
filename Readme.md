@@ -7,7 +7,7 @@ Whilst in the root folder be sure to be in your python virtual env and have mlag
 If it is the first time running, in the terminal type:
 
 ```bash
-pip install training_manager/requirements.txt
+pip install -r training_manager/requirements.txt
 ```
 
 Then to run training, also in the terminal, type:
