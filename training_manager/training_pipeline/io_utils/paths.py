@@ -17,5 +17,10 @@ class Paths:
             return self.builds_dir / "3DBall_Windows" / "UnityEnvironment.exe"
         elif system == "Linux":
             return self.builds_dir / "3DBall_Linux" / "3DBall.x86_64"
+        elif system == "Darwin": # MacOS
+            return self.builds_dir / "3DBall_MacOS" / "3DBall.app"
         else:
             raise RuntimeError(f"Unsopported OS: {system}")
+
+        if not env_path.exists():
+            raise FileNotFoundError(f"Unity environment not found: {env_path}")
