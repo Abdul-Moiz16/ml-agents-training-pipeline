@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1764091288",
+        "python_version": "3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]",
+        "command_line_arguments": "/home/nimkita/miniconda3/envs/mlagents/bin/mlagents-learn /home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/configs_for_training/ppo_93e141f4ce.yaml --run-id=NimkitaArch_ppo_93e141f4ce --env=/home/nimkita/GitRepos/Group8-AI-ML/training_manager/builds/3DBall/UnityEnvironment.exe --no-graphics --results-dir=/home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/results --force",
+        "mlagents_version": "1.1.0",
+        "mlagents_envs_version": "1.1.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.8.0+cu128",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1764091288"
+    },
+    "total": 0.022129257000415237,
+    "count": 1,
+    "self": 0.002940712999588868,
+    "children": {
+        "run_training.setup": {
+            "total": 0.009332599000117625,
+            "count": 1,
+            "self": 0.009332599000117625
+        },
+        "TrainerController.start_learning": {
+            "total": 0.009855945000708743,
+            "count": 1,
+            "self": 0.00028319800094323,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 0.00956417099951068,
+                    "count": 1,
+                    "self": 0.00956417099951068
+                },
+                "trainer_threads": {
+                    "total": 9.22000253922306e-07,
+                    "count": 1,
+                    "self": 9.22000253922306e-07
+                },
+                "TrainerController._save_models": {
+                    "total": 7.654000000911765e-06,
+                    "count": 1,
+                    "self": 7.654000000911765e-06
+                }
+            }
+        }
+    }
+}
