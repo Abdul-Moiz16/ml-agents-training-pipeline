@@ -1,19 +1,33 @@
 # HOW TO RUN
 
-Currently works on Windows and Linux
+Currently works on Windows, Linux and MacOS
 
 Whilst in the root folder be sure to be in your python virtual env and have mlagents installed.
 
 If it is the first time running, in the terminal type:
 
 ```bash
-pip install -r training_manager/requirements.txt
+pip install -e .
 ```
 
-Then to run training, also in the terminal, type:
+To unistall the package type:
 ```bash
-python -m training_manager.training_pipeline.cli.run_experiment
+pip uninstall -y training-manager
 ```
+
+For help type:
+```bash
+mlrun -h
+```
+
+Then to run batch training, also in the terminal, type:
+```bash
+mlrun --batch
+```
+
+Changes to the code are automatically applied to the package unless they are major and change absolutely everything.
+
+Single run training currently not working
 
 Results are saved in training_manager/experiments/results
 

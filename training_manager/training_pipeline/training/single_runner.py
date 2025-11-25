@@ -9,7 +9,7 @@ import psutil
 import socket
 import yaml
 
-from training_manager.training_pipeline.io_utils.paths import Paths
+from training_pipeline.io_utils.paths import Paths
 
 paths = Paths()
 
