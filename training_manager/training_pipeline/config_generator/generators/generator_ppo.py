@@ -1,16 +1,12 @@
-from pathlib import Path
+from training_pipeline.io_utils.paths import Paths
 
-from custom.scripts.config_generator.generators.generator_base import ConfigGeneratorBase
-from custom.scripts.config_generator.parameters.params_ppo import PARAMS_PPO
+from training_pipeline.config_generator.generators.generator_base import ConfigGeneratorBase
+from training_pipeline.config_generator.parameters.params_ppo import PARAMS_PPO
 
-current_file = Path(__file__).resolve()
+paths = Paths()
 
-CONFIG_GENERATOR_DIR = current_file.parents[1]
-
-CUSTOM_DIR = current_file.parents[3]
-
-TEMPLATE_PATH = CONFIG_GENERATOR_DIR / "templates" / "ppo_template.yaml"
-OUTPUT_DIR = CUSTOM_DIR / "data" / "configs_for_training"
+TEMPLATE_PATH = paths.config_generator_dir / "templates" / "ppo_template.yaml"
+OUTPUT_DIR = paths.configs_dir
 
 def run_ppo_generator():
     gen = ConfigGeneratorBase(

@@ -25,25 +25,21 @@ class BatchRunner:
 
         run_folder = RESULTS_DIR / run_id
         flag_file = run_folder / "complete.flag"
+        behavior_dir = next(run_folder.glob("*/"), None)
 
         # folder doesnt exist, start training
         if not run_folder.exists():
-            return False
+            return "fresh"
 
         # flag exists, dont start training again
         if flag_file.exists():
-            return True
+            return "done"
 
-        # folder exists, flag doesnt exists
-        print("-----------------------------------------------------------------")
-        print(f"~i incomplete run detected: {run_id}")
-        print(f"~i deleting old result folder: {run_folder}")
+        if behavior_dir:
+            if any(behavior_dir.glob("*.pt")) or any(behavior_dir.glob("*.onnx")):
+                return "resume"
 
-        force_delete(run_folder)
-
-        print(f"~i result folder deleted: training will be restarted: {run_id}")
-        print("-----------------------------------------------------------------")
-        return False
+        return "stale"
 
     def run_all(self):
         
@@ -59,15 +55,20 @@ class BatchRunner:
 
         for cfg in configs:
             run_id = make_run_id(cfg)
+            status = self.run_completed(run_id)
 
-            # check if run already exists
-            if self.run_completed(run_id):
-                print(f"-----------------------------------------------------------------")
-                print(f"~i skip run {run_id}: already fully trained")
-                print(f"-----------------------------------------------------------------")
+            if status == "done":
+                print(f"~i skip {run_id}: already completed")
                 continue
 
-            self.runner.run(cfg, run_id)
+            resume = status == "resume"
+
+            if resume:
+                print(f"~i resuming run: {run_id}")
+            else:
+                print(f"~i starting fresh run: {run_id}")
+
+            self.runner.run(cfg, run_id, resume=resume)
 
         print(f"-----------------------------------------------------------------")
         print("~i all runs completed")

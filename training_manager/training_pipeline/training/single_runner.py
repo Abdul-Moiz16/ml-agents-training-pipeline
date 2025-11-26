@@ -101,7 +101,7 @@ class Runner:
     def __init__(self, env_path: Path = UNITY_ENV_PATH):
         self.env_path = Path(env_path)
 
-    def run(self, yaml_path: Path, run_id: str):
+    def run(self, yaml_path: Path, run_id: str, resume: bool):
         yaml_path = Path(yaml_path)
         if not yaml_path.exists():
             raise FileNotFoundError(f"~ YAML file not found: {yaml_path}")
@@ -130,8 +130,12 @@ class Runner:
             f"--env={self.env_path}",
             "--no-graphics",
             f"--results-dir={RESULTS_DIR}",
-            "--force",
         ]
+
+        if resume:
+            cmd.append("--resume")
+        else:
+            cmd.append("--force")
 
         print("-----------------------------------------------------------------")
         print("~i start training for:\n")

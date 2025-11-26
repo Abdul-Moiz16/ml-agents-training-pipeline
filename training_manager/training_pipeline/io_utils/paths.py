@@ -8,6 +8,8 @@ class Paths:
         self.experiments_dir = self.root_dir / "experiments"
         self.configs_dir = self.experiments_dir / "configs_for_training"
         self.results_dir = self.experiments_dir / "results"
+        self.training_pipeline_dir = self.root_dir / "training_pipeline"
+        self.config_generator_dir = self.training_pipeline_dir / "config_generator"
     
     @property
     def unity_env(self) -> Path:

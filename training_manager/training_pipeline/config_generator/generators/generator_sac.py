@@ -1,16 +1,18 @@
 from pathlib import Path
 
-from custom.scripts.config_generator.generators.generator_base import ConfigGeneratorBase
-from custom.scripts.config_generator.parameters.params_sac import PARAMS_SAC
+from training_pipeline.io_utils.paths import Paths
 
-current_file = Path(__file__).resolve()
+from training_pipeline.config_generator.generators.generator_base import ConfigGeneratorBase
+from training_pipeline.config_generator.parameters.params_sac import PARAMS_SAC
 
-CONFIG_GENERATOR_DIR = current_file.parents[1]
+paths = Paths()
 
-CUSTOM_DIR = current_file.parents[3]
+CONFIG_GENERATOR_DIR = paths.config_generator_dir
+
+CUSTOM_DIR = paths.root_dir
 
 TEMPLATE_PATH = CONFIG_GENERATOR_DIR / "templates" / "sac_template.yaml"
-OUTPUT_DIR = CUSTOM_DIR / "data" / "configs_for_training"
+OUTPUT_DIR = paths.configs_dir
 
 def run_sac_generator():
     gen = ConfigGeneratorBase(
