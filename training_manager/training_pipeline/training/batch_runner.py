@@ -1,10 +1,6 @@
-import os
-from pathlib import Path
-from datetime import datetime
 import shutil
-
 import stat
-
+from pathlib import Path
 
 from training_pipeline.training.single_runner import Runner, make_run_id
 from training_pipeline.io_utils.paths import Paths
@@ -15,23 +11,20 @@ CONFIGS_DIR = paths.configs_dir
 
 
 class BatchRunner:
-
+    """Runs all training configs in the configs directory."""
 
     def __init__(self):
         self.runner = Runner()
 
     @staticmethod
-    def run_completed(run_id: str) -> bool:
-
+    def run_completed(run_id: str) -> str:
         run_folder = RESULTS_DIR / run_id
         flag_file = run_folder / "complete.flag"
         behavior_dir = next(run_folder.glob("*/"), None)
 
-        # folder doesnt exist, start training
         if not run_folder.exists():
             return "fresh"
 
-        # flag exists, dont start training again
         if flag_file.exists():
             return "done"
 
@@ -42,7 +35,6 @@ class BatchRunner:
         return "stale"
 
     def run_all(self):
-        
         configs = sorted(CONFIGS_DIR.glob("*.yaml"))
         print(f"-----------------------------------------------------------------")
         print(f"~i found configs: {len(configs)}")
@@ -76,6 +68,7 @@ class BatchRunner:
 
 
 def force_delete(path: Path):
+    """Recursively delete a path, handling read-only files."""
     path = Path(path)
 
     if not path.exists():
@@ -93,4 +86,3 @@ def force_delete(path: Path):
             func(p)
 
     shutil.rmtree(path, onerror=remove_readonly)
-
