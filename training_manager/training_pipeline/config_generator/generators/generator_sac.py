@@ -1,9 +1,9 @@
 from pathlib import Path
 
-from training_pipeline.io_utils.paths import Paths
+from training_manager.training_pipeline.io_utils.paths import Paths
 
-from training_pipeline.config_generator.generators.generator_base import ConfigGeneratorBase
-from training_pipeline.config_generator.parameters.params_sac import PARAMS_SAC
+from training_manager.training_pipeline.config_generator.generators.generator_base import ConfigGeneratorBase
+from training_manager.training_pipeline.config_generator.parameters.params_sac import PARAMS_SAC
 
 paths = Paths()
 

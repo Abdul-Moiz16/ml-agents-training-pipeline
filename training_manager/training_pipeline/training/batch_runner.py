@@ -2,8 +2,8 @@ import shutil
 import stat
 from pathlib import Path
 
-from training_pipeline.training.single_runner import Runner, make_run_id
-from training_pipeline.io_utils.paths import Paths
+from training_manager.training_pipeline.training.single_runner import Runner, make_run_id
+from training_manager.training_pipeline.io_utils.paths import Paths
 
 paths = Paths()
 RESULTS_DIR = paths.results_dir

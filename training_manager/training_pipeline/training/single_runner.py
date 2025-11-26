@@ -3,12 +3,15 @@ import subprocess
 import time
 import platform
 import getpass
+import yaml
+import json
 from pathlib import Path
 
 import psutil
+import csv
 
-from training_pipeline.io_utils.paths import Paths
-from training_pipeline.monitoring.hardware_monitor import HardwareMonitorContext
+from training_manager.training_pipeline.io_utils.paths import Paths
+from training_manager.training_pipeline.monitoring.hardware_monitor import HardwareMonitorContext
 
 paths = Paths()
 
@@ -54,6 +57,7 @@ class Runner:
         log_dir = run_folder / "run_logs"
         log_dir.mkdir(parents=True, exist_ok=True)
         log_file = log_dir / "stream.log"
+        run_log_file = log_dir / "run_log.csv"
 
         cmd = [
             "mlagents-learn",
@@ -88,6 +92,13 @@ class Runner:
         hw_monitor = hw_monitor_ctx.monitor
 
         hw_monitor.record_initial_state()
+        # Persist static hardware snapshot for rebuild/backfill
+        try:
+            (run_folder / "hardware_init.json").write_text(
+                json.dumps(hw_monitor.initial_hardware_info, indent=2)
+            )
+        except Exception:
+            pass
         hw_monitor.start_continuous_monitoring()
 
         try:
@@ -139,7 +150,40 @@ class Runner:
         finally:
             hw_monitor.record_final_state()
             hw_monitor.save_to_csv()
-        end = time.time()
+            end = time.time()
+
+        # Write main summary row
+        cfg_meta = load_config(yaml_path)
+        hw_init = hw_monitor.initial_hardware_info
+        hw_final = hw_monitor.final_hardware_info
+
+        final_ram = hw_final.get("final_ram_mb", "NA")
+        final_cpu = hw_final.get("final_cpu_usage_percent", "NA")
+        avg_cpu = hw_final.get("average_cpu_usage_percent", "NA")
+        avg_ram = hw_final.get("average_ram_mb", "NA")
+
+        row = {k: "NA" for k in MAIN_HEADERS}
+        row.update({
+            "run_id": run_id,
+            "machine_id": MACHINE_NAME,
+            "run_log_file": str(run_log_file.relative_to(paths.root_dir)),
+            "train_duration_s": round(end - start, 2),
+            "final_ram_usage": final_ram,
+            "final_cpu_usage": final_cpu,
+            "avg_cpu_usage": avg_cpu,
+            "avg_ram_usage": avg_ram,
+            "time_to_convergence": "NA",
+            "steps_to_convergence": "NA",
+            "os_name": hw_init.get("operating_system", "NA"),
+            "cpu_physical_cores": hw_init.get("cpu_physical_cores_count", "NA"),
+            "cpu_logical_cores": hw_init.get("cpu_logical_cores_count", "NA"),
+            "cpu_clock_ghz": hw_init.get("cpu_clock_speed_ghz", "NA"),
+            "ram_mb": hw_init.get("total_ram_mb", "NA"),
+        })
+        row.update(cfg_meta)
+
+        main_csv = RESULTS_DIR / "main.csv"
+        append_main_row(main_csv, row)
 
         if returncode != 0:
             print("\n")
@@ -170,3 +214,81 @@ class Runner:
 
 def make_run_id(config_file: Path) -> str:
     return f"{MACHINE_NAME}_{config_file.stem}"
+
+# ---------------------------------------------------------------------------
+# Helpers to parse config and write main summary CSV
+# ---------------------------------------------------------------------------
+
+# Schema for main summary CSV
+MAIN_HEADERS = [
+    "run_id", "machine_id", "run_log_file",
+    "algo", "seed", "env_name",
+    "os_name", "cpu_physical_cores", "cpu_logical_cores", "cpu_clock_ghz", "ram_mb",
+    "avg_cpu_usage", "avg_ram_usage",
+    "learning_rate", "learning_rate_schedule", "batch_size", "buffer_size",
+    "normalize", "hidden_units", "num_layers", "vis_encode_type", "gamma", "strength",
+    "keep_checkpoints", "max_steps", "time_horizon", "summary_freq",
+    "buffer_init_steps", "tau", "steps_per_update", "save_replay_buffer",
+    "init_entcoef", "reward_signal_steps_per_update",
+    "beta", "epsilon", "lambd", "num_epoch",
+    "train_duration_s", "final_ram_usage", "final_cpu_usage",
+    "time_to_convergence", "steps_to_convergence",
+]
+
+
+def load_config(yaml_path: Path) -> dict:
+    """Parse YAML once; prepare defaults with NA for missing fields."""
+    data = yaml.safe_load(yaml_path.read_text())
+    behaviors = data.get("behaviors", {}) or {}
+    env_name, env_cfg = next(iter(behaviors.items())) if behaviors else ("", {})
+    trainer_type = env_cfg.get("trainer_type", "NA")
+
+    hyper = env_cfg.get("hyperparameters", {}) or {}
+    net = env_cfg.get("network_settings", {}) or {}
+    reward = env_cfg.get("reward_signals", {}).get("extrinsic", {}) or {}
+
+    def g(d, key):
+        return d.get(key, "NA")
+
+    return {
+        "algo": trainer_type,
+        "seed": env_cfg.get("seed", "NA"),
+        "env_name": env_name,
+        # shared
+        "learning_rate": g(hyper, "learning_rate"),
+        "learning_rate_schedule": g(hyper, "learning_rate_schedule"),
+        "batch_size": g(hyper, "batch_size"),
+        "buffer_size": g(hyper, "buffer_size"),
+        "normalize": g(net, "normalize"),
+        "hidden_units": g(net, "hidden_units"),
+        "num_layers": g(net, "num_layers"),
+        "vis_encode_type": g(net, "vis_encode_type"),
+        "gamma": g(reward, "gamma"),
+        "strength": g(reward, "strength"),
+        "keep_checkpoints": env_cfg.get("keep_checkpoints", "NA"),
+        "max_steps": env_cfg.get("max_steps", "NA"),
+        "time_horizon": env_cfg.get("time_horizon", "NA"),
+        "summary_freq": env_cfg.get("summary_freq", "NA"),
+        # SAC-only
+        "buffer_init_steps": g(hyper, "buffer_init_steps"),
+        "tau": g(hyper, "tau"),
+        "steps_per_update": g(hyper, "steps_per_update"),
+        "save_replay_buffer": g(hyper, "save_replay_buffer"),
+        "init_entcoef": g(hyper, "init_entcoef"),
+        "reward_signal_steps_per_update": g(hyper, "reward_signal_steps_per_update") or g(hyper, "reward_signal_per_step"),
+        # PPO-only
+        "beta": g(hyper, "beta"),
+        "epsilon": g(hyper, "epsilon"),
+        "lambd": g(hyper, "lambd"),
+        "num_epoch": g(hyper, "num_epoch"),
+    }
+
+
+def append_main_row(path: Path, row: dict):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    file_exists = path.exists()
+    with path.open("a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=MAIN_HEADERS)
+        if not file_exists:
+            writer.writeheader()
+        writer.writerow(row)

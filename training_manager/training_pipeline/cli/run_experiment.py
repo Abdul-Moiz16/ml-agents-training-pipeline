@@ -1,11 +1,10 @@
 import argparse
 import sys
 
-from training_pipeline.training.batch_runner import BatchRunner
-# from training_pipeline.training.single_runner import SingleRunner
-from training_pipeline.io_utils.paths import Paths
-from training_pipeline.config_generator.generators.generator_ppo import run_ppo_generator
-from training_pipeline.config_generator.generators.generator_sac import run_sac_generator
+from training_manager.training_pipeline.training.batch_runner import BatchRunner
+from training_manager.training_pipeline.io_utils.paths import Paths
+from training_manager.training_pipeline.config_generator.generators.generator_ppo import run_ppo_generator
+from training_manager.training_pipeline.config_generator.generators.generator_sac import run_sac_generator
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Run ML-Agents experiments and save results")

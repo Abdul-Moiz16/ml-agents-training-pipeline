@@ -18,17 +18,17 @@ class HardwareMonitor:
         self.step_count = 0
         
         if results_dir is None:
-            from training_pipeline.io_utils.paths import Paths
+            from training_manager.training_pipeline.io_utils.paths import Paths
             self.results_dir = Paths().results_dir
         else:
             self.results_dir = Path(results_dir)
         
-        self.initial_hardware_info = {}
-        self.final_hardware_info = {}
+        self.initial_hardware_info: Dict[str, Any] = {}
+        self.final_hardware_info: Dict[str, Any] = {}
         self.step_data = []
         self.training_metrics = {}
         
-        self._process = None
+        self._process: Optional[psutil.Process] = None
         self.start_time = None
         self.end_time = None
         self._is_monitoring = False
@@ -42,9 +42,9 @@ class HardwareMonitor:
         if self._csv_writer is not None:
             return
 
-        run_data_dir = self.results_dir / self.run_name
+        run_data_dir = self.results_dir / self.run_name / "run_logs"
         run_data_dir.mkdir(parents=True, exist_ok=True)
-        self._csv_path = run_data_dir / "hardware_ram_usage.csv"
+        self._csv_path = run_data_dir / "run_log.csv"
 
         self._csv_file = self._csv_path.open('w', newline='', encoding='utf-8')
         self._csv_writer = csv.writer(self._csv_file)
@@ -129,18 +129,6 @@ class HardwareMonitor:
         self.step_data.append(initial_step)
         self._write_step_row(initial_step)
         
-        print("\n" + "="*60)
-        print("HARDWARE INFORMATION (Pre-Training)")
-        print("="*60)
-        print(f"Operating System: {os_name}")
-        print(f"CPU Physical Cores: {cpu_physical_cores}")
-        print(f"CPU Logical Cores: {cpu_logical_cores}")
-        if cpu_clock_ghz:
-            print(f"CPU Clock Speed: {cpu_clock_ghz:.2f} GHz")
-        print(f"Total RAM: {ram_total_mb:.2f} MB ({ram_total_mb/1024:.2f} GB)")
-        print(f"RAM Usage: {ram_usage_percent_initial}%")
-        print("="*60 + "\n")
-        
         return self.initial_hardware_info
     
     def start_continuous_monitoring(self, process: Optional[psutil.Process] = None) -> None:
@@ -151,10 +139,15 @@ class HardwareMonitor:
         if not self.start_time:
             self.start_time = time.time()
         
-        # Prime CPU measurement (first call always returns 0.0)
         if self._process:
             try:
                 self._process.cpu_percent(interval=None)
+                # prime children too so first real sample isn't zero
+                for child in self._process.children(recursive=True):
+                    try:
+                        child.cpu_percent(interval=None)
+                    except psutil.Error:
+                        continue
             except (psutil.NoSuchProcess, psutil.AccessDenied):
                 self._process = None
     
@@ -168,37 +161,41 @@ class HardwareMonitor:
             return
         
         self.step_count += 1
-        
         system_memory = psutil.virtual_memory()
         total_ram_bytes = system_memory.total
-        
-        # get RAM - prefer process-specific when available
-        ram_source = "system"
+
+        cpu_percent = None
+        ram_percent = system_memory.percent
         ram_mb = None
-        if self._process:
-            try:
-                proc_memory = self._process.memory_info()
-                ram_bytes = proc_memory.rss
-                ram_mb = round(ram_bytes / (1024 ** 2), 2)
-                ram_percent = round((ram_bytes / total_ram_bytes) * 100, 2)
-                ram_source = "process"
-            except (psutil.NoSuchProcess, psutil.AccessDenied):
-                ram_percent = system_memory.percent
-                ram_source = "system"
-        else:
-            ram_percent = system_memory.percent
-        
-        # get CPU - prefer process-specific when available
         cpu_source = "system"
+        ram_source = "system"
+
         if self._process:
             try:
-                cpu_percent = self._process.cpu_percent(interval=None)
-                cpu_source = "process"
-            except (psutil.NoSuchProcess, psutil.AccessDenied):
-                cpu_percent = psutil.cpu_percent(interval=None)
-                cpu_source = "system"
-        else:
+                procs = [self._process] + self._process.children(recursive=True)
+                cpu_vals = []
+                ram_vals = []
+                for p in procs:
+                    try:
+                        cpu_vals.append(p.cpu_percent(interval=0.1))
+                        ram_vals.append(p.memory_info().rss)
+                    except psutil.Error:
+                        continue
+                if cpu_vals:
+                    raw_cpu = sum(cpu_vals)
+                    cpu_percent = raw_cpu / psutil.cpu_count(logical=True)
+                    cpu_source = "process_tree"
+                if ram_vals:
+                    ram_bytes = sum(ram_vals)
+                    ram_mb = round(ram_bytes / (1024 ** 2), 2)
+                    ram_percent = round((ram_bytes / total_ram_bytes) * 100, 2)
+                    ram_source = "process_tree"
+            except psutil.Error:
+                pass
+
+        if cpu_percent is None:
             cpu_percent = psutil.cpu_percent(interval=None)
+            cpu_source = "system"
         
         step = {
             'step_number': step_number,
@@ -223,14 +220,12 @@ class HardwareMonitor:
         ram_usage_percent_final = memory_info.percent
         elapsed_time = self.end_time - self.start_time if self.start_time else 0
         
-        # Compute stats, keeping process and system metrics separate
+        # Process vs system stats
         if self.step_data:
             process_ram = [s['ram_percent'] for s in self.step_data 
                           if s['ram_percent'] is not None and s.get('ram_source') == 'process']
             system_ram = [s['ram_percent'] for s in self.step_data 
-                         if s['ram_percent'] is not None and s.get('ram_source') == 'system']
-            
-            # Prefer process metrics when available
+                          if s['ram_percent'] is not None and s.get('ram_source') == 'system']
             if process_ram:
                 peak_ram_percent = max(process_ram)
                 average_ram_percent = sum(process_ram) / len(process_ram)
@@ -242,10 +237,9 @@ class HardwareMonitor:
                 average_ram_percent = ram_usage_percent_final
             
             process_cpu = [s['cpu_percent'] for s in self.step_data 
-                          if s['cpu_percent'] is not None and s.get('cpu_source') == 'process']
+                           if s['cpu_percent'] is not None and s.get('cpu_source') == 'process']
             system_cpu = [s['cpu_percent'] for s in self.step_data 
-                         if s['cpu_percent'] is not None and s.get('cpu_source') == 'system']
-            
+                          if s['cpu_percent'] is not None and s.get('cpu_source') == 'system']
             cpu_values = process_cpu if process_cpu else system_cpu
             if cpu_values:
                 peak_cpu_percent = max(cpu_values)
@@ -262,7 +256,7 @@ class HardwareMonitor:
             average_cpu_percent = None
             final_cpu_percent = None
         
-        # RAM MB stats (only available with process monitoring)
+        # RAM MB stats (process-only)
         if self.step_data:
             ram_mb_values = [s.get('ram_mb') for s in self.step_data if s.get('ram_mb') is not None]
             if ram_mb_values:
@@ -293,28 +287,6 @@ class HardwareMonitor:
             "average_ram_mb": round(average_ram_mb, 2) if average_ram_mb is not None else None
         }
         
-        print("\n" + "="*60)
-        print("HARDWARE INFORMATION (Post-Training)")
-        print("="*60)
-        print(f"Elapsed Time: {elapsed_time:.2f} seconds ({elapsed_time/60:.2f} minutes)")
-        print(f"Total Training Steps: {self.step_count}")
-        print(f"RAM Usage % (Final): {ram_usage_percent_final}%")
-        print(f"RAM Usage % (Peak): {peak_ram_percent}%")
-        print(f"RAM Usage % (Average): {average_ram_percent:.2f}%")
-        if final_ram_mb is not None:
-            print(f"RAM Usage MB (Final): {final_ram_mb:.2f} MB")
-            print(f"RAM Usage MB (Peak): {peak_ram_mb:.2f} MB")
-            print(f"RAM Usage MB (Average): {average_ram_mb:.2f} MB")
-        else:
-            print(f"RAM MB: No process-level data collected")
-        if final_cpu_percent is not None:
-            print(f"CPU Usage (Final): {final_cpu_percent:.2f}%")
-            print(f"CPU Usage (Peak): {peak_cpu_percent:.2f}%")
-            print(f"CPU Usage (Average): {average_cpu_percent:.2f}%")
-        else:
-            print(f"CPU Usage: No data collected")
-        print("="*60 + "\n")
-        
         return self.final_hardware_info
     
     def record_training_metrics(self, metrics: Dict[str, Any]) -> None:
@@ -338,9 +310,9 @@ class HardwareMonitor:
 
         # Write all data if streaming didn't happen
         if self._csv_path is None:
-            run_data_dir = output_dir / self.run_name
+            run_data_dir = output_dir / self.run_name / "run_logs"
             run_data_dir.mkdir(parents=True, exist_ok=True)
-            self._csv_path = run_data_dir / "hardware_ram_usage.csv"
+            self._csv_path = run_data_dir / "run_log.csv"
             with self._csv_path.open('w', newline='', encoding='utf-8') as f:
                 writer = csv.writer(f)
                 writer.writerow([
@@ -363,11 +335,9 @@ class HardwareMonitor:
         self._close_csv_writer()
         ram_csv_path = self._csv_path
 
-        print(f"\n✓ RAM usage data saved: {ram_csv_path}")
+        print(f"\n? RAM usage data saved: {ram_csv_path}")
         
-        # Metadata CSV aggregates summary info across all runs
         metadata_path = output_dir / "TESTING_all_runs_metadata.csv"
-        
         hardware_metadata = {
             'run_name': self.run_name,
             'timestamp': self.initial_hardware_info.get('timestamp', 'N/A'),
@@ -391,7 +361,6 @@ class HardwareMonitor:
             'data_folder': str(ram_csv_path)
         }
         
-        # Only write metadata in testing mode
         if self.testing:
             file_exists = metadata_path.exists()
             with metadata_path.open('a', newline='', encoding='utf-8') as f:
@@ -399,12 +368,11 @@ class HardwareMonitor:
                 if not file_exists:
                     writer.writeheader()
                 writer.writerow(hardware_metadata)
-            
-            print(f"✓ Metadata updated: {metadata_path}")
-            print(f"✓ Testing mode enabled - Hardware_metadata saved to CSV")
+            print(f"? Metadata updated: {metadata_path}")
+            print("? Testing mode enabled - Hardware metadata saved to CSV")
         else:
-            print(f"✓ Testing mode disabled - Hardware_metadata kept in dictionary only")
-            print(f"✓ RAM data file: {ram_csv_path}")
+            print("? Testing mode disabled - Hardware metadata kept in dictionary only")
+            print(f"? RAM data file: {ram_csv_path}")
         
         return ram_csv_path
     
