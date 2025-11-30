@@ -51,7 +51,7 @@ def rebuild():
     main_csv = results_root / "main.csv"
     rows = []
 
-    # walk all run_log.csv under results/**/run_logs/ (supports machine_id/run_id structure)
+    # walk all run_log.csv under results/**/run_logs/ (supports machine_id/run_id structure) and read run data
     for run_log in results_root.rglob("run_logs/run_log.csv"):
         run_dir = run_log.parent.parent  # up from run_logs to run folder
         cfg_copy = run_dir / "configuration.yaml"
