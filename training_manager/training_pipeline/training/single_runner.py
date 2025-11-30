@@ -52,12 +52,18 @@ class Runner:
         if not self.env_path.exists():
             raise FileNotFoundError(f"~ Unity environment not found: {self.env_path}")
 
-        run_folder = RESULTS_DIR / run_id
+        run_base = RESULTS_DIR / MACHINE_NAME
+        run_folder = run_base / run_id
         run_folder.mkdir(parents=True, exist_ok=True)
         log_dir = run_folder / "run_logs"
         log_dir.mkdir(parents=True, exist_ok=True)
         log_file = log_dir / "stream.log"
         run_log_file = log_dir / "run_log.csv"
+        # keep a copy of the config alongside the run
+        try:
+            (run_folder / "configuration.yaml").write_text(yaml_path.read_text())
+        except Exception:
+            pass
 
         cmd = [
             "mlagents-learn",
@@ -65,7 +71,7 @@ class Runner:
             f"--run-id={run_id}",
             f"--env={self.env_path}",
             "--no-graphics",
-            f"--results-dir={RESULTS_DIR}",
+            f"--results-dir={run_base}",
         ]
 
         if resume:
@@ -84,7 +90,7 @@ class Runner:
         start = time.time()
 
         hw_monitor_ctx = HardwareMonitorContext(
-            run_name=run_id,
+            run_name=str(Path(MACHINE_NAME) / run_id),
             steps_per_log=10000,
             testing=False,
             results_dir=RESULTS_DIR,
@@ -161,6 +167,8 @@ class Runner:
         final_cpu = hw_final.get("final_cpu_usage_percent", "NA")
         avg_cpu = hw_final.get("average_cpu_usage_percent", "NA")
         avg_ram = hw_final.get("average_ram_mb", "NA")
+        peak_cpu = hw_final.get("peak_cpu_usage_percent", "NA")
+        peak_ram = hw_final.get("peak_ram_mb", "NA")
 
         row = {k: "NA" for k in MAIN_HEADERS}
         row.update({
@@ -172,6 +180,8 @@ class Runner:
             "final_cpu_usage": final_cpu,
             "avg_cpu_usage": avg_cpu,
             "avg_ram_usage": avg_ram,
+            "peak_cpu_usage": peak_cpu,
+            "peak_ram_usage": peak_ram,
             "time_to_convergence": "NA",
             "steps_to_convergence": "NA",
             "os_name": hw_init.get("operating_system", "NA"),
@@ -224,7 +234,7 @@ MAIN_HEADERS = [
     "run_id", "machine_id", "run_log_file",
     "algo", "seed", "env_name",
     "os_name", "cpu_physical_cores", "cpu_logical_cores", "cpu_clock_ghz", "ram_mb",
-    "avg_cpu_usage", "avg_ram_usage",
+    "avg_cpu_usage", "avg_ram_usage", "peak_cpu_usage", "peak_ram_usage",
     "learning_rate", "learning_rate_schedule", "batch_size", "buffer_size",
     "normalize", "hidden_units", "num_layers", "vis_encode_type", "gamma", "strength",
     "keep_checkpoints", "max_steps", "time_horizon", "summary_freq",

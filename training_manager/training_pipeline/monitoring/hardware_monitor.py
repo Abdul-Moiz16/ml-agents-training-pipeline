@@ -42,6 +42,7 @@ class HardwareMonitor:
         if self._csv_writer is not None:
             return
 
+        # Expect run_name to already include machine_id/run_id when invoked from Runner
         run_data_dir = self.results_dir / self.run_name / "run_logs"
         run_data_dir.mkdir(parents=True, exist_ok=True)
         self._csv_path = run_data_dir / "run_log.csv"
