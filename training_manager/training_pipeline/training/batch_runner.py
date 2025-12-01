@@ -2,7 +2,7 @@ import shutil
 import stat
 from pathlib import Path
 
-from training_manager.training_pipeline.training.single_runner import Runner, make_run_id
+from training_manager.training_pipeline.training.single_runner import Runner, make_run_id, MACHINE_NAME
 from training_manager.training_pipeline.io_utils.paths import Paths
 
 paths = Paths()
@@ -18,9 +18,14 @@ class BatchRunner:
 
     @staticmethod
     def run_completed(run_id: str) -> str:
-        run_folder = RESULTS_DIR / run_id
+        run_base = RESULTS_DIR / MACHINE_NAME
+        run_folder = run_base / run_id
         flag_file = run_folder / "complete.flag"
-        behavior_dir = next(run_folder.glob("*/"), None)
+        # pick any behavior/output dir that is not run_logs
+        behavior_dir = next(
+            (d for d in run_folder.iterdir() if d.is_dir() and d.name != "run_logs"),
+            None,
+        )
 
         if not run_folder.exists():
             return "fresh"
