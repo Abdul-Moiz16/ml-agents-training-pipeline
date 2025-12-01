@@ -22,13 +22,13 @@ class BatchRunner:
         run_folder = run_base / run_id
         flag_file = run_folder / "complete.flag"
         # pick any behavior/output dir that is not run_logs
+        if not run_folder.exists():
+            return "fresh"
+
         behavior_dir = next(
             (d for d in run_folder.iterdir() if d.is_dir() and d.name != "run_logs"),
             None,
         )
-
-        if not run_folder.exists():
-            return "fresh"
 
         if flag_file.exists():
             return "done"

@@ -23,10 +23,13 @@ from training_manager.training_pipeline.io_utils.paths import Paths
 def stats_from_run_log(path: Path) -> Dict[str, float]:
     cpu_vals = []
     ram_vals = []
+    rows = []           # all rows
+    conv_rows = []      # rows considered for convergence (skip baseline step 0)
     last = {}
     with path.open(encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
+            rows.append(row)
             last = row
             try:
                 cpu_vals.append(float(row.get("cpu_percent", "")))
@@ -36,6 +39,13 @@ def stats_from_run_log(path: Path) -> Dict[str, float]:
                 ram_vals.append(float(row.get("ram_mb", "")))
             except (TypeError, ValueError):
                 pass
+            # keep rows with a real step number for convergence
+            try:
+                step_val = int(row.get("step_number") or row.get("steps") or row.get("step") or 0)
+            except (TypeError, ValueError):
+                step_val = 0
+            if step_val > 0:
+                conv_rows.append(row)
     try:
         final_mean = float(last.get("mean_reward", ""))
     except (TypeError, ValueError):
@@ -44,6 +54,36 @@ def stats_from_run_log(path: Path) -> Dict[str, float]:
         final_std = float(last.get("std_of_reward", ""))
     except (TypeError, ValueError):
         final_std = "NA"
+
+    # Convergence heuristic: require target mean over a small window with bounded noise
+    steps_to_convergence = "NA"
+    time_to_convergence = "NA"
+    TARGET_MEAN = 100 # configurable: reward target to consider "converged"
+    STD_RATIO = 1  # controls how much reward variability you allow relative to the mean. We compute std_of_reward / mean_reward for rows in the window; if that ratio is below STD_RATIO, the rewards are considered “stable enough.” A lower value means stricter stability (less noise allowed), a higher value means you’ll accept noisier rewards when deciding the run has converged.
+    WINDOW_ROWS = 3     # require this many consecutive rows to meet target/noise
+
+    if len(conv_rows) > 1:
+        for i in range(WINDOW_ROWS - 1, len(conv_rows)):
+            window = conv_rows[i - WINDOW_ROWS + 1 : i + 1]
+            try:
+                means = [float(r["mean_reward"]) for r in window]
+                stds = [float(r["std_of_reward"]) for r in window]
+                step_now = int(conv_rows[i].get("step_number") or conv_rows[i].get("steps") or conv_rows[i].get("step") or 0)
+                time_now = float(conv_rows[i]["time_elapsed"])
+            except (TypeError, ValueError, KeyError):
+                continue
+
+            if not means or any(m <= 0 for m in means):
+                continue
+
+            meets_target = all(m >= TARGET_MEAN for m in means)
+            bounded_noise = all((s >= 0) and (m != 0) and (s / abs(m) <= STD_RATIO) for s, m in zip(stds, means))
+
+            if meets_target and bounded_noise:
+                steps_to_convergence = step_now
+                time_to_convergence = time_now
+                break
+
     return {
         "avg_cpu_usage": round(sum(cpu_vals) / len(cpu_vals), 2) if cpu_vals else "NA",
         "avg_ram_usage": round(sum(ram_vals) / len(ram_vals), 2) if ram_vals else "NA",
@@ -51,6 +91,8 @@ def stats_from_run_log(path: Path) -> Dict[str, float]:
         "peak_ram_usage": round(max(ram_vals), 2) if ram_vals else "NA",
         "final_mean_reward": final_mean,
         "final_std_reward": final_std,
+        "steps_to_convergence": steps_to_convergence,
+        "time_to_convergence": time_to_convergence,
         "last": last,
     }
 
@@ -105,8 +147,8 @@ def rebuild():
                 "train_duration_s": last.get("time_elapsed", "NA"),
                 "final_mean_reward": stats.get("final_mean_reward", "NA"),
                 "final_std_reward": stats.get("final_std_reward", "NA"),
-                "time_to_convergence": "NA",
-                "steps_to_convergence": "NA",
+                "time_to_convergence": stats.get("time_to_convergence", "NA"),
+                "steps_to_convergence": stats.get("steps_to_convergence", "NA"),
             }
         )
         rows.append(row)
