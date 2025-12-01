@@ -11,8 +11,8 @@ PARAMS_PPO = {
 
     # Network settings
     "normalize":             [False], # default: False
-    "hidden_units":          [128, 64], # default: 128; range: 32 - 512
-    "num_layers":            [2, 3, 1], # default: 2; range: 1 - 3
+    "hidden_units":          [64, 128], # default: 128; range: 32 - 512
+    "num_layers":            [1, 3], # default: 2; range: 1 - 3
     "vis_encode_type":       ["simple"], # keep for 3D Ball
 
     # Reward
