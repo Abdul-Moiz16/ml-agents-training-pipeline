@@ -163,8 +163,8 @@ class Runner:
         hw_init = hw_monitor.initial_hardware_info
         hw_final = hw_monitor.final_hardware_info
 
-        final_ram = hw_final.get("final_ram_mb", "NA")
-        final_cpu = hw_final.get("final_cpu_usage_percent", "NA")
+        final_mean = hw_final.get("final_mean_reward", "NA")
+        final_std = hw_final.get("final_std_reward", "NA")
         avg_cpu = hw_final.get("average_cpu_usage_percent", "NA")
         avg_ram = hw_final.get("average_ram_mb", "NA")
         peak_cpu = hw_final.get("peak_cpu_usage_percent", "NA")
@@ -176,12 +176,12 @@ class Runner:
             "machine_id": MACHINE_NAME,
             "run_log_file": str(run_log_file.relative_to(paths.root_dir)),
             "train_duration_s": round(end - start, 2),
-            "final_ram_usage": final_ram,
-            "final_cpu_usage": final_cpu,
             "avg_cpu_usage": avg_cpu,
             "avg_ram_usage": avg_ram,
             "peak_cpu_usage": peak_cpu,
             "peak_ram_usage": peak_ram,
+            "final_mean_reward": final_mean,
+            "final_std_reward": final_std,
             "time_to_convergence": "NA",
             "steps_to_convergence": "NA",
             "os_name": hw_init.get("operating_system", "NA"),
@@ -241,7 +241,7 @@ MAIN_HEADERS = [
     "buffer_init_steps", "tau", "steps_per_update", "save_replay_buffer",
     "init_entcoef", "reward_signal_steps_per_update",
     "beta", "epsilon", "lambd", "num_epoch",
-    "train_duration_s", "final_ram_usage", "final_cpu_usage",
+    "train_duration_s", "final_mean_reward", "final_std_reward",
     "time_to_convergence", "steps_to_convergence",
 ]
 

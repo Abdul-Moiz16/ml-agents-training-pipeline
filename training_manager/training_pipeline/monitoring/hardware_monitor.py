@@ -285,7 +285,10 @@ class HardwareMonitor:
             "average_cpu_usage_percent": round(average_cpu_percent, 2) if average_cpu_percent is not None else None,
             "final_ram_mb": round(final_ram_mb, 2) if final_ram_mb is not None else None,
             "peak_ram_mb": round(peak_ram_mb, 2) if peak_ram_mb is not None else None,
-            "average_ram_mb": round(average_ram_mb, 2) if average_ram_mb is not None else None
+            "average_ram_mb": round(average_ram_mb, 2) if average_ram_mb is not None else None,
+            # training metrics from last step if available
+            "final_mean_reward": self.step_data[-1].get("mean_reward") if self.step_data else None,
+            "final_std_reward": self.step_data[-1].get("std_of_reward") if self.step_data else None,
         }
         
         return self.final_hardware_info

@@ -36,11 +36,21 @@ def stats_from_run_log(path: Path) -> Dict[str, float]:
                 ram_vals.append(float(row.get("ram_mb", "")))
             except (TypeError, ValueError):
                 pass
+    try:
+        final_mean = float(last.get("mean_reward", ""))
+    except (TypeError, ValueError):
+        final_mean = "NA"
+    try:
+        final_std = float(last.get("std_of_reward", ""))
+    except (TypeError, ValueError):
+        final_std = "NA"
     return {
         "avg_cpu_usage": round(sum(cpu_vals) / len(cpu_vals), 2) if cpu_vals else "NA",
         "avg_ram_usage": round(sum(ram_vals) / len(ram_vals), 2) if ram_vals else "NA",
         "peak_cpu_usage": round(max(cpu_vals), 2) if cpu_vals else "NA",
         "peak_ram_usage": round(max(ram_vals), 2) if ram_vals else "NA",
+        "final_mean_reward": final_mean,
+        "final_std_reward": final_std,
         "last": last,
     }
 
@@ -93,8 +103,8 @@ def rebuild():
                 "peak_cpu_usage": stats.get("peak_cpu_usage", "NA"),
                 "peak_ram_usage": stats.get("peak_ram_usage", "NA"),
                 "train_duration_s": last.get("time_elapsed", "NA"),
-                "final_ram_usage": last.get("ram_mb") or last.get("avg_ram_usage") or "NA",
-                "final_cpu_usage": last.get("cpu_percent") or last.get("avg_cpu_usage") or "NA",
+                "final_mean_reward": stats.get("final_mean_reward", "NA"),
+                "final_std_reward": stats.get("final_std_reward", "NA"),
                 "time_to_convergence": "NA",
                 "steps_to_convergence": "NA",
             }
