@@ -1,14 +1,29 @@
 import shutil
 import stat
+import time
 from pathlib import Path
 
 from training_pipeline.training.single_runner import Runner, make_run_id, MACHINE_NAME
 from training_pipeline.io_utils.paths import Paths
+from training_pipeline.config_generator.generate_all import generate_all
 
 paths = Paths()
 RESULTS_DIR = paths.results_dir
 CONFIGS_DIR = paths.configs_dir
 
+def generate_and_get_new_configs():
+    """
+    Calls generate_all() and returns ONLY the newly created YAML config paths.
+    Works by comparing directory state before and after generation.
+    """
+
+    before = set(CONFIGS_DIR.glob("*.yaml"))
+    generate_all()
+    after = set(CONFIGS_DIR.glob("*.yaml"))
+
+    # Newly created = set difference
+    new_files = sorted(after - before)
+    return new_files
 
 class BatchRunner:
     """Runs all training configs in the configs directory."""
@@ -70,6 +85,50 @@ class BatchRunner:
         print(f"-----------------------------------------------------------------")
         print("~i all runs completed")
         print(f"-----------------------------------------------------------------")
+
+    def run_forever(self, sleep_seconds=3):
+        """
+        1. Run all existing configs exactly once.
+        2. Then infinite loop:
+            - Call generate_all()
+            - Detect *only* the newly created configs
+            - Run only those configs
+            - Sleep
+        """
+
+        print("-----------------------------------------------------------------")
+        print("~i running existing configs once")
+        print("-----------------------------------------------------------------")
+
+        # Run all existing configs ONCE
+        self.run_all()
+
+        print("-----------------------------------------------------------------")
+        print("~i entering continuous config generation mode")
+        print("-----------------------------------------------------------------")
+
+        # Infinite generation → execution loop
+        while True:
+            print("\n~i generating new configs...")
+            new_cfgs = generate_and_get_new_configs()
+
+            if not new_cfgs:
+                print("~i no new configs generated (all duplicates?)")
+                time.sleep(sleep_seconds)
+                continue
+
+            print(f"~i detected {len(new_cfgs)} new configs:")
+            for cfg in new_cfgs:
+                print("   →", cfg.name)
+
+            print("\n~i running new configs...")
+            for cfg in new_cfgs:
+                run_id = make_run_id(cfg)
+                print(f"   → running {run_id}")
+                self.runner.run(cfg, run_id, resume=False)
+
+            print(f"~i sleeping {sleep_seconds} seconds...")
+            time.sleep(sleep_seconds)
 
 
 def force_delete(path: Path):

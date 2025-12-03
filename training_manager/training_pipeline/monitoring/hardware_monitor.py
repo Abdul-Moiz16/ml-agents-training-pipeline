@@ -10,8 +10,7 @@ from typing import Dict, Optional, Any
 class HardwareMonitor:
     """Monitors CPU and RAM usage during training runs."""
     
-    def __init__(self, run_name: str = "training_run", steps_per_log: int = 10000, 
-                 testing: bool = False, results_dir: Optional[Path] = None):
+    def __init__(self, run_name: str = "training_run", steps_per_log: int = 10000, testing: bool = False, results_dir: Optional[Path] = None):
         self.run_name = run_name
         self.steps_per_log = steps_per_log
         self.testing = testing
@@ -410,8 +409,7 @@ class HardwareMonitor:
 class HardwareMonitorContext:
     """Context manager wrapper for HardwareMonitor."""
     
-    def __init__(self, run_name: str = "training_run", steps_per_log: int = 5000, 
-                 testing: bool = False, results_dir: Optional[Path] = None):
+    def __init__(self, run_name: str = "training_run", steps_per_log: int = 5000, testing: bool = False, results_dir: Optional[Path] = None):
         self.monitor = HardwareMonitor(run_name, steps_per_log, testing, results_dir)
     
     def __enter__(self) -> HardwareMonitor:

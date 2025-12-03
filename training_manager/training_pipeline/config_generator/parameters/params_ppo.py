@@ -21,7 +21,7 @@ PARAMS_PPO = {
 
     # General
     "keep_checkpoints":      [5], # default: 5
-    "max_steps":             [100000], # default: 500000; range: 5e5 - 1e7
+    "max_steps":             [1e7], # default: 500000; range: 5e5 - 1e7
     "time_horizon":          [64], # default: 64; range: 32 - 2048
     "summary_freq":          [10000], # default: 50000
 }

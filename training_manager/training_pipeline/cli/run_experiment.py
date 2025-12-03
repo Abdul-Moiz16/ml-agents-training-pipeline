@@ -22,27 +22,16 @@ def parse_args():
         help="Run all YAML configs from configs directory using BatchRunner mode."
     )
 
-    parser.add_argument(
-        "--generate-configs",
-        action="store_true",
-        help="Generate training configuration files from with which to run bach training"
-    )
-
     return parser.parse_args()
 
 def main():
     args = parse_args()
     paths = Paths()
 
-    if args.generate_configs:
-        print("\nGenerating configs...")
-        generate_all()
-        print("\nConfigs generated")
-        return
-    elif args.batch:
+    if args.batch:
         print("\nRunning in batch mode...")
         runner = BatchRunner()
-        runner.run_all()
+        runner.run_forever()
         return
     elif not args.config:
         print("\nConfiguration file is required for single run mode")
