@@ -38,10 +38,8 @@ python -m pip install ./ml-agents
 ```
 
 ## How to run training
-Choose the agent and find the right file in */config*, then run:
-```bash
-mlagents-learn config/subdir/Some_agent.yaml --run-id=TrainRun1 --train
-```
+
+Training can be run from feture/training-pipeline branch, where the updated Readme with inctructions can be found 
 
 ## Data collection
 
