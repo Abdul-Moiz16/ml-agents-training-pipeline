@@ -1,10 +1,11 @@
 import argparse
 import sys
 
-from training_manager.training_pipeline.training.batch_runner import BatchRunner
-from training_manager.training_pipeline.io_utils.paths import Paths
-from training_manager.training_pipeline.config_generator.generators.generator_ppo import run_ppo_generator
-from training_manager.training_pipeline.config_generator.generators.generator_sac import run_sac_generator
+from training_pipeline.training.batch_runner import BatchRunner
+from training_pipeline.io_utils.paths import Paths
+from training_pipeline.config_generator.generators.generator_ppo import run_ppo_generator
+from training_pipeline.config_generator.generators.generator_sac import run_sac_generator
+from training_pipeline.config_generator.generate_all import generate_all
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Run ML-Agents experiments and save results")
@@ -34,12 +35,9 @@ def main():
     paths = Paths()
 
     if args.generate_configs:
-        print("\nGenerating PPO configs...")
-        run_ppo_generator()
-        print("\nPPO configs generated")
-
-        print("\nGenerating SAC configs...")
-        print("\nSAC configs generated")
+        print("\nGenerating configs...")
+        generate_all()
+        print("\nConfigs generated")
         return
     elif args.batch:
         print("\nRunning in batch mode...")

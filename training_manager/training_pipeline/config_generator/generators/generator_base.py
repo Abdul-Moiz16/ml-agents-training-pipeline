@@ -3,7 +3,7 @@ import hashlib
 from pathlib import Path
 from random import randrange, randint, uniform
 
-N_SAMPLES = 5
+N_SAMPLES = 10
 
 class ConfigGeneratorBase:
 

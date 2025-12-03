@@ -10,14 +10,14 @@ If it is the first time running, in the terminal type:
 pip install -e .
 ```
 
-To unistall the package type:
-```bash
-pip uninstall -y training-manager
-```
-
 For help type:
 ```bash
 mlrun -h
+```
+
+To create configs:
+```bash
+mlrun --create-configs
 ```
 
 Then to run batch training, also in the terminal, type:

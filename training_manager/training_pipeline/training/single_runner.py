@@ -10,8 +10,8 @@ from pathlib import Path
 import psutil
 import csv
 
-from training_manager.training_pipeline.io_utils.paths import Paths
-from training_manager.training_pipeline.monitoring.hardware_monitor import HardwareMonitorContext
+from training_pipeline.io_utils.paths import Paths
+from training_pipeline.monitoring.hardware_monitor import HardwareMonitorContext
 
 paths = Paths()
 
