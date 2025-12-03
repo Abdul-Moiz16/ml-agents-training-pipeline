@@ -1,38 +1,3 @@
-# HOW TO RUN
-
-Currently works on Windows, Linux and MacOS
-
-Whilst in the root folder be sure to be in your python virtual env and have mlagents installed.
-
-If it is the first time running, in the terminal type:
-
-```bash
-pip install -e .
-```
-
-For help type:
-```bash
-mlrun -h
-```
-
-To create configs:
-```bash
-mlrun --create-configs
-```
-
-Then to run batch training, also in the terminal, type:
-```bash
-mlrun --batch
-```
-
-Changes to the code are automatically applied to the package unless they are major and change absolutely everything.
-
-Single run training currently not working
-
-Results are saved in training_manager/experiments/results
-
-
-
 # Project 2.1 - AI and Machine Learning
 
 Semester project for Computer Science programme, AI and Machine Learning
@@ -81,22 +46,46 @@ python -m pip install ./ml-agents
 
 ## How to run training
 
-Choose the agent and find the right file in _/config_, then run:
+Currently works on Windows, Linux and MacOS
+
+Whilst in the root folder be sure to be in your python virtual env and have mlagents installed.
+
+If it is the first time running, in the terminal type:
 
 ```bash
-mlagents-learn config/subdir/Some_agent.yaml --run-id=TrainRun1 --train
+pip install -e .
 ```
+
+For help type:
+```bash
+mlrun -h
+```
+
+To create configs:
+```bash
+mlrun --create-configs
+```
+
+Then to run batch training, also in the terminal, type:
+```bash
+mlrun --batch
+```
+
+Changes to the code are automatically applied to the package unless they are major and change absolutely everything.
+
+Single run training currently not working
+
+Results are saved in training_manager/experiments/results
 
 ## Data collection
 
 Right now we are developing the tool to automate the process of running the tests and storing data afterwards.
 
-The data will be stored as the CSV files. Data include hardware used, environment specs, DRL algorithm, [hyperparameters configuration](https://unity-technologies.github.io/ml-agents/Training-Configuration-File/) together with runtime and performance outcomes. Proper documentation of parameters that we aim to collect can be found in the repositories mentioned below under the **Group 8** directory.
+The data are stored as the CSV files. Data include hardware used, environment specs, DRL algorithm, [hyperparameters configuration](https://unity-technologies.github.io/ml-agents/Training-Configuration-File/) together with runtime and performance outcomes. Proper documentation of parameters that we collect can be found in the repositories mentioned below under the **Group 8** directory.
 
 Firstly, group members add the generated data to the [forked repository](https://github.com/qba24qba/BCS2720-project-data-collection-2025-2026.git). When they are ready to be shared for use by the rest of the groups we submit a **pull request** to the [collaborative collection repository](https://github.com/DennisSoemers/BCS2720-project-data-collection-2025-2026).
 
-Description of how to run the trainining+collecting to be added
 
 ## Project Status
 
-In development. Wokring on the training + data collection...
+In development. Gathering data from trainings..
