@@ -16,8 +16,8 @@ from typing import Dict
 
 import yaml
 
-from training_manager.training_pipeline.training.single_runner import MAIN_HEADERS, load_config, MACHINE_NAME
-from training_manager.training_pipeline.io_utils.paths import Paths
+from training_pipeline.training.single_runner import MAIN_HEADERS, load_config, MACHINE_NAME
+from training_pipeline.io_utils.paths import Paths
 
 
 def stats_from_run_log(path: Path) -> Dict[str, float]:
