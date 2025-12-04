@@ -35,6 +35,8 @@ class HardwareMonitor:
         self._csv_file: Optional[Any] = None
         self._csv_writer: Optional[csv.writer] = None
         self._csv_path: Optional[Path] = None
+        self._existing_log: bool = False
+        self.time_offset: float = 0.0  # used when resuming to keep elapsed time monotonic
 
     def _ensure_csv_writer(self) -> None:
         """Open CSV file and write header if not already open."""
@@ -46,17 +48,46 @@ class HardwareMonitor:
         run_data_dir.mkdir(parents=True, exist_ok=True)
         self._csv_path = run_data_dir / "run_log.csv"
 
-        self._csv_file = self._csv_path.open('w', newline='', encoding='utf-8')
+
+        # this is when we resume the trainig it was losingteh initial runlog and only started new runlog from the new step now its fixed and it keeps teh previous runlog 
+        file_exists = self._csv_path.exists()
+
+        if file_exists:
+            try:
+                with self._csv_path.open('r', newline='', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    last_row = None
+                    for row in reader:
+                        last_row = row
+                    if last_row:
+                        try:
+                            self.time_offset = float(last_row.get("time_elapsed", 0) or 0)
+                        except (TypeError, ValueError):
+                            self.time_offset = 0.0
+                        try:
+                            self.step_count = int(last_row.get("step_number") or last_row.get("steps") or 0)
+                        except (TypeError, ValueError):
+                            pass
+                self._existing_log = True
+            except Exception:
+                self.time_offset = 0.0
+                self._existing_log = False
+
+        self._csv_file = self._csv_path.open('a', newline='', encoding='utf-8')
         self._csv_writer = csv.writer(self._csv_file)
-        self._csv_writer.writerow([
-            'step_number', 'time_elapsed', 'mean_reward', 'std_of_reward', 
-            'cpu_percent', 'cpu_source', 'ram_percent', 'ram_source', 'ram_mb'
-        ])
+        if not file_exists:
+            self._csv_writer.writerow([
+                'step_number', 'time_elapsed', 'mean_reward', 'std_of_reward', 
+                'cpu_percent', 'cpu_source', 'ram_percent', 'ram_source', 'ram_mb'
+            ])
 
     def _write_step_row(self, step: Dict[str, Any]) -> None:
         """Append a step row to CSV and flush to disk."""
         self._ensure_csv_writer()
         if not self._csv_writer:
+            return
+        # avoid duplicating the baseline row when resuming
+        if self._existing_log and step.get('step_number') == 0:
             return
 
         self._csv_writer.writerow([
@@ -197,9 +228,11 @@ class HardwareMonitor:
             cpu_percent = psutil.cpu_percent(interval=None)
             cpu_source = "system"
         
+        adjusted_time = time_elapsed + self.time_offset
+
         step = {
             'step_number': step_number,
-            'time_elapsed': time_elapsed,
+            'time_elapsed': adjusted_time,
             'mean_reward': mean_reward,
             'std_of_reward': std_of_reward,
             'cpu_percent': cpu_percent,
