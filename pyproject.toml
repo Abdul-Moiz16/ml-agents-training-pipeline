@@ -6,12 +6,9 @@ build-backend = "setuptools.build_meta"
 name = "training-manager"
 version = "0.1.0"
 description = "MLAgents training with monitoring and result tracking"
-authors = [{name = "Group 8"}]
+authors = [{ name = "Group 8" }]
 
-dependencies = [
-    "mlagents",
-    "psutil"
-]
+dependencies = ["mlagents", "psutil"]
 
 [project.scripts]
 mlrun = "training_pipeline.cli.run_experiment:main"

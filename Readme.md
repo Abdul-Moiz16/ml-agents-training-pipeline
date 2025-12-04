@@ -61,11 +61,6 @@ For help type:
 mlrun -h
 ```
 
-To create configs:
-```bash
-mlrun --create-configs
-```
-
 Then to run batch training, also in the terminal, type:
 ```bash
 mlrun --batch
