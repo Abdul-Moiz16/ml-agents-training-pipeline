@@ -195,7 +195,7 @@ class Runner:
                     stderr=subprocess.STDOUT,
                     text=True,
                     bufsize=1,
-                    start_new_session=True,  # ✅ crucial: lets us signal the whole process group
+                    # start_new_session=True,
                 )
 
                 def request_stop(reason: str):
@@ -207,7 +207,7 @@ class Runner:
                     stop_reason = reason
                     print(f"\n~i stopping current run ({reason}) via SIGINT...\n")
                     try:
-                        os.killpg(proc.pid, signal.SIGINT)  # ✅ stop mlagents + Unity children
+                        os.killpg(proc.pid, signal.SIGINT)
                     except Exception:
                         proc.send_signal(signal.SIGINT)
 
@@ -246,7 +246,7 @@ class Runner:
                     # ---- STOP 1: hard cap ----
                     if (not stop_signal_sent) and (step_num >= self.max_steps):
                         request_stop("max_steps")
-                        break  # ✅ leave stdout loop so we can wait/cleanup
+                        break
 
                     # ---- STOP 2: convergence (mean>=target AND stable) ----
                     mean_win.append(mean_r)
@@ -263,7 +263,7 @@ class Runner:
                             steps_to_convergence = step_num
                             time_to_convergence = t_elapsed
                             request_stop("converged")
-                            break  # ✅ move on to next config
+                            break 
 
                 # After breaking or EOF, wait for process to exit
                 try:
