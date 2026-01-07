@@ -33,6 +33,8 @@ def _get_machine_name() -> str:
 
 MACHINE_NAME = _get_machine_name()
 
+IS_WINDOWS = (platform.system() == "Windows")
+
 # Example:
 # "[INFO] 3DBall. Step: 10000. Time Elapsed: 20.983 s. Mean Reward: 1.175. Std of Reward: 0.734."
 STAT_PATTERN = re.compile(
@@ -59,6 +61,49 @@ def _patch_max_steps(src_yaml: Path, dst_yaml: Path, max_steps: int) -> None:
 
     dst_yaml.write_text(yaml.safe_dump(data, sort_keys=False), encoding="utf-8")
 
+
+def popen_in_own_group(cmd: list[str], **kwargs) -> subprocess.Popen:
+    if IS_WINDOWS:
+        kwargs["creationflags"] = kwargs.get("creationflags", 0) | subprocess.CREATE_NEW_PROCESS_GROUP
+    else:
+        kwargs["start_new_session"] = True  # enables killpg(proc.pid, ...)
+    return subprocess.Popen(cmd, **kwargs)
+
+def send_interrupt(proc: subprocess.Popen) -> None:
+    if IS_WINDOWS:
+        try:
+            proc.send_signal(signal.CTRL_BREAK_EVENT)
+        except Exception:
+            proc.terminate()
+    else:
+        os.killpg(proc.pid, signal.SIGINT)
+
+def send_terminate(proc: subprocess.Popen) -> None:
+    if IS_WINDOWS:
+        proc.terminate()
+    else:
+        os.killpg(proc.pid, signal.SIGTERM)
+
+def send_kill(proc: subprocess.Popen) -> None:
+    if IS_WINDOWS:
+        proc.kill()
+    else:
+        os.killpg(proc.pid, signal.SIGKILL)
+
+def kill_process_tree(pid: int) -> None:
+    try:
+        parent = psutil.Process(pid)
+    except psutil.NoSuchProcess:
+        return
+    for c in parent.children(recursive=True):
+        try:
+            c.kill()
+        except Exception:
+            pass
+    try:
+        parent.kill()
+    except Exception:
+        pass
 
 class Runner:
     """Runs a single ML-Agents training session."""
@@ -189,13 +234,12 @@ class Runner:
 
         try:
             with log_file.open("a", encoding="utf-8") as lf:
-                proc = subprocess.Popen(
+                proc = popen_in_own_group(
                     cmd,
                     stdout=subprocess.PIPE,
                     stderr=subprocess.STDOUT,
                     text=True,
                     bufsize=1,
-                    # start_new_session=True,
                 )
 
                 def request_stop(reason: str):
@@ -205,11 +249,8 @@ class Runner:
                     stop_signal_sent = True
                     stopped_intentionally = True
                     stop_reason = reason
-                    print(f"\n~i stopping current run ({reason}) via SIGINT...\n")
-                    try:
-                        os.killpg(proc.pid, signal.SIGINT)
-                    except Exception:
-                        proc.send_signal(signal.SIGINT)
+                    print(f"\n~i stopping current run ({reason}) via interrupt...\n")
+                    send_interrupt(proc)
 
                 ps_proc = psutil.Process(proc.pid)
                 ps_proc.cpu_percent(interval=None)
@@ -269,21 +310,17 @@ class Runner:
                 try:
                     proc.wait(timeout=self.graceful_timeout_s)
                 except subprocess.TimeoutExpired:
-                    print("~! SIGINT timeout; sending SIGTERM...")
-                    try:
-                        os.killpg(proc.pid, signal.SIGTERM)
-                    except Exception:
-                        proc.terminate()
+                    print("~! interrupt timeout; sending terminate...")
+                    send_terminate(proc)
 
                     try:
                         proc.wait(timeout=30)
                     except subprocess.TimeoutExpired:
-                        print("~!! SIGTERM timeout; killing process group...")
-                        try:
-                            os.killpg(proc.pid, signal.SIGKILL)
-                        except Exception:
-                            proc.kill()
-                        proc.wait()
+                        print("~!! terminate timeout; killing...")
+                        send_kill(proc)
+
+                        if IS_WINDOWS:
+                            kill_process_tree(proc.pid)
 
                 returncode = proc.returncode
 
@@ -349,19 +386,6 @@ class Runner:
         print(f"~i stop_reason: {stop_reason}")
         print(f"~i duration: {round(end - start, 2)}s")
         print("-----------------------------------------------------------------")
-
-        self.kill_unity_processes()
-
-    @staticmethod
-    def kill_unity_processes():
-        """Kill hanging UnityEnvironment processes."""
-        for p in psutil.process_iter(["pid", "name"]):
-            try:
-                if p.info["name"] and "UnityEnvironment" in p.info["name"]:
-                    print(f"~i Killing hanging Unity process PID={p.info['pid']}")
-                    p.kill()
-            except (psutil.NoSuchProcess, psutil.AccessDenied):
-                pass
 
 
 def make_run_id(config_file: Path) -> str:
