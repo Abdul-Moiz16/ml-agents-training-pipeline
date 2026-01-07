@@ -7,6 +7,8 @@ from training_pipeline.training.single_runner import Runner, make_run_id, MACHIN
 from training_pipeline.io_utils.paths import Paths
 from training_pipeline.config_generator.generate_all import generate_all
 
+from training_pipeline.cli.rebuild_main import rebuild
+
 paths = Paths()
 RESULTS_DIR = paths.results_dir
 CONFIGS_DIR = paths.configs_dir
@@ -28,8 +30,29 @@ def generate_and_get_new_configs():
 class BatchRunner:
     """Runs all training configs in the configs directory."""
 
-    def __init__(self):
-        self.runner = Runner()
+    def __init__(
+        self,
+        rebuild_main: bool = False,
+        max_steps: int = 10_000_000,
+        target_mean: float = 99.5,
+        window_rows: int = 5,
+        cv_max: float = 0.10,
+        mean_jitter: float = 2.0,
+        min_steps_before_check: int = 200_000,
+    ):
+        self.runner = Runner(
+            max_steps=max_steps,
+            target_mean=target_mean,
+            window_rows=window_rows,
+            cv_max=cv_max,
+            mean_jitter=mean_jitter,
+            min_steps_before_check=min_steps_before_check,
+        )
+        self.rebuild_main = rebuild_main
+
+    def _maybe_rebuild(self):
+        if self.rebuild_main:
+            rebuild()
 
     @staticmethod
     def run_completed(run_id: str) -> str:
@@ -81,6 +104,8 @@ class BatchRunner:
                 print(f"~i starting fresh run: {run_id}")
 
             self.runner.run(cfg, run_id, resume=resume)
+
+            self._maybe_rebuild()
 
         print(f"-----------------------------------------------------------------")
         print("~i all runs completed")

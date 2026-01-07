@@ -1,10 +1,13 @@
+import os
 import re
+import signal
 import subprocess
 import time
 import platform
 import getpass
 import yaml
 import json
+from collections import deque
 from pathlib import Path
 
 import psutil
@@ -30,8 +33,8 @@ def _get_machine_name() -> str:
 
 MACHINE_NAME = _get_machine_name()
 
-# Regex to extract training metrics from mlagents-learn output
-# Example: "[INFO] 3DBall. Step: 10000. Time Elapsed: 20.983 s. Mean Reward: 1.175. Std of Reward: 0.734."
+# Example:
+# "[INFO] 3DBall. Step: 10000. Time Elapsed: 20.983 s. Mean Reward: 1.175. Std of Reward: 0.734."
 STAT_PATTERN = re.compile(
     r"Step:\s+(?P<steps>\d+)\.\s+Time\s+Elapsed:\s+(?P<time>[\d.]+)\s+s\.\s+"
     r"Mean\s+Reward:\s+(?P<mean>[-\d.]+)\.\s+Std\s+of\s+Reward:\s+(?P<std>[\d.]+)\.",
@@ -39,11 +42,69 @@ STAT_PATTERN = re.compile(
 )
 
 
+def _patch_max_steps(src_yaml: Path, dst_yaml: Path, max_steps: int) -> None:
+    """
+    Read src YAML, force behaviors/*/max_steps = max_steps, write to dst_yaml.
+    This guarantees the 10M cap even if generator forgot it.
+    """
+    data = yaml.safe_load(src_yaml.read_text(encoding="utf-8")) or {}
+    behaviors = data.get("behaviors") or {}
+
+    if isinstance(behaviors, dict) and behaviors:
+        for _, env_cfg in behaviors.items():
+            if isinstance(env_cfg, dict):
+                env_cfg["max_steps"] = int(max_steps)
+    else:
+        data["max_steps"] = int(max_steps)
+
+    dst_yaml.write_text(yaml.safe_dump(data, sort_keys=False), encoding="utf-8")
+
+
 class Runner:
     """Runs a single ML-Agents training session."""
 
-    def __init__(self, env_path: Path = UNITY_ENV_PATH):
+    def __init__(
+        self,
+        env_path: Path = UNITY_ENV_PATH,
+        # hard cap
+        max_steps: int = 10_000_000,
+        # convergence = mean >= target AND stable
+        target_mean: float = 99.5,
+        window_rows: int = 5,          # consecutive stats lines required
+        cv_max: float = 0.10,          # std/mean <= 10%  (stability)
+        mean_jitter: float = 2,      # max(mean)-min(mean) within window
+        min_steps_before_check: int = 200_000,
+        # stopping behavior
+        graceful_timeout_s: int = 120,  # wait after SIGINT before escalating
+    ):
         self.env_path = Path(env_path)
+
+        self.max_steps = int(max_steps)
+        self.target_mean = float(target_mean)
+        self.window_rows = int(window_rows)
+        self.cv_max = float(cv_max)
+        self.mean_jitter = float(mean_jitter)
+        self.min_steps_before_check = int(min_steps_before_check)
+        self.graceful_timeout_s = int(graceful_timeout_s)
+
+    def _converged(self, means: list[float], stds: list[float]) -> bool:
+        if len(means) < self.window_rows:
+            return False
+        if any(m < self.target_mean for m in means):
+            return False
+
+        # stability via coefficient-of-variation
+        for m, s in zip(means, stds):
+            if m <= 0:
+                return False
+            if (abs(s) / abs(m)) > self.cv_max:
+                return False
+
+        # prevent "alternating a lot" in the mean itself
+        if (max(means) - min(means)) > self.mean_jitter:
+            return False
+
+        return True
 
     def run(self, yaml_path: Path, run_id: str, resume: bool):
         yaml_path = Path(yaml_path)
@@ -55,19 +116,26 @@ class Runner:
         run_base = RESULTS_DIR / MACHINE_NAME
         run_folder = run_base / run_id
         run_folder.mkdir(parents=True, exist_ok=True)
+
         log_dir = run_folder / "run_logs"
         log_dir.mkdir(parents=True, exist_ok=True)
         log_file = log_dir / "stream.log"
         run_log_file = log_dir / "run_log.csv"
-        # keep a copy of the config alongside the run
+
+        # Write a patched config copy (enforces max_steps) and run THAT
+        cfg_copy = run_folder / "configuration.yaml"
         try:
-            (run_folder / "configuration.yaml").write_text(yaml_path.read_text())
+            _patch_max_steps(yaml_path, cfg_copy, self.max_steps)
         except Exception:
-            pass
+            # fallback: still keep a copy
+            try:
+                cfg_copy.write_text(yaml_path.read_text(encoding="utf-8"), encoding="utf-8")
+            except Exception:
+                pass
 
         cmd = [
             "mlagents-learn",
-            str(yaml_path),
+            str(cfg_copy),
             f"--run-id={run_id}",
             f"--env={self.env_path}",
             "--no-graphics",
@@ -98,14 +166,26 @@ class Runner:
         hw_monitor = hw_monitor_ctx.monitor
 
         hw_monitor.record_initial_state()
-        # Persist static hardware snapshot for rebuild/backfill
         try:
             (run_folder / "hardware_init.json").write_text(
-                json.dumps(hw_monitor.initial_hardware_info, indent=2)
+                json.dumps(hw_monitor.initial_hardware_info, indent=2),
+                encoding="utf-8",
             )
         except Exception:
             pass
+
         hw_monitor.start_continuous_monitoring()
+
+        # convergence bookkeeping
+        mean_win = deque(maxlen=self.window_rows)
+        std_win = deque(maxlen=self.window_rows)
+        time_to_convergence = "NA"
+        steps_to_convergence = "NA"
+
+        stopped_intentionally = False
+        stop_reason = "NA"
+        stop_signal_sent = False
+        returncode = None
 
         try:
             with log_file.open("a", encoding="utf-8") as lf:
@@ -115,51 +195,105 @@ class Runner:
                     stderr=subprocess.STDOUT,
                     text=True,
                     bufsize=1,
+                    start_new_session=True,  # ✅ crucial: lets us signal the whole process group
                 )
+
+                def request_stop(reason: str):
+                    nonlocal stopped_intentionally, stop_reason, stop_signal_sent
+                    if stop_signal_sent:
+                        return
+                    stop_signal_sent = True
+                    stopped_intentionally = True
+                    stop_reason = reason
+                    print(f"\n~i stopping current run ({reason}) via SIGINT...\n")
+                    try:
+                        os.killpg(proc.pid, signal.SIGINT)  # ✅ stop mlagents + Unity children
+                    except Exception:
+                        proc.send_signal(signal.SIGINT)
+
                 ps_proc = psutil.Process(proc.pid)
-                ps_proc.cpu_percent(interval=None)  # prime the measurement
+                ps_proc.cpu_percent(interval=None)
                 hw_monitor._process = ps_proc
 
                 assert proc.stdout is not None
                 for line in proc.stdout:
                     print(line, end="")
                     lf.write(line)
-                    
+
                     m = STAT_PATTERN.search(line)
-                    if m:
-                        try:
-                            step_num = int(m.group("steps"))
-                            t_elapsed = float(m.group("time"))
-                            mean_r = float(m.group("mean"))
-                            std_r = float(m.group("std"))
-                            print(
-                                f"\n~hw CAPTURED step={step_num}, "
-                                f"time={t_elapsed:.2f}s, "
-                                f"mean_reward={mean_r:.3f}, "
-                                f"std_reward={std_r:.3f}\n"
-                            )
-                        except (ValueError, KeyError):
-                            continue
+                    if not m:
+                        continue
 
-                        try:
-                            hw_monitor.log_step(
-                                step_number=step_num,
-                                time_elapsed=t_elapsed,
-                                mean_reward=mean_r,
-                                std_of_reward=std_r,
-                            )
-                        except (ValueError, KeyError):
-                            pass
+                    try:
+                        step_num = int(m.group("steps"))
+                        t_elapsed = float(m.group("time"))
+                        mean_r = float(m.group("mean"))
+                        std_r = float(m.group("std"))
+                    except (ValueError, KeyError):
+                        continue
 
-                proc.wait()
+                    # log to run_log.csv via your monitor
+                    try:
+                        hw_monitor.log_step(
+                            step_number=step_num,
+                            time_elapsed=t_elapsed,
+                            mean_reward=mean_r,
+                            std_of_reward=std_r,
+                        )
+                    except Exception:
+                        pass
+
+                    # ---- STOP 1: hard cap ----
+                    if (not stop_signal_sent) and (step_num >= self.max_steps):
+                        request_stop("max_steps")
+                        break  # ✅ leave stdout loop so we can wait/cleanup
+
+                    # ---- STOP 2: convergence (mean>=target AND stable) ----
+                    mean_win.append(mean_r)
+                    std_win.append(std_r)
+
+                    if (
+                        (not stop_signal_sent)
+                        and step_num >= self.min_steps_before_check
+                        and len(mean_win) == self.window_rows
+                    ):
+                        means = list(mean_win)
+                        stds = list(std_win)
+                        if self._converged(means, stds):
+                            steps_to_convergence = step_num
+                            time_to_convergence = t_elapsed
+                            request_stop("converged")
+                            break  # ✅ move on to next config
+
+                # After breaking or EOF, wait for process to exit
+                try:
+                    proc.wait(timeout=self.graceful_timeout_s)
+                except subprocess.TimeoutExpired:
+                    print("~! SIGINT timeout; sending SIGTERM...")
+                    try:
+                        os.killpg(proc.pid, signal.SIGTERM)
+                    except Exception:
+                        proc.terminate()
+
+                    try:
+                        proc.wait(timeout=30)
+                    except subprocess.TimeoutExpired:
+                        print("~!! SIGTERM timeout; killing process group...")
+                        try:
+                            os.killpg(proc.pid, signal.SIGKILL)
+                        except Exception:
+                            proc.kill()
+                        proc.wait()
+
                 returncode = proc.returncode
+
         finally:
             hw_monitor.record_final_state()
             hw_monitor.save_to_csv()
             end = time.time()
 
         # Write main summary row
-        cfg_meta = load_config(yaml_path)
+        cfg_meta = load_config(cfg_copy)
         hw_init = hw_monitor.initial_hardware_info
         hw_final = hw_monitor.final_hardware_info
 
@@ -182,8 +316,8 @@ class Runner:
             "peak_ram_usage": peak_ram,
             "final_mean_reward": final_mean,
             "final_std_reward": final_std,
-            "time_to_convergence": "NA",
-            "steps_to_convergence": "NA",
+            "time_to_convergence": time_to_convergence,
+            "steps_to_convergence": steps_to_convergence,
             "os_name": hw_init.get("operating_system", "NA"),
             "cpu_physical_cores": hw_init.get("cpu_physical_cores_count", "NA"),
             "cpu_logical_cores": hw_init.get("cpu_logical_cores_count", "NA"),
@@ -195,16 +329,24 @@ class Runner:
         main_csv = RESULTS_DIR / "main.csv"
         append_main_row(main_csv, row)
 
-        if returncode != 0:
+        # Treat intentional SIGINT/SIGTERM (we sent) as success
+        rc = returncode if returncode is not None else -999
+        ok_interrupt_codes = {0, 130, -2, 143, -15}  # common: SIGINT=130, SIGTERM=143
+        successful = (rc == 0) or (stopped_intentionally and rc in ok_interrupt_codes)
+
+        if not successful:
             print("\n")
             print(f"~! training failed for: {yaml_path.name}")
-            print(f"~! exit code: {returncode}")
+            print(f"~! exit code: {rc}")
             print("-----------------------------------------------------------------")
             return
 
-        (run_folder / "complete.flag").write_text("ok")
+        (run_folder / "complete.flag").write_text("ok", encoding="utf-8")
+        (run_folder / "stop_reason.txt").write_text(stop_reason, encoding="utf-8")
+
         print("\n")
         print(f"~i training done for: {yaml_path.name}")
+        print(f"~i stop_reason: {stop_reason}")
         print(f"~i duration: {round(end - start, 2)}s")
         print("-----------------------------------------------------------------")
 
@@ -225,11 +367,11 @@ class Runner:
 def make_run_id(config_file: Path) -> str:
     return f"{MACHINE_NAME}_{config_file.stem}"
 
+
 # ---------------------------------------------------------------------------
 # Helpers to parse config and write main summary CSV
 # ---------------------------------------------------------------------------
 
-# Schema for main summary CSV
 MAIN_HEADERS = [
     "run_id", "machine_id", "run_log_file",
     "algo", "seed", "env_name",
@@ -247,8 +389,7 @@ MAIN_HEADERS = [
 
 
 def load_config(yaml_path: Path) -> dict:
-    """Parse YAML once; prepare defaults with NA for missing fields."""
-    data = yaml.safe_load(yaml_path.read_text())
+    data = yaml.safe_load(yaml_path.read_text(encoding="utf-8")) or {}
     behaviors = data.get("behaviors", {}) or {}
     env_name, env_cfg = next(iter(behaviors.items())) if behaviors else ("", {})
     trainer_type = env_cfg.get("trainer_type", "NA")
@@ -264,7 +405,6 @@ def load_config(yaml_path: Path) -> dict:
         "algo": trainer_type,
         "seed": env_cfg.get("seed", "NA"),
         "env_name": env_name,
-        # shared
         "learning_rate": g(hyper, "learning_rate"),
         "learning_rate_schedule": g(hyper, "learning_rate_schedule"),
         "batch_size": g(hyper, "batch_size"),
@@ -279,14 +419,12 @@ def load_config(yaml_path: Path) -> dict:
         "max_steps": env_cfg.get("max_steps", "NA"),
         "time_horizon": env_cfg.get("time_horizon", "NA"),
         "summary_freq": env_cfg.get("summary_freq", "NA"),
-        # SAC-only
         "buffer_init_steps": g(hyper, "buffer_init_steps"),
         "tau": g(hyper, "tau"),
         "steps_per_update": g(hyper, "steps_per_update"),
         "save_replay_buffer": g(hyper, "save_replay_buffer"),
         "init_entcoef": g(hyper, "init_entcoef"),
         "reward_signal_steps_per_update": g(hyper, "reward_signal_steps_per_update") or g(hyper, "reward_signal_per_step"),
-        # PPO-only
         "beta": g(hyper, "beta"),
         "epsilon": g(hyper, "epsilon"),
         "lambd": g(hyper, "lambd"),
