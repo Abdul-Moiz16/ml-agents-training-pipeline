@@ -24,7 +24,7 @@ def parse_args():
     )
 
     parser.add_argument("--max-steps", type=int, default=10_000_000)
-    parser.add_argument("--target-mean", type=float, default=99.5)
+    parser.add_argument("--target-mean", type=float, default=95)
     parser.add_argument("--window-rows", type=int, default=5)
     parser.add_argument("--cv-max", type=float, default=0.10)
     parser.add_argument("--mean-jitter", type=float, default=2.0)

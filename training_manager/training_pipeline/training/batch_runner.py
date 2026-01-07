@@ -34,7 +34,7 @@ class BatchRunner:
         self,
         rebuild_main: bool = False,
         max_steps: int = 10_000_000,
-        target_mean: float = 99.5,
+        target_mean: float = 95,
         window_rows: int = 5,
         cv_max: float = 0.10,
         mean_jitter: float = 2.0,
