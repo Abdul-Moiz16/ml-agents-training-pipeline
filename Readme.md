@@ -66,6 +66,16 @@ Then to run batch training, also in the terminal, type:
 mlrun --batch
 ```
 
+To rebuild the main csv, type:
+```bash
+mlrun --rebuild-main
+```
+
+You can also run batch training and rebuild after every trained model with:
+```bash
+mlrun --batch --rebuild-main
+```
+
 Changes to the code are automatically applied to the package unless they are major and change absolutely everything.
 
 Single run training currently not working
