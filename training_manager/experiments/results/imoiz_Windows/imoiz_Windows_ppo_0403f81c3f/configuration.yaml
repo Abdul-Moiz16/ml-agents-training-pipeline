@@ -4,7 +4,11 @@ behaviors:
     trainer_type: ppo
     hyperparameters:
       batch_size: 32
+<<<<<<<< HEAD:training_manager/experiments/results/imoiz_Windows/imoiz_Windows_ppo_0403f81c3f/configuration.yaml
       buffer_size: 348160
+========
+      buffer_size: 429728
+>>>>>>>> 6e36bdcb (new tests coming back):training_manager/experiments/results/nimkita_Linux/nimkita_Linux_ppo_5db4be9b51/configuration.yaml
       learning_rate: 0.0003
       beta: 0.005
       epsilon: 0.2
@@ -17,8 +21,13 @@ behaviors:
     checkpoint_interval: 500000
     network_settings:
       normalize: false
+<<<<<<<< HEAD:training_manager/experiments/results/imoiz_Windows/imoiz_Windows_ppo_0403f81c3f/configuration.yaml
       hidden_units: 99
       num_layers: 1
+========
+      hidden_units: 118
+      num_layers: 2
+>>>>>>>> 6e36bdcb (new tests coming back):training_manager/experiments/results/nimkita_Linux/nimkita_Linux_ppo_5db4be9b51/configuration.yaml
       vis_encode_type: simple
       memory: null
       goal_conditioning_type: hyper
@@ -38,7 +47,7 @@ behaviors:
     init_path: null
     keep_checkpoints: 5
     even_checkpoints: false
-    max_steps: 10000000
+    max_steps: 3000000
     time_horizon: 64
     summary_freq: 10000
     threaded: false
@@ -66,7 +75,11 @@ engine_settings:
   no_graphics_monitor: false
 environment_parameters: null
 checkpoint_settings:
+<<<<<<<< HEAD:training_manager/experiments/results/imoiz_Windows/imoiz_Windows_ppo_0403f81c3f/configuration.yaml
   run_id: imoiz_Windows_ppo_0403f81c3f
+========
+  run_id: nimkita_Linux_ppo_5db4be9b51
+>>>>>>>> 6e36bdcb (new tests coming back):training_manager/experiments/results/nimkita_Linux/nimkita_Linux_ppo_5db4be9b51/configuration.yaml
   initialize_from: null
   load_model: false
   resume: false
