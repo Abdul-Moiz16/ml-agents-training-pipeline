@@ -1,0 +1,134 @@
+
+            ┐  ╖
+        ╓╖╬│╡  ││╬╖╖
+    ╓╖╬│││││┘  ╬│││││╬╖
+ ╖╬│││││╬╜        ╙╬│││││╖╖                               ╗╗╗
+ ╬╬╬╬╖││╦╖        ╖╬││╗╣╣╣╬      ╟╣╣╬    ╟╣╣╣             ╜╜╜  ╟╣╣
+ ╬╬╬╬╬╬╬╬╖│╬╖╖╓╬╪│╓╣╣╣╣╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╒╣╣╖╗╣╣╣╗   ╣╣╣ ╣╣╣╣╣╣ ╟╣╣╖   ╣╣╣
+ ╬╬╬╬┐  ╙╬╬╬╬│╓╣╣╣╝╜  ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╣╙ ╙╣╣╣  ╣╣╣ ╙╟╣╣╜╙  ╫╣╣  ╟╣╣
+ ╬╬╬╬┐     ╙╬╬╣╣      ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣     ╣╣╣┌╣╣╜
+ ╬╬╬╜       ╬╬╣╣      ╙╝╣╣╬      ╙╣╣╣╗╖╓╗╣╣╣╜ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣╦╓    ╣╣╣╣╣
+ ╙   ╓╦╖    ╬╬╣╣   ╓╗╗╖            ╙╝╣╣╣╣╝╜   ╘╝╝╜   ╝╝╝  ╝╝╝   ╙╣╣╣    ╟╣╣╣
+   ╩╬╬╬╬╬╬╦╦╬╬╣╣╗╣╣╣╣╣╣╣╝                                             ╫╣╣╣╣
+      ╙╬╬╬╬╬╬╬╣╣╣╣╣╣╝╜
+          ╙╬╬╬╣╣╣╜
+             ╙
+        
+ Version information:
+  ml-agents: 1.1.0,
+  ml-agents-envs: 1.1.0,
+  Communicator API: 1.5.0,
+  PyTorch: 2.8.0+cu128
+[INFO] Connected to Unity environment with package version 3.0.0-exp.1 and communication version 1.5.0
+[INFO] Connected new brain: 3DBall?team=0
+[INFO] Hyperparameters for behavior name 3DBall: 
+	trainer_type:	sac
+	hyperparameters:	
+	  learning_rate:	0.0003
+	  learning_rate_schedule:	linear
+	  batch_size:	64
+	  buffer_size:	67584
+	  buffer_init_steps:	6821
+	  tau:	0.0053354676348552985
+	  steps_per_update:	13.0
+	  save_replay_buffer:	False
+	  init_entcoef:	0.5723437112899297
+	  reward_signal_steps_per_update:	9.0
+	checkpoint_interval:	500000
+	network_settings:	
+	  normalize:	False
+	  hidden_units:	358
+	  num_layers:	1
+	  vis_encode_type:	simple
+	  memory:	None
+	  goal_conditioning_type:	hyper
+	  deterministic:	False
+	reward_signals:	
+	  extrinsic:	
+	    gamma:	0.9458871969645354
+	    strength:	1.0
+	    network_settings:	
+	      normalize:	False
+	      hidden_units:	128
+	      num_layers:	2
+	      vis_encode_type:	simple
+	      memory:	None
+	      goal_conditioning_type:	hyper
+	      deterministic:	False
+	init_path:	None
+	keep_checkpoints:	5
+	even_checkpoints:	False
+	max_steps:	3000000
+	time_horizon:	669
+	summary_freq:	50000
+	threaded:	False
+	self_play:	None
+	behavioral_cloning:	None
+[INFO] 3DBall. Step: 50000. Time Elapsed: 35.330 s. Mean Reward: 0.948. Std of Reward: 0.565. Training.
+[INFO] 3DBall. Step: 100000. Time Elapsed: 73.120 s. Mean Reward: 1.075. Std of Reward: 0.601. Training.
+[INFO] 3DBall. Step: 150000. Time Elapsed: 110.749 s. Mean Reward: 1.414. Std of Reward: 1.189. Training.
+[INFO] 3DBall. Step: 200000. Time Elapsed: 148.794 s. Mean Reward: 3.888. Std of Reward: 5.920. Training.
+[INFO] 3DBall. Step: 250000. Time Elapsed: 184.605 s. Mean Reward: 67.448. Std of Reward: 40.393. Training.
+[INFO] 3DBall. Step: 300000. Time Elapsed: 219.467 s. Mean Reward: 87.353. Std of Reward: 33.119. Training.
+[INFO] 3DBall. Step: 350000. Time Elapsed: 254.193 s. Mean Reward: 82.034. Std of Reward: 38.303. Training.
+[INFO] 3DBall. Step: 400000. Time Elapsed: 288.653 s. Mean Reward: 82.025. Std of Reward: 38.324. Training.
+[INFO] 3DBall. Step: 450000. Time Elapsed: 323.044 s. Mean Reward: 77.873. Std of Reward: 41.396. Training.
+[INFO] 3DBall. Step: 500000. Time Elapsed: 358.088 s. Mean Reward: 82.515. Std of Reward: 37.674. Training.
+[INFO] Exported /home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/results/nimkita_Linux/nimkita_Linux_sac_2531f24313/3DBall/3DBall-499816.onnx
+[INFO] 3DBall. Step: 550000. Time Elapsed: 393.409 s. Mean Reward: 63.000. Std of Reward: 47.925. Training.
+[INFO] 3DBall. Step: 600000. Time Elapsed: 428.280 s. Mean Reward: 72.829. Std of Reward: 44.371. Training.
+[INFO] 3DBall. Step: 650000. Time Elapsed: 463.313 s. Mean Reward: 70.876. Std of Reward: 45.123. Training.
+[INFO] 3DBall. Step: 700000. Time Elapsed: 498.191 s. Mean Reward: 80.526. Std of Reward: 39.353. Training.
+[INFO] 3DBall. Step: 750000. Time Elapsed: 533.153 s. Mean Reward: 81.478. Std of Reward: 38.692. Training.
+[INFO] 3DBall. Step: 800000. Time Elapsed: 568.417 s. Mean Reward: 56.820. Std of Reward: 49.183. Training.
+[INFO] 3DBall. Step: 850000. Time Elapsed: 603.802 s. Mean Reward: 70.511. Std of Reward: 45.338. Training.
+[INFO] 3DBall. Step: 900000. Time Elapsed: 638.725 s. Mean Reward: 94.812. Std of Reward: 22.013. Training.
+[INFO] 3DBall. Step: 950000. Time Elapsed: 674.890 s. Mean Reward: 79.494. Std of Reward: 40.217. Training.
+[INFO] 3DBall. Step: 1000000. Time Elapsed: 709.349 s. Mean Reward: 85.764. Std of Reward: 34.870. Training.
+[INFO] Exported /home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/results/nimkita_Linux/nimkita_Linux_sac_2531f24313/3DBall/3DBall-999445.onnx
+[INFO] 3DBall. Step: 1050000. Time Elapsed: 743.990 s. Mean Reward: 97.961. Std of Reward: 14.125. Training.
+[INFO] 3DBall. Step: 1100000. Time Elapsed: 779.185 s. Mean Reward: 94.224. Std of Reward: 23.113. Training.
+[INFO] 3DBall. Step: 1150000. Time Elapsed: 815.226 s. Mean Reward: 89.516. Std of Reward: 30.567. Training.
+[INFO] 3DBall. Step: 1200000. Time Elapsed: 848.148 s. Mean Reward: 78.032. Std of Reward: 41.293. Training.
+[INFO] 3DBall. Step: 1250000. Time Elapsed: 882.237 s. Mean Reward: 35.108. Std of Reward: 46.944. Training.
+[INFO] 3DBall. Step: 1300000. Time Elapsed: 915.752 s. Mean Reward: 52.461. Std of Reward: 46.940. Training.
+[INFO] 3DBall. Step: 1350000. Time Elapsed: 950.344 s. Mean Reward: 42.247. Std of Reward: 46.896. Training.
+[INFO] 3DBall. Step: 1400000. Time Elapsed: 985.643 s. Mean Reward: 53.427. Std of Reward: 44.316. Training.
+[INFO] 3DBall. Step: 1450000. Time Elapsed: 1018.706 s. Mean Reward: 94.145. Std of Reward: 23.420. Training.
+[INFO] 3DBall. Step: 1500000. Time Elapsed: 1051.763 s. Mean Reward: 96.008. Std of Reward: 19.557. Training.
+[INFO] Exported /home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/results/nimkita_Linux/nimkita_Linux_sac_2531f24313/3DBall/3DBall-1499550.onnx
+[INFO] 3DBall. Step: 1550000. Time Elapsed: 1086.270 s. Mean Reward: 88.385. Std of Reward: 31.960. Training.
+[INFO] 3DBall. Step: 1600000. Time Elapsed: 1119.492 s. Mean Reward: 94.654. Std of Reward: 22.472. Training.
+[INFO] 3DBall. Step: 1650000. Time Elapsed: 1153.881 s. Mean Reward: 89.327. Std of Reward: 30.811. Training.
+[INFO] 3DBall. Step: 1700000. Time Elapsed: 1186.993 s. Mean Reward: 96.012. Std of Reward: 19.537. Training.
+[INFO] 3DBall. Step: 1750000. Time Elapsed: 1220.235 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 1800000. Time Elapsed: 1255.552 s. Mean Reward: 96.008. Std of Reward: 19.557. Training.
+[INFO] 3DBall. Step: 1850000. Time Elapsed: 1289.256 s. Mean Reward: 89.681. Std of Reward: 30.378. Training.
+[INFO] 3DBall. Step: 1900000. Time Elapsed: 1322.761 s. Mean Reward: 91.571. Std of Reward: 27.700. Training.
+[INFO] 3DBall. Step: 1950000. Time Elapsed: 1356.816 s. Mean Reward: 92.707. Std of Reward: 25.784. Training.
+[INFO] 3DBall. Step: 2000000. Time Elapsed: 1390.080 s. Mean Reward: 87.393. Std of Reward: 33.014. Training.
+[INFO] Exported /home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/results/nimkita_Linux/nimkita_Linux_sac_2531f24313/3DBall/3DBall-1999569.onnx
+[INFO] 3DBall. Step: 2050000. Time Elapsed: 1423.382 s. Mean Reward: 64.345. Std of Reward: 47.542. Training.
+[INFO] 3DBall. Step: 2100000. Time Elapsed: 1456.627 s. Mean Reward: 72.267. Std of Reward: 44.092. Training.
+[INFO] 3DBall. Step: 2150000. Time Elapsed: 1490.548 s. Mean Reward: 93.469. Std of Reward: 19.922. Training.
+[INFO] 3DBall. Step: 2200000. Time Elapsed: 1525.118 s. Mean Reward: 14.159. Std of Reward: 27.931. Training.
+[INFO] 3DBall. Step: 2250000. Time Elapsed: 1559.504 s. Mean Reward: 94.758. Std of Reward: 22.240. Training.
+[INFO] 3DBall. Step: 2300000. Time Elapsed: 1592.788 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2350000. Time Elapsed: 1626.416 s. Mean Reward: 82.798. Std of Reward: 37.687. Training.
+[INFO] 3DBall. Step: 2400000. Time Elapsed: 1659.785 s. Mean Reward: 72.466. Std of Reward: 43.572. Training.
+[INFO] 3DBall. Step: 2450000. Time Elapsed: 1693.133 s. Mean Reward: 88.950. Std of Reward: 31.254. Training.
+[INFO] 3DBall. Step: 2500000. Time Elapsed: 1727.061 s. Mean Reward: 91.093. Std of Reward: 28.447. Training.
+[INFO] Exported /home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/results/nimkita_Linux/nimkita_Linux_sac_2531f24313/3DBall/3DBall-2499979.onnx
+[INFO] 3DBall. Step: 2550000. Time Elapsed: 1760.525 s. Mean Reward: 80.488. Std of Reward: 39.398. Training.
+[INFO] 3DBall. Step: 2600000. Time Elapsed: 1794.446 s. Mean Reward: 77.822. Std of Reward: 41.295. Training.
+[INFO] 3DBall. Step: 2650000. Time Elapsed: 1828.247 s. Mean Reward: 94.143. Std of Reward: 23.427. Training.
+[INFO] 3DBall. Step: 2700000. Time Elapsed: 1861.564 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2750000. Time Elapsed: 1894.832 s. Mean Reward: 96.014. Std of Reward: 19.527. Training.
+[INFO] 3DBall. Step: 2800000. Time Elapsed: 1929.101 s. Mean Reward: 96.163. Std of Reward: 19.183. Training.
+[INFO] 3DBall. Step: 2850000. Time Elapsed: 1962.072 s. Mean Reward: 94.556. Std of Reward: 22.664. Training.
+[INFO] 3DBall. Step: 2900000. Time Elapsed: 1996.016 s. Mean Reward: 98.184. Std of Reward: 13.347. Training.
+[INFO] 3DBall. Step: 2950000. Time Elapsed: 2028.985 s. Mean Reward: 97.967. Std of Reward: 14.083. Training.
+[INFO] 3DBall. Step: 3000000. Time Elapsed: 2061.911 s. Mean Reward: 87.309. Std of Reward: 33.233. Training.
+[INFO] Exported /home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/results/nimkita_Linux/nimkita_Linux_sac_2531f24313/3DBall/3DBall-2999808.onnx
+[INFO] Exported /home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/results/nimkita_Linux/nimkita_Linux_sac_2531f24313/3DBall/3DBall-3000477.onnx
+[INFO] Copied /home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/results/nimkita_Linux/nimkita_Linux_sac_2531f24313/3DBall/3DBall-3000477.onnx to /home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/results/nimkita_Linux/nimkita_Linux_sac_2531f24313/3DBall.onnx.

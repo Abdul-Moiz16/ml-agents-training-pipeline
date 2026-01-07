@@ -1,22 +1,23 @@
 default_settings: null
 behaviors:
   3DBall:
-    trainer_type: sac
+    trainer_type: ppo
     hyperparameters:
+      batch_size: 32
+      buffer_size: 436928
       learning_rate: 0.0003
+      beta: 0.005
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      shared_critic: false
       learning_rate_schedule: linear
-      batch_size: 64
-      buffer_size: 120832
-      buffer_init_steps: 6399
-      tau: 0.006373867646242537
-      steps_per_update: 20.0
-      save_replay_buffer: false
-      init_entcoef: 0.9569903900276919
-      reward_signal_steps_per_update: 17.0
+      beta_schedule: linear
+      epsilon_schedule: linear
     checkpoint_interval: 500000
     network_settings:
       normalize: false
-      hidden_units: 159
+      hidden_units: 87
       num_layers: 1
       vis_encode_type: simple
       memory: null
@@ -24,7 +25,7 @@ behaviors:
       deterministic: false
     reward_signals:
       extrinsic:
-        gamma: 0.8745622752368736
+        gamma: 0.99
         strength: 1.0
         network_settings:
           normalize: false
@@ -38,13 +39,13 @@ behaviors:
     keep_checkpoints: 5
     even_checkpoints: false
     max_steps: 3000000
-    time_horizon: 1919
-    summary_freq: 50000
+    time_horizon: 64
+    summary_freq: 10000
     threaded: false
     self_play: null
     behavioral_cloning: null
 env_settings:
-  env_path: C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\training_manager\builds\3DBall_Windows\UnityEnvironment.exe
+  env_path: /home/nimkita/GitRepos/Group8-AI-ML/training_manager/builds/3DBall_Linux/3DBall.x86_64
   env_args: null
   base_port: 5005
   num_envs: 1
@@ -65,18 +66,14 @@ engine_settings:
   no_graphics_monitor: false
 environment_parameters: null
 checkpoint_settings:
-<<<<<<<< HEAD:training_manager/experiments/results/imoiz_Windows/imoiz_Windows_sac_37142c64bc/configuration.yaml
-  run_id: imoiz_Windows_sac_37142c64bc
-========
-  run_id: nimkita_Linux_sac_58f398576d
->>>>>>>> 6e36bdcb (new tests coming back):training_manager/experiments/results/nimkita_Linux/nimkita_Linux_sac_58f398576d/configuration.yaml
+  run_id: nimkita_Linux_ppo_37eebd28d7
   initialize_from: null
   load_model: false
-  resume: false
-  force: true
+  resume: true
+  force: false
   train_model: false
   inference: false
-  results_dir: C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\training_manager\experiments\results\imoiz_Windows
+  results_dir: /home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/results/nimkita_Linux
 torch_settings:
   device: null
 debug: false

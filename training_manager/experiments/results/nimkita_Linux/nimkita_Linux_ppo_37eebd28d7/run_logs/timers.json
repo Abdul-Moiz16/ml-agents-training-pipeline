@@ -1,0 +1,54 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1767606684",
+        "python_version": "3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]",
+        "command_line_arguments": "/home/nimkita/miniconda3/envs/mlagents/bin/mlagents-learn /home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/configs_for_training/ppo_37eebd28d7.yaml --run-id=nimkita_Linux_ppo_37eebd28d7 --env=/home/nimkita/GitRepos/Group8-AI-ML/training_manager/builds/3DBall_Linux/3DBall.x86_64 --no-graphics --results-dir=/home/nimkita/GitRepos/Group8-AI-ML/training_manager/experiments/results/nimkita_Linux --resume",
+        "mlagents_version": "1.1.0",
+        "mlagents_envs_version": "1.1.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.8.0+cu128",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1767606685"
+    },
+    "total": 1.38077530999999,
+    "count": 1,
+    "self": 0.21736854499977198,
+    "children": {
+        "run_training.setup": {
+            "total": 0.012345127000116918,
+            "count": 1,
+            "self": 0.012345127000116918
+        },
+        "TrainerController.start_learning": {
+            "total": 1.151061638000101,
+            "count": 1,
+            "self": 6.777800035706605e-05,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 1.1144344899998941,
+                    "count": 1,
+                    "self": 1.1144344899998941
+                },
+                "trainer_threads": {
+                    "total": 4.5099977796780877e-07,
+                    "count": 1,
+                    "self": 4.5099977796780877e-07
+                },
+                "TrainerController._save_models": {
+                    "total": 0.03655891900007191,
+                    "count": 1,
+                    "self": 0.0001941170003192383,
+                    "children": {
+                        "RLTrainer._checkpoint": {
+                            "total": 0.03636480199975267,
+                            "count": 1,
+                            "self": 0.03636480199975267
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
