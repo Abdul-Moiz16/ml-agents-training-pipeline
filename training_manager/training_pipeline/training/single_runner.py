@@ -209,6 +209,9 @@ class Runner:
             results_dir=RESULTS_DIR,
         )
         hw_monitor = hw_monitor_ctx.monitor
+        
+        # tell the monitor if were resuming so it can trim the csv properly
+        hw_monitor._is_resume = resume
 
         hw_monitor.record_initial_state()
         try:
@@ -231,6 +234,7 @@ class Runner:
         stop_reason = "NA"
         stop_signal_sent = False
         returncode = None
+        last_step_num = 0
 
         try:
             with log_file.open("a", encoding="utf-8") as lf:
@@ -252,9 +256,12 @@ class Runner:
                     print(f"\n~i stopping current run ({reason}) via interrupt...\n")
                     send_interrupt(proc)
 
-                ps_proc = psutil.Process(proc.pid)
-                ps_proc.cpu_percent(interval=None)
-                hw_monitor._process = ps_proc
+                try:
+                    ps_proc = psutil.Process(proc.pid)
+                    ps_proc.cpu_percent(interval=None)
+                    hw_monitor._process = ps_proc
+                except psutil.NoSuchProcess:
+                    pass
 
                 assert proc.stdout is not None
                 for line in proc.stdout:
@@ -273,6 +280,8 @@ class Runner:
                     except (ValueError, KeyError):
                         continue
 
+                    last_step_num = step_num
+
                     # log to run_log.csv via your monitor
                     try:
                         hw_monitor.log_step(
@@ -287,7 +296,7 @@ class Runner:
                     # ---- STOP 1: hard cap ----
                     if (not stop_signal_sent) and (step_num >= self.max_steps):
                         request_stop("max_steps")
-                        break
+                        # Don't break - drain remaining output
 
                     # ---- STOP 2: convergence (mean>=target AND stable) ----
                     mean_win.append(mean_r)
@@ -304,13 +313,13 @@ class Runner:
                             steps_to_convergence = step_num
                             time_to_convergence = t_elapsed
                             request_stop("converged")
-                            break 
+                            # Don't break - drain remaining output
 
-                # After breaking or EOF, wait for process to exit
+                # After EOF (process closed stdout), wait for process to exit
                 try:
                     proc.wait(timeout=self.graceful_timeout_s)
                 except subprocess.TimeoutExpired:
-                    print("~! interrupt timeout; sending terminate...")
+                    print("~! process timeout; sending terminate...")
                     send_terminate(proc)
 
                     try:
@@ -318,18 +327,69 @@ class Runner:
                     except subprocess.TimeoutExpired:
                         print("~!! terminate timeout; killing...")
                         send_kill(proc)
-
+                        try:
+                            proc.wait(timeout=10)
+                        except subprocess.TimeoutExpired:
+                            pass
                         if IS_WINDOWS:
                             kill_process_tree(proc.pid)
 
                 returncode = proc.returncode
 
+                # Detect natural completion by ML-Agents (it reached its own max_steps)
+                if returncode == 0 and not stopped_intentionally:
+                    stop_reason = "natural_completion"
+                    stopped_intentionally = True  # Treat as intentional for success check
+
         finally:
             hw_monitor.record_final_state()
-            hw_monitor.save_to_csv()
+            hw_monitor.save_to_csv()  # Always save hardware data (run_log.csv)
             end = time.time()
 
-        # Write main summary row
+        # Determine if run completed successfully FIRST
+        rc = returncode if returncode is not None else -999
+        
+        # Exit codes that indicate successful/intentional termination:
+        # 0: normal exit
+        # 130, -2: SIGINT (Ctrl+C or our interrupt)
+        # 143, -15: SIGTERM (our terminate)
+        # 137, -9: SIGKILL (our kill - last resort but still "successful" if we triggered it)
+        ok_exit_codes = {0, 130, -2, 143, -15, 137, -9}
+        
+        # Success = we intentionally stopped it (convergence or max_steps)
+        # NOT success = crash, external interrupt (Ctrl+C by user), port conflict, etc.
+        successful = stopped_intentionally and rc in ok_exit_codes
+
+        if not successful:
+            print("\n")
+            print(f"~! training incomplete/failed for: {yaml_path.name}")
+            print(f"~! exit code: {rc}")
+            print(f"~! stopped_intentionally: {stopped_intentionally}")
+            print(f"~! last_step: {last_step_num}")
+            
+            # if it crashed at 0 steps, delete the folder
+            # this way it can start fresh next time instead of being stuck
+            if last_step_num == 0:
+                try:
+                    import shutil
+                    shutil.rmtree(run_folder)
+                    print(f"~! Deleted failed run folder (0 steps): {run_folder.name}")
+                    print(f"~! Will start fresh on next batch run")
+                except Exception as e:
+                    print(f"~! Could not delete run folder: {e}")
+            else:
+                print(f"~! Hardware data saved to run_log.csv (run can be resumed if checkpoint exists)")
+            
+            print("-----------------------------------------------------------------")
+            return  # Don't write to main.csv for incomplete runs
+
+        # === ONLY REACHED IF RUN COMPLETED SUCCESSFULLY ===
+        
+        # Write completion markers
+        (run_folder / "complete.flag").write_text("ok", encoding="utf-8")
+        (run_folder / "stop_reason.txt").write_text(stop_reason, encoding="utf-8")
+
+        # Now write to main.csv (only for completed runs)
         cfg_meta = load_config(cfg_copy)
         hw_init = hw_monitor.initial_hardware_info
         hw_final = hw_monitor.final_hardware_info
@@ -366,25 +426,13 @@ class Runner:
         main_csv = RESULTS_DIR / "main.csv"
         append_main_row(main_csv, row)
 
-        # Treat intentional SIGINT/SIGTERM (we sent) as success
-        rc = returncode if returncode is not None else -999
-        ok_interrupt_codes = {0, 130, -2, 143, -15}  # common: SIGINT=130, SIGTERM=143
-        successful = (rc == 0) or (stopped_intentionally and rc in ok_interrupt_codes)
-
-        if not successful:
-            print("\n")
-            print(f"~! training failed for: {yaml_path.name}")
-            print(f"~! exit code: {rc}")
-            print("-----------------------------------------------------------------")
-            return
-
-        (run_folder / "complete.flag").write_text("ok", encoding="utf-8")
-        (run_folder / "stop_reason.txt").write_text(stop_reason, encoding="utf-8")
-
         print("\n")
-        print(f"~i training done for: {yaml_path.name}")
+        print(f"~i training COMPLETED for: {yaml_path.name}")
         print(f"~i stop_reason: {stop_reason}")
+        print(f"~i exit_code: {rc}")
+        print(f"~i last_step: {last_step_num}")
         print(f"~i duration: {round(end - start, 2)}s")
+        print(f"~i >> Added to main.csv")
         print("-----------------------------------------------------------------")
 
 

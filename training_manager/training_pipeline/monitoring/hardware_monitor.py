@@ -10,6 +10,9 @@ from typing import Dict, Optional, Any
 class HardwareMonitor:
     """Monitors CPU and RAM usage during training runs."""
     
+    # mlagents saves checkpoints every 500k steps
+    CHECKPOINT_INTERVAL = 500_000
+    
     def __init__(self, run_name: str = "training_run", steps_per_log: int = 10000, testing: bool = False, results_dir: Optional[Path] = None):
         self.run_name = run_name
         self.steps_per_log = steps_per_log
@@ -36,7 +39,8 @@ class HardwareMonitor:
         self._csv_writer: Optional[csv.writer] = None
         self._csv_path: Optional[Path] = None
         self._existing_log: bool = False
-        self.time_offset: float = 0.0  # used when resuming to keep elapsed time monotonic
+        self.time_offset: float = 0.0  # keeps time consistent when resuming
+        self._is_resume: bool = False  # runner sets this when resuming
 
     def _ensure_csv_writer(self) -> None:
         """Open CSV file and write header if not already open."""
@@ -48,11 +52,16 @@ class HardwareMonitor:
         run_data_dir.mkdir(parents=True, exist_ok=True)
         self._csv_path = run_data_dir / "run_log.csv"
 
-
-        # this is when we resume the trainig it was losingteh initial runlog and only started new runlog from the new step now its fixed and it keeps teh previous runlog 
         file_exists = self._csv_path.exists()
 
-        if file_exists:
+        if file_exists and self._is_resume:
+            # When resuming, trim CSV to last checkpoint (multiple of CHECKPOINT_INTERVAL)
+            try:
+                self._trim_csv_to_last_checkpoint()
+            except Exception as e:
+                print(f"? Warning: Could not trim CSV on resume: {e}")
+        elif file_exists:
+            # Not a resume but file exists - read last row for time offset
             try:
                 with self._csv_path.open('r', newline='', encoding='utf-8') as f:
                     reader = csv.DictReader(f)
@@ -80,6 +89,101 @@ class HardwareMonitor:
                 'step_number', 'time_elapsed', 'mean_reward', 'std_of_reward', 
                 'cpu_percent', 'cpu_source', 'ram_percent', 'ram_source', 'ram_mb'
             ])
+
+    def _trim_csv_to_last_checkpoint(self) -> None:
+        """
+        When resuming, trim the CSV to keep only rows up to the last checkpoint.
+        ML-Agents checkpoints every CHECKPOINT_INTERVAL steps, so we keep rows
+        where step_number <= last_checkpoint_step.
+        """
+        if self._csv_path is None or not self._csv_path.exists():
+            return
+        
+        # Read all rows
+        rows = []
+        header = None
+        with self._csv_path.open('r', newline='', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            header = next(reader, None)
+            if not header:
+                return
+            for row in reader:
+                rows.append(row)
+        
+        if not rows:
+            return
+        
+        # Find the step_number column index
+        step_col_idx = 0
+        time_col_idx = 1
+        for i, col in enumerate(header):
+            if col.lower() == 'step_number' or col.lower() == 'steps':
+                step_col_idx = i
+            if col.lower() == 'time_elapsed':
+                time_col_idx = i
+        
+        # Find the maximum step number that is a multiple of CHECKPOINT_INTERVAL
+        max_checkpoint_step = 0
+        for row in rows:
+            try:
+                step = int(row[step_col_idx])
+                if step % self.CHECKPOINT_INTERVAL == 0 and step > max_checkpoint_step:
+                    max_checkpoint_step = step
+            except (ValueError, IndexError):
+                continue
+        
+        # Safety check: if no checkpoint found, don't trim anything
+        if max_checkpoint_step == 0:
+            print("? resume: no checkpoint in csv, keeping all data")
+            if rows:
+                last_row = rows[-1]
+                try:
+                    self.time_offset = float(last_row[time_col_idx] or 0)
+                except (ValueError, IndexError):
+                    self.time_offset = 0.0
+                try:
+                    self.step_count = int(last_row[step_col_idx])
+                except (ValueError, IndexError):
+                    pass
+            self._existing_log = True
+            return
+        
+        # only keep rows up to the checkpoint
+        trimmed_rows = []
+        checkpoint_row = None
+        for row in rows:
+            try:
+                step = int(row[step_col_idx])
+                if step <= max_checkpoint_step:
+                    trimmed_rows.append(row)
+                    if step == max_checkpoint_step:
+                        checkpoint_row = row
+            except (ValueError, IndexError):
+                # Keep rows we can't parse (just in case)
+                trimmed_rows.append(row)
+        
+        trimmed_count = len(rows) - len(trimmed_rows)
+        if trimmed_count > 0:
+            print(f"? resume: removed {trimmed_count} rows after step {max_checkpoint_step}")
+        
+        # set time offset from checkpoint row so timing stays consistent
+        if checkpoint_row:
+            try:
+                self.time_offset = float(checkpoint_row[time_col_idx] or 0)
+            except (ValueError, IndexError):
+                self.time_offset = 0.0
+            try:
+                self.step_count = int(checkpoint_row[step_col_idx])
+            except (ValueError, IndexError):
+                pass
+        
+        # Write trimmed data back
+        with self._csv_path.open('w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerow(header)
+            writer.writerows(trimmed_rows)
+        
+        self._existing_log = True
 
     def _write_step_row(self, step: Dict[str, Any]) -> None:
         """Append a step row to CSV and flush to disk."""

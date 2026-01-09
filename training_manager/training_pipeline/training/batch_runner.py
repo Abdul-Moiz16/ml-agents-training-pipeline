@@ -1,6 +1,8 @@
 import shutil
 import stat
 import time
+import platform
+import subprocess
 from pathlib import Path
 
 from training_pipeline.training.single_runner import Runner, make_run_id, MACHINE_NAME
@@ -13,19 +15,167 @@ paths = Paths()
 RESULTS_DIR = paths.results_dir
 CONFIGS_DIR = paths.configs_dir
 
+# wait a bit between runs so ports get freed up
+DELAY_BETWEEN_RUNS_S = 3
+
+
+def cleanup_unity_processes():
+    """
+    kills any unity processes that are still running from previous runs
+     fixes the annoying 'address already in use' error I kept getting
+    """
+    system = platform.system()
+    
+    # Process names to kill (Unity environment)
+    targets = ["3DBall", "UnityEnvironment"]
+    
+    killed_any = False
+    
+    for target in targets:
+        try:
+            if system == "Windows":
+                subprocess.run(
+                    ["taskkill", "/F", "/IM", f"{target}*"],
+                    capture_output=True,
+                    timeout=10
+                )
+            else:
+                # mac/linux
+                result = subprocess.run(
+                    ["pkill", "-9", "-f", target],
+                    capture_output=True,
+                    timeout=10
+                )
+                if result.returncode == 0:
+                    killed_any = True
+        except Exception:
+            pass
+    
+    # also check if something is using port 5004 (mlagents uses this)
+    try:
+        if system == "Windows":
+            # windows way - parse netstat output
+            result = subprocess.run(
+                ["netstat", "-ano"],
+                capture_output=True,
+                text=True,
+                timeout=10
+            )
+            for line in result.stdout.split('\n'):
+                if ':5004' in line and 'LISTENING' in line:
+                    parts = line.split()
+                    if parts:
+                        pid = parts[-1]
+                        try:
+                            subprocess.run(["taskkill", "/F", "/PID", pid], capture_output=True, timeout=5)
+                            killed_any = True
+                        except Exception:
+                            pass
+        else:
+            # mac/linux - lsof is way easier
+            result = subprocess.run(
+                ["lsof", "-ti", ":5004"],
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            if result.stdout.strip():
+                pids = result.stdout.strip().split('\n')
+                for pid in pids:
+                    try:
+                        subprocess.run(["kill", "-9", pid], capture_output=True, timeout=5)
+                        killed_any = True
+                    except Exception:
+                        pass
+    except Exception:
+        pass
+    
+    if killed_any:
+        print("~i cleaned up lingering Unity processes")
+    
+    # give the OS a sec to actually release the ports
+    time.sleep(3)
+    
+    return killed_any
+
 def generate_and_get_new_configs():
     """
-    Calls generate_all() and returns ONLY the newly created YAML config paths.
-    Works by comparing directory state before and after generation.
+    generates configs and returns only the new ones
+    (compares before/after to find what was added)
     """
-
     before = set(CONFIGS_DIR.glob("*.yaml"))
     generate_all()
     after = set(CONFIGS_DIR.glob("*.yaml"))
 
-    # Newly created = set difference
     new_files = sorted(after - before)
     return new_files
+
+
+def cleanup_incomplete_runs():
+    """
+    deletes runs that got interrupted before hitting 500k steps
+    these cant be resumed anyway (no checkpoint file) so we just nuke em
+    and let them start fresh next time
+    """
+    import csv
+    
+    results_base = RESULTS_DIR / MACHINE_NAME
+    if not results_base.exists():
+        return
+    
+    deleted_count = 0
+    
+    for run_folder in results_base.iterdir():
+        if not run_folder.is_dir():
+            continue
+        
+        # Skip if already complete
+        if (run_folder / "complete.flag").exists():
+            continue
+        
+        # look for checkpoint files in the behavior folder (like 3DBall/)
+        behavior_dir = next(
+            (d for d in run_folder.iterdir() if d.is_dir() and d.name != "run_logs"),
+            None,
+        )
+        
+        has_checkpoint = False
+        if behavior_dir:
+            has_checkpoint = any(behavior_dir.glob("*.pt"))
+        
+        # if theres a checkpoint we can resume, dont touch it
+        if has_checkpoint:
+            continue
+        
+        # check if it actually did any training (steps > 0 in csv)
+        run_log = run_folder / "run_logs" / "run_log.csv"
+        last_step = 0
+        if run_log.exists():
+            try:
+                with run_log.open('r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        try:
+                            step = int(row.get("step_number") or row.get("steps") or 0)
+                            if step > last_step:
+                                last_step = step
+                        except (ValueError, TypeError):
+                            pass
+            except Exception:
+                pass
+        
+        # got some progress but no checkpoint = useless, delete it
+        if last_step > 0:
+            try:
+                shutil.rmtree(run_folder)
+                print(f"~i deleted incomplete run: {run_folder.name} (had {last_step} steps, no checkpoint)")
+                deleted_count += 1
+            except Exception as e:
+                print(f"~! failed to delete {run_folder.name}: {e}")
+    
+    if deleted_count > 0:
+        print(f"~i cleaned up {deleted_count} incomplete run(s)")
+
 
 class BatchRunner:
     """Runs all training configs in the configs directory."""
@@ -56,60 +206,117 @@ class BatchRunner:
 
     @staticmethod
     def run_completed(run_id: str) -> str:
+        """
+        checks whats up with a run:
+        - done: has complete.flag, skip it
+        - resume: has .pt checkpoint, we can continue from there
+        - incomplete: has some progress but no checkpoint, cant resume
+        - fresh: folder doesnt exist, start new
+        - stale: folder exists but nothing useful in it
+        """
         run_base = RESULTS_DIR / MACHINE_NAME
         run_folder = run_base / run_id
         flag_file = run_folder / "complete.flag"
-        # pick any behavior/output dir that is not run_logs
+        
+        # No folder = fresh start
         if not run_folder.exists():
             return "fresh"
 
+        # Complete flag exists = done, skip this run
+        if flag_file.exists():
+            return "done"
+
+        # Check for checkpoint files (.pt)
         behavior_dir = next(
             (d for d in run_folder.iterdir() if d.is_dir() and d.name != "run_logs"),
             None,
         )
-
-        if flag_file.exists():
-            return "done"
-
+        
+        has_checkpoint = False
         if behavior_dir:
-            if any(behavior_dir.glob("*.pt")) or any(behavior_dir.glob("*.onnx")):
-                return "resume"
+            has_checkpoint = any(behavior_dir.glob("*.pt"))
 
+        if has_checkpoint:
+            return "resume"
+
+        # check if theres any progress in the csv (catches runs that died before 500k)
+        run_log = run_folder / "run_logs" / "run_log.csv"
+        last_step = 0
+        if run_log.exists():
+            try:
+                import csv
+                with run_log.open('r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        try:
+                            step = int(row.get("step_number") or row.get("steps") or 0)
+                            if step > last_step:
+                                last_step = step
+                        except (ValueError, TypeError):
+                            pass
+            except Exception:
+                pass
+
+        if last_step > 0:
+            # got progress but no checkpoint = cant resume this
+            return "incomplete"
+
+        # Folder exists but no meaningful progress
         return "stale"
 
     def run_all(self):
+        # Clean up incomplete runs (those with progress but no checkpoint)
+        # so they can start fresh instead of being skipped
+        cleanup_incomplete_runs()
+        
         configs = sorted(CONFIGS_DIR.glob("*.yaml"))
         print(f"-----------------------------------------------------------------")
         print(f"~i found configs: {len(configs)}")
         print(f"-----------------------------------------------------------------")
 
-
         if not configs:
             print("~i no config files found")
             return
 
-        for cfg in configs:
-            run_id = make_run_id(cfg)
-            status = self.run_completed(run_id)
+        try:
+            for i, cfg in enumerate(configs):
+                run_id = make_run_id(cfg)
+                status = self.run_completed(run_id)
 
-            if status == "done":
-                print(f"~i skip {run_id}: already completed")
-                continue
+                if status == "done":
+                    print(f"~i skip {run_id}: already completed")
+                    continue
 
-            resume = status == "resume"
+                # kill any zombie unity processes before starting
+                cleanup_unity_processes()
 
-            if resume:
-                print(f"~i resuming run: {run_id}")
-            else:
-                print(f"~i starting fresh run: {run_id}")
+                resume = status == "resume"
 
-            self.runner.run(cfg, run_id, resume=resume)
+                if resume:
+                    print(f"~i resuming run: {run_id} (has checkpoint)")
+                else:
+                    print(f"~i starting fresh run: {run_id}")
 
-            self._maybe_rebuild()
+                self.runner.run(cfg, run_id, resume=resume)
 
-        print(f"-----------------------------------------------------------------")
-        print("~i all runs completed")
-        print(f"-----------------------------------------------------------------")
+                self._maybe_rebuild()
+
+                # wait a bit so ports get released
+                if i < len(configs) - 1:
+                    print(f"~i waiting {DELAY_BETWEEN_RUNS_S}s before next run...")
+                    time.sleep(DELAY_BETWEEN_RUNS_S)
+
+            print(f"-----------------------------------------------------------------")
+            print("~i all runs completed")
+            print(f"-----------------------------------------------------------------")
+        except KeyboardInterrupt:
+            print("\n-----------------------------------------------------------------")
+            print("~i batch interrupted by user (Ctrl+C)")
+            print("~i cleaning up lingering processes...")
+            cleanup_unity_processes()
+            print("~i exiting gracefully")
+            print("-----------------------------------------------------------------")
+            raise  # re-raise so the program actually stops
 
     def run_forever(self, sleep_seconds=3):
         """
@@ -120,40 +327,53 @@ class BatchRunner:
             - Run only those configs
             - Sleep
         """
+        try:
+            print("-----------------------------------------------------------------")
+            print("~i running existing configs once")
+            print("-----------------------------------------------------------------")
 
-        print("-----------------------------------------------------------------")
-        print("~i running existing configs once")
-        print("-----------------------------------------------------------------")
+            self.run_all()
 
-        # Run all existing configs ONCE
-        self.run_all()
+            print("-----------------------------------------------------------------")
+            print("~i entering continuous config generation mode")
+            print("-----------------------------------------------------------------")
 
-        print("-----------------------------------------------------------------")
-        print("~i entering continuous config generation mode")
-        print("-----------------------------------------------------------------")
+            while True:
+                print("\n~i generating new configs...")
+                new_cfgs = generate_and_get_new_configs()
 
-        # Infinite generation → execution loop
-        while True:
-            print("\n~i generating new configs...")
-            new_cfgs = generate_and_get_new_configs()
+                if not new_cfgs:
+                    print("~i no new configs generated (all duplicates?)")
+                    time.sleep(sleep_seconds)
+                    continue
 
-            if not new_cfgs:
-                print("~i no new configs generated (all duplicates?)")
+                print(f"~i detected {len(new_cfgs)} new configs:")
+                for cfg in new_cfgs:
+                    print("   →", cfg.name)
+
+                print("\n~i running new configs...")
+                for i, cfg in enumerate(new_cfgs):
+                    # Cleanup before each run
+                    cleanup_unity_processes()
+                    
+                    run_id = make_run_id(cfg)
+                    print(f"   → running {run_id}")
+                    self.runner.run(cfg, run_id, resume=False)
+                    
+                    # Delay between runs
+                    if i < len(new_cfgs) - 1:
+                        print(f"~i waiting {DELAY_BETWEEN_RUNS_S}s before next run...")
+                        time.sleep(DELAY_BETWEEN_RUNS_S)
+
+                print(f"~i sleeping {sleep_seconds} seconds...")
                 time.sleep(sleep_seconds)
-                continue
-
-            print(f"~i detected {len(new_cfgs)} new configs:")
-            for cfg in new_cfgs:
-                print("   →", cfg.name)
-
-            print("\n~i running new configs...")
-            for cfg in new_cfgs:
-                run_id = make_run_id(cfg)
-                print(f"   → running {run_id}")
-                self.runner.run(cfg, run_id, resume=False)
-
-            print(f"~i sleeping {sleep_seconds} seconds...")
-            time.sleep(sleep_seconds)
+        except KeyboardInterrupt:
+            print("\n-----------------------------------------------------------------")
+            print("~i batch interrupted by user (Ctrl+C)")
+            print("~i cleaning up lingering processes...")
+            cleanup_unity_processes()
+            print("~i exiting gracefully")
+            print("-----------------------------------------------------------------")
 
 
 def force_delete(path: Path):
