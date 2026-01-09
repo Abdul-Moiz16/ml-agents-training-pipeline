@@ -71,10 +71,8 @@ def popen_in_own_group(cmd: list[str], **kwargs) -> subprocess.Popen:
 
 def send_interrupt(proc: subprocess.Popen) -> None:
     if IS_WINDOWS:
-        try:
-            proc.send_signal(signal.CTRL_BREAK_EVENT)
-        except Exception:
-            proc.terminate()
+        # Avoid CTRL_BREAK_EVENT to prevent Fortran runtime abort; use terminate instead
+        proc.terminate()
     else:
         os.killpg(proc.pid, signal.SIGINT)
 
@@ -355,10 +353,12 @@ class Runner:
         # 143, -15: SIGTERM (our terminate)
         # 137, -9: SIGKILL (our kill - last resort but still "successful" if we triggered it)
         ok_exit_codes = {0, 130, -2, 143, -15, 137, -9}
-        
-        # Success = we intentionally stopped it (convergence or max_steps)
-        # NOT success = crash, external interrupt (Ctrl+C by user), port conflict, etc.
-        successful = stopped_intentionally and rc in ok_exit_codes
+
+        # Treat intentional stops (converged/max_steps) as success even if rc is non-zero
+        if stopped_intentionally and stop_reason in {"converged", "max_steps", "natural_completion"}:
+            successful = True
+        else:
+            successful = stopped_intentionally and rc in ok_exit_codes
 
         if not successful:
             print("\n")
