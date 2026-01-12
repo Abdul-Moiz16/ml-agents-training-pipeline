@@ -21,35 +21,37 @@ DELAY_BETWEEN_RUNS_S = 3
 
 def cleanup_unity_processes(base_port: int | None = None):
     """
-    kills any unity processes that are still running from previous runs
-     fixes the annoying 'address already in use' error I kept getting
+    Cleanup Unity processes/ports.
+
+    If base_port is provided (parallel runs), avoid killing by process name to
+    prevent terminating other workers; only clear the specific port.
     """
     system = platform.system()
     
-    # Process names to kill (Unity environment)
-    targets = ["3DBall", "UnityEnvironment"]
-    
     killed_any = False
-    
-    for target in targets:
-        try:
-            if system == "Windows":
-                subprocess.run(
-                    ["taskkill", "/F", "/IM", f"{target}*"],
-                    capture_output=True,
-                    timeout=10
-                )
-            else:
-                # mac/linux
-                result = subprocess.run(
-                    ["pkill", "-9", "-f", target],
-                    capture_output=True,
-                    timeout=10
-                )
-                if result.returncode == 0:
-                    killed_any = True
-        except Exception:
-            pass
+
+    # Only kill by name when not running parallel (no base_port specified).
+    if base_port is None:
+        targets = ["3DBall", "UnityEnvironment"]
+        for target in targets:
+            try:
+                if system == "Windows":
+                    subprocess.run(
+                        ["taskkill", "/F", "/IM", f"{target}*"],
+                        capture_output=True,
+                        timeout=10,
+                    )
+                else:
+                    # mac/linux
+                    result = subprocess.run(
+                        ["pkill", "-9", "-f", target],
+                        capture_output=True,
+                        timeout=10,
+                    )
+                    if result.returncode == 0:
+                        killed_any = True
+            except Exception:
+                pass
     
     # also check if something is using the mlagents port
     port = base_port if base_port is not None else 5004
