@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1767828967",
+        "python_version": "3.10.12 | packaged by Anaconda, Inc. | (main, Jul  5 2023, 19:01:18) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\HP\\miniconda3\\envs\\mlagents\\Scripts\\mlagents-learn C:\\prog\\ml-agents\\Group8-AI-ML\\training_manager\\experiments\\results\\HP_Windows\\HP_Windows_ppo_ec235ec93f\\configuration.yaml --run-id=HP_Windows_ppo_ec235ec93f --env=C:\\prog\\ml-agents\\Group8-AI-ML\\training_manager\\builds\\3DBall_Windows\\UnityEnvironment.exe --no-graphics --results-dir=C:\\prog\\ml-agents\\Group8-AI-ML\\training_manager\\experiments\\results\\HP_Windows --force",
+        "mlagents_version": "1.1.0",
+        "mlagents_envs_version": "1.1.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.8.0+cpu",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1767828971"
+    },
+    "total": 4.402030600234866,
+    "count": 1,
+    "self": 0.01064939983189106,
+    "children": {
+        "run_training.setup": {
+            "total": 0.16208550008013844,
+            "count": 1,
+            "self": 0.16208550008013844
+        },
+        "TrainerController.start_learning": {
+            "total": 4.229295700322837,
+            "count": 1,
+            "self": 0.0001208004541695118,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 4.229153799824417,
+                    "count": 1,
+                    "self": 4.229153799824417
+                },
+                "TrainerController._save_models": {
+                    "total": 2.110004425048828e-05,
+                    "count": 1,
+                    "self": 2.110004425048828e-05
+                }
+            }
+        }
+    }
+}
