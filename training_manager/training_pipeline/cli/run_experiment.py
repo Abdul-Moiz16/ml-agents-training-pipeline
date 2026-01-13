@@ -29,6 +29,10 @@ def parse_args():
     parser.add_argument("--cv-max", type=float, default=0.10)
     parser.add_argument("--mean-jitter", type=float, default=2.0)
     parser.add_argument("--min-steps-before-check", type=int, default=200_000)
+    parser.add_argument("--base-port", type=int, default=None, help="Base port for ML-Agents (for parallel runs).")
+    parser.add_argument("--shard-index", type=int, default=0, help="Shard index for parallel batch runs (0-based).")
+    parser.add_argument("--shard-count", type=int, default=1, help="Total number of shards for parallel runs.")
+    parser.add_argument("--inuse-timeout-hours", type=int, default=6, help="Hours before inuse.flag is considered stale.")
 
     return parser.parse_args()
 
@@ -49,6 +53,10 @@ def main():
             cv_max=args.cv_max,
             mean_jitter=args.mean_jitter,
             min_steps_before_check=args.min_steps_before_check,
+            base_port=args.base_port,
+            shard_index=args.shard_index,
+            shard_count=args.shard_count,
+            inuse_timeout_hours=args.inuse_timeout_hours,
         )
         runner.run_forever()
         return
