@@ -21,8 +21,8 @@ class BaseModel:
         "run_id",
         "machine_id",
         "run_log_file",
-        "train_duration_s",     # leakage
-        "steps_to_convergence",  # leakage
+       # "train_duration_s",     # leakage
+       # "steps_to_convergence",  # leakage
     ]
 
     def __init__(self, data_path: Optional[Path] = None):

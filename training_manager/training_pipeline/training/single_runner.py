@@ -119,6 +119,8 @@ class Runner:
         min_steps_before_check: int = 200_000,
         # stopping behavior
         graceful_timeout_s: int = 120,  # wait after SIGINT before escalating
+        # base port for parallel runs (mlagents-learn --base-port)
+        base_port: int | None = None,
     ):
         self.env_path = Path(env_path)
 
@@ -129,6 +131,7 @@ class Runner:
         self.mean_jitter = float(mean_jitter)
         self.min_steps_before_check = int(min_steps_before_check)
         self.graceful_timeout_s = int(graceful_timeout_s)
+        self.base_port = base_port
 
     def _converged(self, means: list[float], stds: list[float]) -> bool:
         if len(means) < self.window_rows:
@@ -164,6 +167,23 @@ class Runner:
         log_dir.mkdir(parents=True, exist_ok=True)
         log_file = log_dir / "stream.log"
         run_log_file = log_dir / "run_log.csv"
+        inuse_flag = run_folder / "inuse.flag"
+
+        try:
+            inuse_flag.write_text(
+                json.dumps(
+                    {
+                        "machine": MACHINE_NAME,
+                        "run_id": run_id,
+                        "started_ts": time.time(),
+                        "pid": None,
+                    },
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+        except Exception:
+            pass
 
         # Write a patched config copy (enforces max_steps) and run THAT
         cfg_copy = run_folder / "configuration.yaml"
@@ -184,6 +204,8 @@ class Runner:
             "--no-graphics",
             f"--results-dir={run_base}",
         ]
+        if self.base_port is not None:
+            cmd.append(f"--base-port={self.base_port}")
 
         if resume:
             cmd.append("--resume")
@@ -258,6 +280,21 @@ class Runner:
                     ps_proc = psutil.Process(proc.pid)
                     ps_proc.cpu_percent(interval=None)
                     hw_monitor._process = ps_proc
+                    try:
+                        inuse_flag.write_text(
+                            json.dumps(
+                                {
+                                    "machine": MACHINE_NAME,
+                                    "run_id": run_id,
+                                    "started_ts": time.time(),
+                                    "pid": proc.pid,
+                                },
+                                indent=2,
+                            ),
+                            encoding="utf-8",
+                        )
+                    except Exception:
+                        pass
                 except psutil.NoSuchProcess:
                     pass
 
@@ -343,6 +380,11 @@ class Runner:
             hw_monitor.record_final_state()
             hw_monitor.save_to_csv()  # Always save hardware data (run_log.csv)
             end = time.time()
+            try:
+                if inuse_flag.exists():
+                    inuse_flag.unlink()
+            except Exception:
+                pass
 
         # Determine if run completed successfully FIRST
         rc = returncode if returncode is not None else -999
