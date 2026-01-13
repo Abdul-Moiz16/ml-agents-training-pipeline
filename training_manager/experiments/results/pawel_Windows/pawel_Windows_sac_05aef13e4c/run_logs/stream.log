@@ -1,0 +1,720 @@
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\torch_utils\torch.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\torch_utils\torch.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[INFO] Connected to Unity environment with package version 3.0.0-exp.1 and communication version 1.5.0
+[INFO] Connected new brain: 3DBall?team=0
+
+            ┐  ╖
+        ╓╖╬│╡  ││╬╖╖
+    ╓╖╬│││││┘  ╬│││││╬╖
+ ╖╬│││││╬╜        ╙╬│││││╖╖                               ╗╗╗
+ ╬╬╬╬╖││╦╖        ╖╬││╗╣╣╣╬      ╟╣╣╬    ╟╣╣╣             ╜╜╜  ╟╣╣
+ ╬╬╬╬╬╬╬╬╖│╬╖╖╓╬╪│╓╣╣╣╣╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╒╣╣╖╗╣╣╣╗   ╣╣╣ ╣╣╣╣╣╣ ╟╣╣╖   ╣╣╣
+ ╬╬╬╬┐  ╙╬╬╬╬│╓╣╣╣╝╜  ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╣╙ ╙╣╣╣  ╣╣╣ ╙╟╣╣╜╙  ╫╣╣  ╟╣╣
+ ╬╬╬╬┐     ╙╬╬╣╣      ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣     ╣╣╣┌╣╣╜
+ ╬╬╬╜       ╬╬╣╣      ╙╝╣╣╬      ╙╣╣╣╗╖╓╗╣╣╣╜ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣╦╓    ╣╣╣╣╣
+ ╙   ╓╦╖    ╬╬╣╣   ╓╗╗╖            ╙╝╣╣╣╣╝╜   ╘╝╝╜   ╝╝╝  ╝╝╝   ╙╣╣╣    ╟╣╣╣
+   ╩╬╬╬╬╬╬╦╦╬╬╣╣╗╣╣╣╣╣╣╣╝                                             ╫╣╣╣╣
+      ╙╬╬╬╬╬╬╬╣╣╣╣╣╣╝╜
+          ╙╬╬╬╣╣╣╜
+             ╙
+        
+ Version information:
+  ml-agents: 1.1.0,
+  ml-agents-envs: 1.1.0,
+  Communicator API: 1.5.0,
+  PyTorch: 2.9.1+cpu
+[INFO] Hyperparameters for behavior name 3DBall: 
+	trainer_type:	sac
+	hyperparameters:	
+	  learning_rate:	0.0003
+	  learning_rate_schedule:	linear
+	  batch_size:	64
+	  buffer_size:	620928
+	  buffer_init_steps:	8977
+	  tau:	0.007215385253858345
+	  steps_per_update:	13.0
+	  save_replay_buffer:	False
+	  init_entcoef:	0.5863838931885306
+	  reward_signal_steps_per_update:	5.0
+	checkpoint_interval:	500000
+	network_settings:	
+	  normalize:	False
+	  hidden_units:	265
+	  num_layers:	3
+	  vis_encode_type:	simple
+	  memory:	None
+	  goal_conditioning_type:	hyper
+	  deterministic:	False
+	reward_signals:	
+	  extrinsic:	
+	    gamma:	0.9337687579413874
+	    strength:	1.0
+	    network_settings:	
+	      normalize:	False
+	      hidden_units:	128
+	      num_layers:	2
+	      vis_encode_type:	simple
+	      memory:	None
+	      goal_conditioning_type:	hyper
+	      deterministic:	False
+	init_path:	None
+	keep_checkpoints:	5
+	even_checkpoints:	False
+	max_steps:	10000000
+	time_horizon:	2026
+	summary_freq:	50000
+	threaded:	False
+	self_play:	None
+	behavioral_cloning:	None
+[INFO] 3DBall. Step: 50000. Time Elapsed: 91.988 s. Mean Reward: 1.032. Std of Reward: 0.664. Training.
+[INFO] 3DBall. Step: 100000. Time Elapsed: 184.001 s. Mean Reward: 3.119. Std of Reward: 5.643. Training.
+[INFO] 3DBall. Step: 150000. Time Elapsed: 272.257 s. Mean Reward: 97.902. Std of Reward: 10.863. Training.
+[INFO] 3DBall. Step: 200000. Time Elapsed: 363.198 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 250000. Time Elapsed: 453.003 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 300000. Time Elapsed: 542.857 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 350000. Time Elapsed: 631.929 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 400000. Time Elapsed: 720.372 s. Mean Reward: 94.975. Std of Reward: 17.674. Training.
+[INFO] 3DBall. Step: 450000. Time Elapsed: 811.083 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 500000. Time Elapsed: 908.102 s. Mean Reward: 99.966. Std of Reward: 0.238. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 16:06:11.417000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 16:06:11.876000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-499141.onnx
+[INFO] 3DBall. Step: 550000. Time Elapsed: 999.377 s. Mean Reward: 70.886. Std of Reward: 37.069. Training.
+[INFO] 3DBall. Step: 600000. Time Elapsed: 1086.677 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 650000. Time Elapsed: 1178.334 s. Mean Reward: 97.227. Std of Reward: 12.335. Training.
+[INFO] 3DBall. Step: 700000. Time Elapsed: 1270.299 s. Mean Reward: 62.961. Std of Reward: 43.987. Training.
+[INFO] 3DBall. Step: 750000. Time Elapsed: 1358.890 s. Mean Reward: 48.366. Std of Reward: 43.729. Training.
+[INFO] 3DBall. Step: 800000. Time Elapsed: 1454.089 s. Mean Reward: 49.210. Std of Reward: 46.642. Training.
+[INFO] 3DBall. Step: 850000. Time Elapsed: 1547.939 s. Mean Reward: 60.234. Std of Reward: 44.799. Training.
+[INFO] 3DBall. Step: 900000. Time Elapsed: 1643.568 s. Mean Reward: 66.616. Std of Reward: 41.435. Training.
+[INFO] 3DBall. Step: 950000. Time Elapsed: 1735.176 s. Mean Reward: 71.417. Std of Reward: 37.209. Training.
+[INFO] 3DBall. Step: 1000000. Time Elapsed: 1826.952 s. Mean Reward: 75.364. Std of Reward: 38.099. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 16:21:29.962000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 16:21:30.344000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-999867.onnx
+[INFO] 3DBall. Step: 1050000. Time Elapsed: 1922.993 s. Mean Reward: 80.367. Std of Reward: 35.561. Training.
+[INFO] 3DBall. Step: 1100000. Time Elapsed: 2014.123 s. Mean Reward: 51.417. Std of Reward: 45.824. Training.
+[INFO] 3DBall. Step: 1150000. Time Elapsed: 2109.137 s. Mean Reward: 66.497. Std of Reward: 38.687. Training.
+[INFO] 3DBall. Step: 1200000. Time Elapsed: 2200.527 s. Mean Reward: 59.747. Std of Reward: 39.887. Training.
+[INFO] 3DBall. Step: 1250000. Time Elapsed: 2296.204 s. Mean Reward: 79.343. Std of Reward: 34.132. Training.
+[INFO] 3DBall. Step: 1300000. Time Elapsed: 2387.777 s. Mean Reward: 75.722. Std of Reward: 34.317. Training.
+[INFO] 3DBall. Step: 1350000. Time Elapsed: 2477.795 s. Mean Reward: 62.992. Std of Reward: 38.323. Training.
+[INFO] 3DBall. Step: 1400000. Time Elapsed: 2567.082 s. Mean Reward: 44.226. Std of Reward: 40.396. Training.
+[INFO] 3DBall. Step: 1450000. Time Elapsed: 2657.812 s. Mean Reward: 40.621. Std of Reward: 34.058. Training.
+[INFO] 3DBall. Step: 1500000. Time Elapsed: 2749.019 s. Mean Reward: 45.849. Std of Reward: 33.149. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 16:36:52.030000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 16:36:52.375000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-1499074.onnx
+[INFO] 3DBall. Step: 1550000. Time Elapsed: 2843.767 s. Mean Reward: 61.911. Std of Reward: 37.468. Training.
+[INFO] 3DBall. Step: 1600000. Time Elapsed: 2939.896 s. Mean Reward: 81.023. Std of Reward: 32.532. Training.
+[INFO] 3DBall. Step: 1650000. Time Elapsed: 3032.761 s. Mean Reward: 70.590. Std of Reward: 38.438. Training.
+[INFO] 3DBall. Step: 1700000. Time Elapsed: 3125.240 s. Mean Reward: 58.040. Std of Reward: 42.704. Training.
+[INFO] 3DBall. Step: 1750000. Time Elapsed: 3215.345 s. Mean Reward: 57.306. Std of Reward: 39.254. Training.
+[INFO] 3DBall. Step: 1800000. Time Elapsed: 3308.052 s. Mean Reward: 90.133. Std of Reward: 24.396. Training.
+[INFO] 3DBall. Step: 1850000. Time Elapsed: 3398.745 s. Mean Reward: 69.146. Std of Reward: 37.127. Training.
+[INFO] 3DBall. Step: 1900000. Time Elapsed: 3487.485 s. Mean Reward: 71.912. Std of Reward: 29.460. Training.
+[INFO] 3DBall. Step: 1950000. Time Elapsed: 3580.557 s. Mean Reward: 74.009. Std of Reward: 30.916. Training.
+[INFO] 3DBall. Step: 2000000. Time Elapsed: 3669.254 s. Mean Reward: 73.035. Std of Reward: 34.824. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 16:52:12.265000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 16:52:12.641000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-1999805.onnx
+[INFO] 3DBall. Step: 2050000. Time Elapsed: 3762.675 s. Mean Reward: 74.176. Std of Reward: 37.177. Training.
+[INFO] 3DBall. Step: 2100000. Time Elapsed: 3855.630 s. Mean Reward: 34.827. Std of Reward: 34.687. Training.
+[INFO] 3DBall. Step: 2150000. Time Elapsed: 3948.488 s. Mean Reward: 61.589. Std of Reward: 36.646. Training.
+[INFO] 3DBall. Step: 2200000. Time Elapsed: 4035.254 s. Mean Reward: 80.298. Std of Reward: 32.718. Training.
+[INFO] 3DBall. Step: 2250000. Time Elapsed: 4127.085 s. Mean Reward: 88.386. Std of Reward: 26.091. Training.
+[INFO] 3DBall. Step: 2300000. Time Elapsed: 4216.984 s. Mean Reward: 69.454. Std of Reward: 36.674. Training.
+[INFO] 3DBall. Step: 2350000. Time Elapsed: 4308.625 s. Mean Reward: 70.746. Std of Reward: 36.933. Training.
+[INFO] 3DBall. Step: 2400000. Time Elapsed: 4401.801 s. Mean Reward: 80.351. Std of Reward: 32.547. Training.
+[INFO] 3DBall. Step: 2450000. Time Elapsed: 4495.575 s. Mean Reward: 55.696. Std of Reward: 34.492. Training.
+[INFO] 3DBall. Step: 2500000. Time Elapsed: 4586.116 s. Mean Reward: 58.710. Std of Reward: 41.106. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 17:07:29.128000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 17:07:29.528000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-2499194.onnx
+[INFO] 3DBall. Step: 2550000. Time Elapsed: 4679.361 s. Mean Reward: 60.425. Std of Reward: 39.433. Training.
+[INFO] 3DBall. Step: 2600000. Time Elapsed: 4770.075 s. Mean Reward: 54.153. Std of Reward: 37.965. Training.
+[INFO] 3DBall. Step: 2650000. Time Elapsed: 4863.997 s. Mean Reward: 67.215. Std of Reward: 38.379. Training.
+[INFO] 3DBall. Step: 2700000. Time Elapsed: 4958.325 s. Mean Reward: 72.693. Std of Reward: 30.230. Training.
+[INFO] 3DBall. Step: 2750000. Time Elapsed: 5052.383 s. Mean Reward: 81.923. Std of Reward: 32.525. Training.
+[INFO] 3DBall. Step: 2800000. Time Elapsed: 5148.177 s. Mean Reward: 81.859. Std of Reward: 36.762. Training.
+[INFO] 3DBall. Step: 2850000. Time Elapsed: 5237.464 s. Mean Reward: 97.214. Std of Reward: 14.496. Training.
+[INFO] 3DBall. Step: 2900000. Time Elapsed: 5334.704 s. Mean Reward: 85.322. Std of Reward: 28.265. Training.
+[INFO] 3DBall. Step: 2950000. Time Elapsed: 5425.486 s. Mean Reward: 86.428. Std of Reward: 29.415. Training.
+[INFO] 3DBall. Step: 3000000. Time Elapsed: 5520.494 s. Mean Reward: 74.016. Std of Reward: 34.760. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 17:23:03.505000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 17:23:03.902000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-2999700.onnx
+[INFO] 3DBall. Step: 3050000. Time Elapsed: 5616.511 s. Mean Reward: 94.460. Std of Reward: 20.856. Training.
+[INFO] 3DBall. Step: 3100000. Time Elapsed: 5707.576 s. Mean Reward: 62.532. Std of Reward: 37.337. Training.
+[INFO] 3DBall. Step: 3150000. Time Elapsed: 5796.349 s. Mean Reward: 37.374. Std of Reward: 32.896. Training.
+[INFO] 3DBall. Step: 3200000. Time Elapsed: 5886.582 s. Mean Reward: 26.140. Std of Reward: 28.019. Training.
+[INFO] 3DBall. Step: 3250000. Time Elapsed: 5980.293 s. Mean Reward: 69.920. Std of Reward: 35.100. Training.
+[INFO] 3DBall. Step: 3300000. Time Elapsed: 6074.446 s. Mean Reward: 96.673. Std of Reward: 14.002. Training.
+[INFO] 3DBall. Step: 3350000. Time Elapsed: 6164.493 s. Mean Reward: 96.406. Std of Reward: 17.973. Training.
+[INFO] 3DBall. Step: 3400000. Time Elapsed: 6254.056 s. Mean Reward: 66.543. Std of Reward: 40.360. Training.
+[INFO] 3DBall. Step: 3450000. Time Elapsed: 6342.984 s. Mean Reward: 57.116. Std of Reward: 38.407. Training.
+[INFO] 3DBall. Step: 3500000. Time Elapsed: 6433.273 s. Mean Reward: 63.833. Std of Reward: 33.590. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 17:38:16.297000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 17:38:16.671000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-3499798.onnx
+[INFO] 3DBall. Step: 3550000. Time Elapsed: 6525.774 s. Mean Reward: 62.630. Std of Reward: 35.123. Training.
+[INFO] 3DBall. Step: 3600000. Time Elapsed: 6618.342 s. Mean Reward: 75.897. Std of Reward: 35.397. Training.
+[INFO] 3DBall. Step: 3650000. Time Elapsed: 6716.849 s. Mean Reward: 93.581. Std of Reward: 22.790. Training.
+[INFO] 3DBall. Step: 3700000. Time Elapsed: 6810.268 s. Mean Reward: 81.100. Std of Reward: 27.632. Training.
+[INFO] 3DBall. Step: 3750000. Time Elapsed: 6904.513 s. Mean Reward: 89.204. Std of Reward: 23.714. Training.
+[INFO] 3DBall. Step: 3800000. Time Elapsed: 6996.946 s. Mean Reward: 84.376. Std of Reward: 27.357. Training.
+[INFO] 3DBall. Step: 3850000. Time Elapsed: 7090.247 s. Mean Reward: 75.524. Std of Reward: 35.375. Training.
+[INFO] 3DBall. Step: 3900000. Time Elapsed: 7179.473 s. Mean Reward: 53.752. Std of Reward: 37.774. Training.
+[INFO] 3DBall. Step: 3950000. Time Elapsed: 7269.640 s. Mean Reward: 87.674. Std of Reward: 28.362. Training.
+[INFO] 3DBall. Step: 4000000. Time Elapsed: 7359.161 s. Mean Reward: 57.429. Std of Reward: 33.040. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 17:53:42.188000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 17:53:42.565000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-3999673.onnx
+[INFO] 3DBall. Step: 4050000. Time Elapsed: 7453.089 s. Mean Reward: 63.716. Std of Reward: 34.697. Training.
+[INFO] 3DBall. Step: 4100000. Time Elapsed: 7541.073 s. Mean Reward: 67.836. Std of Reward: 32.633. Training.
+[INFO] 3DBall. Step: 4150000. Time Elapsed: 7631.786 s. Mean Reward: 64.604. Std of Reward: 38.811. Training.
+[INFO] 3DBall. Step: 4200000. Time Elapsed: 7722.318 s. Mean Reward: 82.912. Std of Reward: 25.233. Training.
+[INFO] 3DBall. Step: 4250000. Time Elapsed: 7814.146 s. Mean Reward: 87.300. Std of Reward: 27.965. Training.
+[INFO] 3DBall. Step: 4300000. Time Elapsed: 7903.629 s. Mean Reward: 90.867. Std of Reward: 22.986. Training.
+[INFO] 3DBall. Step: 4350000. Time Elapsed: 7996.989 s. Mean Reward: 74.131. Std of Reward: 39.430. Training.
+[INFO] 3DBall. Step: 4400000. Time Elapsed: 8089.559 s. Mean Reward: 96.925. Std of Reward: 15.399. Training.
+[INFO] 3DBall. Step: 4450000. Time Elapsed: 8183.876 s. Mean Reward: 94.104. Std of Reward: 18.450. Training.
+[INFO] 3DBall. Step: 4500000. Time Elapsed: 8274.561 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 18:08:57.594000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 18:08:57.965000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-4499936.onnx
+[INFO] 3DBall. Step: 4550000. Time Elapsed: 8367.426 s. Mean Reward: 98.416. Std of Reward: 11.088. Training.
+[INFO] 3DBall. Step: 4600000. Time Elapsed: 8461.368 s. Mean Reward: 98.706. Std of Reward: 5.230. Training.
+[INFO] 3DBall. Step: 4650000. Time Elapsed: 8553.049 s. Mean Reward: 76.942. Std of Reward: 31.474. Training.
+[INFO] 3DBall. Step: 4700000. Time Elapsed: 8644.088 s. Mean Reward: 94.750. Std of Reward: 14.829. Training.
+[INFO] 3DBall. Step: 4750000. Time Elapsed: 8739.495 s. Mean Reward: 98.224. Std of Reward: 12.172. Training.
+[INFO] 3DBall. Step: 4800000. Time Elapsed: 8840.028 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 4850000. Time Elapsed: 8934.734 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 4900000. Time Elapsed: 9028.024 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 4950000. Time Elapsed: 9120.710 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 5000000. Time Elapsed: 9218.044 s. Mean Reward: 81.106. Std of Reward: 36.696. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 18:24:41.074000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 18:24:41.491000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-4999751.onnx
+[INFO] 3DBall. Step: 5050000. Time Elapsed: 9309.315 s. Mean Reward: 83.337. Std of Reward: 32.894. Training.
+[INFO] 3DBall. Step: 5100000. Time Elapsed: 9405.769 s. Mean Reward: 97.685. Std of Reward: 12.968. Training.
+[INFO] 3DBall. Step: 5150000. Time Elapsed: 9494.340 s. Mean Reward: 97.084. Std of Reward: 13.176. Training.
+[INFO] 3DBall. Step: 5200000. Time Elapsed: 9588.261 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 5250000. Time Elapsed: 9680.071 s. Mean Reward: 81.087. Std of Reward: 30.097. Training.
+[INFO] 3DBall. Step: 5300000. Time Elapsed: 9777.920 s. Mean Reward: 77.722. Std of Reward: 35.058. Training.
+[INFO] 3DBall. Step: 5350000. Time Elapsed: 9870.849 s. Mean Reward: 77.117. Std of Reward: 30.977. Training.
+[INFO] 3DBall. Step: 5400000. Time Elapsed: 9967.911 s. Mean Reward: 89.489. Std of Reward: 23.896. Training.
+[INFO] 3DBall. Step: 5450000. Time Elapsed: 10061.518 s. Mean Reward: 82.122. Std of Reward: 33.236. Training.
+[INFO] 3DBall. Step: 5500000. Time Elapsed: 10154.925 s. Mean Reward: 78.033. Std of Reward: 38.645. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 18:40:17.937000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 18:40:18.344000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-5499324.onnx
+[INFO] 3DBall. Step: 5550000. Time Elapsed: 10244.392 s. Mean Reward: 59.865. Std of Reward: 43.212. Training.
+[INFO] 3DBall. Step: 5600000. Time Elapsed: 10338.338 s. Mean Reward: 76.018. Std of Reward: 31.289. Training.
+[INFO] 3DBall. Step: 5650000. Time Elapsed: 10428.698 s. Mean Reward: 79.711. Std of Reward: 31.460. Training.
+[INFO] 3DBall. Step: 5700000. Time Elapsed: 10520.176 s. Mean Reward: 55.609. Std of Reward: 39.462. Training.
+[INFO] 3DBall. Step: 5750000. Time Elapsed: 10612.083 s. Mean Reward: 85.688. Std of Reward: 25.204. Training.
+[INFO] 3DBall. Step: 5800000. Time Elapsed: 10702.908 s. Mean Reward: 98.426. Std of Reward: 7.873. Training.
+[INFO] 3DBall. Step: 5850000. Time Elapsed: 10794.461 s. Mean Reward: 89.377. Std of Reward: 23.926. Training.
+[INFO] 3DBall. Step: 5900000. Time Elapsed: 10888.281 s. Mean Reward: 96.323. Std of Reward: 8.952. Training.
+[INFO] 3DBall. Step: 5950000. Time Elapsed: 10978.210 s. Mean Reward: 86.682. Std of Reward: 24.520. Training.
+[INFO] 3DBall. Step: 6000000. Time Elapsed: 11071.920 s. Mean Reward: 77.505. Std of Reward: 29.734. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 18:55:34.933000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 18:55:35.341000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-5999243.onnx
+[INFO] 3DBall. Step: 6050000. Time Elapsed: 11162.686 s. Mean Reward: 91.158. Std of Reward: 15.918. Training.
+[INFO] 3DBall. Step: 6100000. Time Elapsed: 11251.774 s. Mean Reward: 53.668. Std of Reward: 29.346. Training.
+[INFO] 3DBall. Step: 6150000. Time Elapsed: 11345.183 s. Mean Reward: 97.465. Std of Reward: 12.701. Training.
+[INFO] 3DBall. Step: 6200000. Time Elapsed: 11434.161 s. Mean Reward: 98.310. Std of Reward: 11.830. Training.
+[INFO] 3DBall. Step: 6250000. Time Elapsed: 11527.106 s. Mean Reward: 92.076. Std of Reward: 23.213. Training.
+[INFO] 3DBall. Step: 6300000. Time Elapsed: 11618.007 s. Mean Reward: 95.681. Std of Reward: 13.336. Training.
+[INFO] 3DBall. Step: 6350000. Time Elapsed: 11706.841 s. Mean Reward: 94.208. Std of Reward: 19.452. Training.
+[INFO] 3DBall. Step: 6400000. Time Elapsed: 11800.611 s. Mean Reward: 87.809. Std of Reward: 22.593. Training.
+[INFO] 3DBall. Step: 6450000. Time Elapsed: 11890.067 s. Mean Reward: 91.478. Std of Reward: 24.355. Training.
+[INFO] 3DBall. Step: 6500000. Time Elapsed: 11983.364 s. Mean Reward: 89.325. Std of Reward: 20.914. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 19:10:46.381000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 19:10:46.779000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-6499568.onnx
+[INFO] 3DBall. Step: 6550000. Time Elapsed: 12080.008 s. Mean Reward: 96.986. Std of Reward: 15.089. Training.
+[INFO] 3DBall. Step: 6600000. Time Elapsed: 12172.065 s. Mean Reward: 95.557. Std of Reward: 14.464. Training.
+[INFO] 3DBall. Step: 6650000. Time Elapsed: 12264.224 s. Mean Reward: 96.477. Std of Reward: 14.480. Training.
+[INFO] 3DBall. Step: 6700000. Time Elapsed: 12353.685 s. Mean Reward: 94.535. Std of Reward: 18.571. Training.
+[INFO] 3DBall. Step: 6750000. Time Elapsed: 12444.233 s. Mean Reward: 96.308. Std of Reward: 15.008. Training.
+[INFO] 3DBall. Step: 6800000. Time Elapsed: 12536.996 s. Mean Reward: 97.098. Std of Reward: 14.175. Training.
+[INFO] 3DBall. Step: 6850000. Time Elapsed: 12630.540 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 6900000. Time Elapsed: 12721.251 s. Mean Reward: 94.013. Std of Reward: 19.648. Training.
+[INFO] 3DBall. Step: 6950000. Time Elapsed: 12810.691 s. Mean Reward: 94.935. Std of Reward: 20.563. Training.
+[INFO] 3DBall. Step: 7000000. Time Elapsed: 12902.947 s. Mean Reward: 87.337. Std of Reward: 31.618. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 19:26:05.962000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 19:26:06.362000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-6999010.onnx
+[INFO] 3DBall. Step: 7050000. Time Elapsed: 12997.154 s. Mean Reward: 70.663. Std of Reward: 37.343. Training.
+[INFO] 3DBall. Step: 7100000. Time Elapsed: 13088.346 s. Mean Reward: 96.404. Std of Reward: 17.647. Training.
+[INFO] 3DBall. Step: 7150000. Time Elapsed: 13179.746 s. Mean Reward: 85.274. Std of Reward: 28.694. Training.
+[INFO] 3DBall. Step: 7200000. Time Elapsed: 13273.249 s. Mean Reward: 78.321. Std of Reward: 27.667. Training.
+[INFO] 3DBall. Step: 7250000. Time Elapsed: 13363.996 s. Mean Reward: 64.209. Std of Reward: 34.926. Training.
+[INFO] 3DBall. Step: 7300000. Time Elapsed: 13456.473 s. Mean Reward: 60.160. Std of Reward: 39.115. Training.
+[INFO] 3DBall. Step: 7350000. Time Elapsed: 13551.316 s. Mean Reward: 70.573. Std of Reward: 36.906. Training.
+[INFO] 3DBall. Step: 7400000. Time Elapsed: 13641.464 s. Mean Reward: 86.411. Std of Reward: 25.354. Training.
+[INFO] 3DBall. Step: 7450000. Time Elapsed: 13732.061 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 7500000. Time Elapsed: 13824.316 s. Mean Reward: 91.784. Std of Reward: 17.449. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 19:41:27.350000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 19:41:27.739000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-7499975.onnx
+[INFO] 3DBall. Step: 7550000. Time Elapsed: 13915.532 s. Mean Reward: 84.486. Std of Reward: 30.493. Training.
+[INFO] 3DBall. Step: 7600000. Time Elapsed: 14007.411 s. Mean Reward: 98.402. Std of Reward: 11.300. Training.
+[INFO] 3DBall. Step: 7650000. Time Elapsed: 14097.794 s. Mean Reward: 97.060. Std of Reward: 13.065. Training.
+[INFO] 3DBall. Step: 7700000. Time Elapsed: 14186.665 s. Mean Reward: 87.995. Std of Reward: 25.603. Training.
+[INFO] 3DBall. Step: 7750000. Time Elapsed: 14278.205 s. Mean Reward: 92.798. Std of Reward: 18.485. Training.
+[INFO] 3DBall. Step: 7800000. Time Elapsed: 14370.457 s. Mean Reward: 96.450. Std of Reward: 10.121. Training.
+[INFO] 3DBall. Step: 7850000. Time Elapsed: 14465.468 s. Mean Reward: 91.835. Std of Reward: 20.365. Training.
+[INFO] 3DBall. Step: 7900000. Time Elapsed: 14555.524 s. Mean Reward: 79.632. Std of Reward: 30.800. Training.
+[INFO] 3DBall. Step: 7950000. Time Elapsed: 14650.283 s. Mean Reward: 87.929. Std of Reward: 25.908. Training.
+[INFO] 3DBall. Step: 8000000. Time Elapsed: 14743.999 s. Mean Reward: 99.437. Std of Reward: 2.786. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 19:56:47.014000 13484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 19:56:47.426000 13484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 1 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_sac_05aef13e4c\3DBall\3DBall-7999998.onnx
+[INFO] 3DBall. Step: 8050000. Time Elapsed: 14836.861 s. Mean Reward: 81.463. Std of Reward: 29.516. Training.
+[INFO] 3DBall. Step: 8100000. Time Elapsed: 14928.718 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 8150000. Time Elapsed: 15020.663 s. Mean Reward: 99.431. Std of Reward: 3.748. Training.
+[INFO] 3DBall. Step: 8200000. Time Elapsed: 15110.613 s. Mean Reward: 97.971. Std of Reward: 10.439. Training.
+[INFO] 3DBall. Step: 8250000. Time Elapsed: 15202.364 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 8300000. Time Elapsed: 15293.086 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 8350000. Time Elapsed: 15385.640 s. Mean Reward: 99.840. Std of Reward: 0.814. Training.
+[INFO] 3DBall. Step: 8400000. Time Elapsed: 15474.527 s. Mean Reward: 99.844. Std of Reward: 1.092. Training.
+[INFO] 3DBall. Step: 8450000. Time Elapsed: 15565.933 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[ERROR] UnityEnvironment worker 0: environment raised an unexpected exception.
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 312, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+BrokenPipeError: [WinError 109] The pipe has been ended
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 175, in worker
+    req: EnvironmentRequest = parent_conn.recv()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 321, in _recv_bytes
+    raise EOFError
+EOFError
+Process Process-1:
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 312, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+BrokenPipeError: [WinError 109] The pipe has been ended
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 175, in worker
+    req: EnvironmentRequest = parent_conn.recv()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 321, in _recv_bytes
+    raise EOFError
+EOFError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 235, in worker
+    _send_response(EnvironmentCommand.ENV_EXITED, ex)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 150, in _send_response
+    parent_conn.send(EnvironmentResponse(cmd_name, worker_id, payload))
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 206, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 280, in _send_bytes
+    ov, err = _winapi.WriteFile(self._handle, buf, overlapped=True)
+BrokenPipeError: [WinError 232] The pipe is being closed
