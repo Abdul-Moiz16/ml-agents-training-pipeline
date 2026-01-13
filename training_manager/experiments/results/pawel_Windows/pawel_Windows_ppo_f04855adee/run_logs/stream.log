@@ -1,0 +1,529 @@
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\torch_utils\torch.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\torch_utils\torch.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[INFO] Connected to Unity environment with package version 3.0.0-exp.1 and communication version 1.5.0
+[INFO] Connected new brain: 3DBall?team=0
+
+            ┐  ╖
+        ╓╖╬│╡  ││╬╖╖
+    ╓╖╬│││││┘  ╬│││││╬╖
+ ╖╬│││││╬╜        ╙╬│││││╖╖                               ╗╗╗
+ ╬╬╬╬╖││╦╖        ╖╬││╗╣╣╣╬      ╟╣╣╬    ╟╣╣╣             ╜╜╜  ╟╣╣
+ ╬╬╬╬╬╬╬╬╖│╬╖╖╓╬╪│╓╣╣╣╣╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╒╣╣╖╗╣╣╣╗   ╣╣╣ ╣╣╣╣╣╣ ╟╣╣╖   ╣╣╣
+ ╬╬╬╬┐  ╙╬╬╬╬│╓╣╣╣╝╜  ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╣╙ ╙╣╣╣  ╣╣╣ ╙╟╣╣╜╙  ╫╣╣  ╟╣╣
+ ╬╬╬╬┐     ╙╬╬╣╣      ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣     ╣╣╣┌╣╣╜
+ ╬╬╬╜       ╬╬╣╣      ╙╝╣╣╬      ╙╣╣╣╗╖╓╗╣╣╣╜ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣╦╓    ╣╣╣╣╣
+ ╙   ╓╦╖    ╬╬╣╣   ╓╗╗╖            ╙╝╣╣╣╣╝╜   ╘╝╝╜   ╝╝╝  ╝╝╝   ╙╣╣╣    ╟╣╣╣
+   ╩╬╬╬╬╬╬╦╦╬╬╣╣╗╣╣╣╣╣╣╣╝                                             ╫╣╣╣╣
+      ╙╬╬╬╬╬╬╬╣╣╣╣╣╣╝╜
+          ╙╬╬╬╣╣╣╜
+             ╙
+        
+ Version information:
+  ml-agents: 1.1.0,
+  ml-agents-envs: 1.1.0,
+  Communicator API: 1.5.0,
+  PyTorch: 2.9.1+cpu
+[INFO] Hyperparameters for behavior name 3DBall: 
+	trainer_type:	ppo
+	hyperparameters:	
+	  batch_size:	32
+	  buffer_size:	337312
+	  learning_rate:	0.0003
+	  beta:	0.005
+	  epsilon:	0.2
+	  lambd:	0.95
+	  num_epoch:	3
+	  shared_critic:	False
+	  learning_rate_schedule:	linear
+	  beta_schedule:	linear
+	  epsilon_schedule:	linear
+	checkpoint_interval:	500000
+	network_settings:	
+	  normalize:	False
+	  hidden_units:	107
+	  num_layers:	1
+	  vis_encode_type:	simple
+	  memory:	None
+	  goal_conditioning_type:	hyper
+	  deterministic:	False
+	reward_signals:	
+	  extrinsic:	
+	    gamma:	0.99
+	    strength:	1.0
+	    network_settings:	
+	      normalize:	False
+	      hidden_units:	128
+	      num_layers:	2
+	      vis_encode_type:	simple
+	      memory:	None
+	      goal_conditioning_type:	hyper
+	      deterministic:	False
+	init_path:	None
+	keep_checkpoints:	5
+	even_checkpoints:	False
+	max_steps:	10000000
+	time_horizon:	64
+	summary_freq:	10000
+	threaded:	False
+	self_play:	None
+	behavioral_cloning:	None
+[INFO] 3DBall. Step: 10000. Time Elapsed: 10.427 s. Mean Reward: 1.055. Std of Reward: 0.630. Training.
+[INFO] 3DBall. Step: 20000. Time Elapsed: 14.528 s. Mean Reward: 1.041. Std of Reward: 0.666. Training.
+[INFO] 3DBall. Step: 30000. Time Elapsed: 18.406 s. Mean Reward: 1.119. Std of Reward: 0.746. Training.
+[INFO] 3DBall. Step: 40000. Time Elapsed: 22.452 s. Mean Reward: 1.088. Std of Reward: 0.632. Training.
+[INFO] 3DBall. Step: 50000. Time Elapsed: 26.399 s. Mean Reward: 1.091. Std of Reward: 0.640. Training.
+[INFO] 3DBall. Step: 60000. Time Elapsed: 30.334 s. Mean Reward: 1.062. Std of Reward: 0.680. Training.
+[INFO] 3DBall. Step: 70000. Time Elapsed: 34.513 s. Mean Reward: 1.045. Std of Reward: 0.657. Training.
+[INFO] 3DBall. Step: 80000. Time Elapsed: 41.520 s. Mean Reward: 1.096. Std of Reward: 0.666. Training.
+[INFO] 3DBall. Step: 90000. Time Elapsed: 47.818 s. Mean Reward: 1.147. Std of Reward: 0.767. Training.
+[INFO] 3DBall. Step: 100000. Time Elapsed: 52.616 s. Mean Reward: 1.038. Std of Reward: 0.615. Training.
+[INFO] 3DBall. Step: 110000. Time Elapsed: 56.940 s. Mean Reward: 1.129. Std of Reward: 0.705. Training.
+[INFO] 3DBall. Step: 120000. Time Elapsed: 61.332 s. Mean Reward: 1.082. Std of Reward: 0.720. Training.
+[INFO] 3DBall. Step: 130000. Time Elapsed: 65.703 s. Mean Reward: 1.156. Std of Reward: 0.670. Training.
+[INFO] 3DBall. Step: 140000. Time Elapsed: 69.736 s. Mean Reward: 1.080. Std of Reward: 0.675. Training.
+[INFO] 3DBall. Step: 150000. Time Elapsed: 73.754 s. Mean Reward: 1.056. Std of Reward: 0.683. Training.
+[INFO] 3DBall. Step: 160000. Time Elapsed: 77.684 s. Mean Reward: 1.089. Std of Reward: 0.645. Training.
+[INFO] 3DBall. Step: 170000. Time Elapsed: 81.970 s. Mean Reward: 1.072. Std of Reward: 0.630. Training.
+[INFO] 3DBall. Step: 180000. Time Elapsed: 85.875 s. Mean Reward: 1.078. Std of Reward: 0.643. Training.
+[INFO] 3DBall. Step: 190000. Time Elapsed: 89.784 s. Mean Reward: 1.067. Std of Reward: 0.699. Training.
+[INFO] 3DBall. Step: 200000. Time Elapsed: 94.084 s. Mean Reward: 1.077. Std of Reward: 0.641. Training.
+[INFO] 3DBall. Step: 210000. Time Elapsed: 98.381 s. Mean Reward: 1.073. Std of Reward: 0.663. Training.
+[INFO] 3DBall. Step: 220000. Time Elapsed: 102.386 s. Mean Reward: 1.031. Std of Reward: 0.662. Training.
+[INFO] 3DBall. Step: 230000. Time Elapsed: 107.213 s. Mean Reward: 1.124. Std of Reward: 0.640. Training.
+[INFO] 3DBall. Step: 240000. Time Elapsed: 111.135 s. Mean Reward: 1.041. Std of Reward: 0.635. Training.
+[INFO] 3DBall. Step: 250000. Time Elapsed: 115.075 s. Mean Reward: 1.112. Std of Reward: 0.689. Training.
+[INFO] 3DBall. Step: 260000. Time Elapsed: 119.000 s. Mean Reward: 1.056. Std of Reward: 0.633. Training.
+[INFO] 3DBall. Step: 270000. Time Elapsed: 122.950 s. Mean Reward: 1.065. Std of Reward: 0.619. Training.
+[INFO] 3DBall. Step: 280000. Time Elapsed: 126.881 s. Mean Reward: 1.114. Std of Reward: 0.663. Training.
+[INFO] 3DBall. Step: 290000. Time Elapsed: 132.840 s. Mean Reward: 1.093. Std of Reward: 0.664. Training.
+[INFO] 3DBall. Step: 300000. Time Elapsed: 138.993 s. Mean Reward: 1.043. Std of Reward: 0.642. Training.
+[INFO] 3DBall. Step: 310000. Time Elapsed: 145.272 s. Mean Reward: 1.042. Std of Reward: 0.664. Training.
+[INFO] 3DBall. Step: 320000. Time Elapsed: 151.602 s. Mean Reward: 1.066. Std of Reward: 0.705. Training.
+[INFO] 3DBall. Step: 330000. Time Elapsed: 157.889 s. Mean Reward: 1.074. Std of Reward: 0.666. Training.
+[INFO] 3DBall. Step: 340000. Time Elapsed: 265.623 s. Mean Reward: 1.097. Std of Reward: 0.683. Training.
+[INFO] 3DBall. Step: 350000. Time Elapsed: 269.510 s. Mean Reward: 1.206. Std of Reward: 0.712. Training.
+[INFO] 3DBall. Step: 360000. Time Elapsed: 273.428 s. Mean Reward: 1.208. Std of Reward: 0.707. Training.
+[INFO] 3DBall. Step: 370000. Time Elapsed: 277.494 s. Mean Reward: 1.158. Std of Reward: 0.701. Training.
+[INFO] 3DBall. Step: 380000. Time Elapsed: 281.422 s. Mean Reward: 1.183. Std of Reward: 0.718. Training.
+[INFO] 3DBall. Step: 390000. Time Elapsed: 285.842 s. Mean Reward: 1.283. Std of Reward: 0.773. Training.
+[INFO] 3DBall. Step: 400000. Time Elapsed: 290.140 s. Mean Reward: 1.206. Std of Reward: 0.710. Training.
+[INFO] 3DBall. Step: 410000. Time Elapsed: 294.420 s. Mean Reward: 1.162. Std of Reward: 0.721. Training.
+[INFO] 3DBall. Step: 420000. Time Elapsed: 298.694 s. Mean Reward: 1.155. Std of Reward: 0.692. Training.
+[INFO] 3DBall. Step: 430000. Time Elapsed: 302.622 s. Mean Reward: 1.231. Std of Reward: 0.705. Training.
+[INFO] 3DBall. Step: 440000. Time Elapsed: 306.687 s. Mean Reward: 1.137. Std of Reward: 0.700. Training.
+[INFO] 3DBall. Step: 450000. Time Elapsed: 310.839 s. Mean Reward: 1.249. Std of Reward: 0.774. Training.
+[INFO] 3DBall. Step: 460000. Time Elapsed: 314.798 s. Mean Reward: 1.156. Std of Reward: 0.670. Training.
+[INFO] 3DBall. Step: 470000. Time Elapsed: 318.686 s. Mean Reward: 1.208. Std of Reward: 0.718. Training.
+[INFO] 3DBall. Step: 480000. Time Elapsed: 322.940 s. Mean Reward: 1.249. Std of Reward: 0.730. Training.
+[INFO] 3DBall. Step: 490000. Time Elapsed: 327.546 s. Mean Reward: 1.220. Std of Reward: 0.758. Training.
+[INFO] 3DBall. Step: 500000. Time Elapsed: 331.902 s. Mean Reward: 1.150. Std of Reward: 0.669. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 13:10:24.256000 9484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 13:10:24.902000 9484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 2 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_ppo_f04855adee\3DBall\3DBall-499989.onnx
+[INFO] 3DBall. Step: 510000. Time Elapsed: 338.186 s. Mean Reward: 1.162. Std of Reward: 0.686. Training.
+[INFO] 3DBall. Step: 520000. Time Elapsed: 342.480 s. Mean Reward: 1.141. Std of Reward: 0.670. Training.
+[INFO] 3DBall. Step: 530000. Time Elapsed: 346.377 s. Mean Reward: 1.171. Std of Reward: 0.738. Training.
+[INFO] 3DBall. Step: 540000. Time Elapsed: 350.267 s. Mean Reward: 1.205. Std of Reward: 0.731. Training.
+[INFO] 3DBall. Step: 550000. Time Elapsed: 354.193 s. Mean Reward: 1.191. Std of Reward: 0.691. Training.
+[INFO] 3DBall. Step: 560000. Time Elapsed: 358.104 s. Mean Reward: 1.172. Std of Reward: 0.714. Training.
+[INFO] 3DBall. Step: 570000. Time Elapsed: 362.009 s. Mean Reward: 1.183. Std of Reward: 0.729. Training.
+[INFO] 3DBall. Step: 580000. Time Elapsed: 366.334 s. Mean Reward: 1.225. Std of Reward: 0.693. Training.
+[INFO] 3DBall. Step: 590000. Time Elapsed: 370.303 s. Mean Reward: 1.170. Std of Reward: 0.760. Training.
+[INFO] 3DBall. Step: 600000. Time Elapsed: 374.180 s. Mean Reward: 1.188. Std of Reward: 0.710. Training.
+[INFO] 3DBall. Step: 610000. Time Elapsed: 378.015 s. Mean Reward: 1.287. Std of Reward: 0.825. Training.
+[INFO] 3DBall. Step: 620000. Time Elapsed: 381.877 s. Mean Reward: 1.186. Std of Reward: 0.731. Training.
+[INFO] 3DBall. Step: 630000. Time Elapsed: 385.797 s. Mean Reward: 1.176. Std of Reward: 0.741. Training.
+[INFO] 3DBall. Step: 640000. Time Elapsed: 389.640 s. Mean Reward: 1.214. Std of Reward: 0.773. Training.
+[INFO] 3DBall. Step: 650000. Time Elapsed: 394.140 s. Mean Reward: 1.197. Std of Reward: 0.737. Training.
+[INFO] 3DBall. Step: 660000. Time Elapsed: 397.999 s. Mean Reward: 1.258. Std of Reward: 0.732. Training.
+[INFO] 3DBall. Step: 670000. Time Elapsed: 401.909 s. Mean Reward: 1.174. Std of Reward: 0.726. Training.
+[INFO] 3DBall. Step: 680000. Time Elapsed: 506.647 s. Mean Reward: 1.361. Std of Reward: 0.834. Training.
+[INFO] 3DBall. Step: 690000. Time Elapsed: 510.479 s. Mean Reward: 1.627. Std of Reward: 0.970. Training.
+[INFO] 3DBall. Step: 700000. Time Elapsed: 514.168 s. Mean Reward: 1.708. Std of Reward: 1.155. Training.
+[INFO] 3DBall. Step: 710000. Time Elapsed: 517.993 s. Mean Reward: 1.572. Std of Reward: 0.953. Training.
+[INFO] 3DBall. Step: 720000. Time Elapsed: 521.775 s. Mean Reward: 1.597. Std of Reward: 0.958. Training.
+[INFO] 3DBall. Step: 730000. Time Elapsed: 525.563 s. Mean Reward: 1.537. Std of Reward: 1.014. Training.
+[INFO] 3DBall. Step: 740000. Time Elapsed: 529.610 s. Mean Reward: 1.643. Std of Reward: 0.944. Training.
+[INFO] 3DBall. Step: 750000. Time Elapsed: 533.388 s. Mean Reward: 1.529. Std of Reward: 0.927. Training.
+[INFO] 3DBall. Step: 760000. Time Elapsed: 537.163 s. Mean Reward: 1.591. Std of Reward: 0.981. Training.
+[INFO] 3DBall. Step: 770000. Time Elapsed: 541.169 s. Mean Reward: 1.643. Std of Reward: 0.928. Training.
+[INFO] 3DBall. Step: 780000. Time Elapsed: 544.944 s. Mean Reward: 1.622. Std of Reward: 0.934. Training.
+[INFO] 3DBall. Step: 790000. Time Elapsed: 548.708 s. Mean Reward: 1.609. Std of Reward: 0.991. Training.
+[INFO] 3DBall. Step: 800000. Time Elapsed: 552.832 s. Mean Reward: 1.587. Std of Reward: 1.007. Training.
+[INFO] 3DBall. Step: 810000. Time Elapsed: 556.598 s. Mean Reward: 1.623. Std of Reward: 0.916. Training.
+[INFO] 3DBall. Step: 820000. Time Elapsed: 560.403 s. Mean Reward: 1.635. Std of Reward: 1.020. Training.
+[INFO] 3DBall. Step: 830000. Time Elapsed: 564.148 s. Mean Reward: 1.602. Std of Reward: 1.021. Training.
+[INFO] 3DBall. Step: 840000. Time Elapsed: 567.944 s. Mean Reward: 1.651. Std of Reward: 0.943. Training.
+[INFO] 3DBall. Step: 850000. Time Elapsed: 572.156 s. Mean Reward: 1.467. Std of Reward: 0.876. Training.
+[INFO] 3DBall. Step: 860000. Time Elapsed: 575.929 s. Mean Reward: 1.604. Std of Reward: 0.971. Training.
+[INFO] 3DBall. Step: 870000. Time Elapsed: 579.681 s. Mean Reward: 1.612. Std of Reward: 1.005. Training.
+[INFO] 3DBall. Step: 880000. Time Elapsed: 583.467 s. Mean Reward: 1.665. Std of Reward: 1.037. Training.
+[INFO] 3DBall. Step: 890000. Time Elapsed: 587.255 s. Mean Reward: 1.649. Std of Reward: 0.919. Training.
+[INFO] 3DBall. Step: 900000. Time Elapsed: 591.523 s. Mean Reward: 1.643. Std of Reward: 1.063. Training.
+[INFO] 3DBall. Step: 910000. Time Elapsed: 595.346 s. Mean Reward: 1.560. Std of Reward: 0.904. Training.
+[INFO] 3DBall. Step: 920000. Time Elapsed: 599.126 s. Mean Reward: 1.623. Std of Reward: 1.047. Training.
+[INFO] 3DBall. Step: 930000. Time Elapsed: 602.934 s. Mean Reward: 1.569. Std of Reward: 0.961. Training.
+[INFO] 3DBall. Step: 940000. Time Elapsed: 606.727 s. Mean Reward: 1.667. Std of Reward: 0.994. Training.
+[INFO] 3DBall. Step: 950000. Time Elapsed: 610.507 s. Mean Reward: 1.649. Std of Reward: 1.012. Training.
+[INFO] 3DBall. Step: 960000. Time Elapsed: 614.848 s. Mean Reward: 1.556. Std of Reward: 0.985. Training.
+[INFO] 3DBall. Step: 970000. Time Elapsed: 618.646 s. Mean Reward: 1.577. Std of Reward: 1.017. Training.
+[INFO] 3DBall. Step: 980000. Time Elapsed: 622.449 s. Mean Reward: 1.530. Std of Reward: 0.980. Training.
+[INFO] 3DBall. Step: 990000. Time Elapsed: 626.251 s. Mean Reward: 1.570. Std of Reward: 0.942. Training.
+[INFO] 3DBall. Step: 1000000. Time Elapsed: 629.980 s. Mean Reward: 1.741. Std of Reward: 1.039. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 13:15:21.951000 9484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 13:15:22.301000 9484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 2 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_ppo_f04855adee\3DBall\3DBall-999998.onnx
+[INFO] 3DBall. Step: 1010000. Time Elapsed: 634.498 s. Mean Reward: 1.595. Std of Reward: 0.980. Training.
+[INFO] 3DBall. Step: 1020000. Time Elapsed: 744.073 s. Mean Reward: 2.379. Std of Reward: 1.721. Training.
+[INFO] 3DBall. Step: 1030000. Time Elapsed: 749.850 s. Mean Reward: 2.501. Std of Reward: 1.583. Training.
+[INFO] 3DBall. Step: 1040000. Time Elapsed: 753.850 s. Mean Reward: 2.571. Std of Reward: 1.823. Training.
+[INFO] 3DBall. Step: 1050000. Time Elapsed: 757.501 s. Mean Reward: 2.616. Std of Reward: 1.852. Training.
+[INFO] 3DBall. Step: 1060000. Time Elapsed: 761.318 s. Mean Reward: 2.748. Std of Reward: 1.944. Training.
+[INFO] 3DBall. Step: 1070000. Time Elapsed: 770.579 s. Mean Reward: 2.562. Std of Reward: 1.869. Training.
+[INFO] 3DBall. Step: 1080000. Time Elapsed: 777.498 s. Mean Reward: 2.555. Std of Reward: 1.763. Training.
+[INFO] 3DBall. Step: 1090000. Time Elapsed: 782.060 s. Mean Reward: 2.545. Std of Reward: 1.637. Training.
+[INFO] 3DBall. Step: 1100000. Time Elapsed: 786.650 s. Mean Reward: 2.783. Std of Reward: 2.097. Training.
+[INFO] 3DBall. Step: 1110000. Time Elapsed: 791.666 s. Mean Reward: 2.600. Std of Reward: 1.858. Training.
+[INFO] 3DBall. Step: 1120000. Time Elapsed: 797.336 s. Mean Reward: 2.630. Std of Reward: 1.602. Training.
+[INFO] 3DBall. Step: 1130000. Time Elapsed: 802.011 s. Mean Reward: 2.550. Std of Reward: 1.802. Training.
+[INFO] 3DBall. Step: 1140000. Time Elapsed: 805.912 s. Mean Reward: 2.595. Std of Reward: 1.995. Training.
+[INFO] 3DBall. Step: 1150000. Time Elapsed: 810.069 s. Mean Reward: 2.604. Std of Reward: 2.039. Training.
+[INFO] 3DBall. Step: 1160000. Time Elapsed: 813.810 s. Mean Reward: 2.472. Std of Reward: 1.636. Training.
+[INFO] 3DBall. Step: 1170000. Time Elapsed: 817.562 s. Mean Reward: 2.607. Std of Reward: 1.724. Training.
+[INFO] 3DBall. Step: 1180000. Time Elapsed: 821.303 s. Mean Reward: 2.620. Std of Reward: 1.963. Training.
+[INFO] 3DBall. Step: 1190000. Time Elapsed: 825.607 s. Mean Reward: 2.719. Std of Reward: 2.016. Training.
+[INFO] 3DBall. Step: 1200000. Time Elapsed: 829.344 s. Mean Reward: 2.475. Std of Reward: 1.593. Training.
+[INFO] 3DBall. Step: 1210000. Time Elapsed: 833.120 s. Mean Reward: 2.779. Std of Reward: 1.991. Training.
+[INFO] 3DBall. Step: 1220000. Time Elapsed: 837.102 s. Mean Reward: 2.644. Std of Reward: 1.891. Training.
+[INFO] 3DBall. Step: 1230000. Time Elapsed: 841.012 s. Mean Reward: 2.796. Std of Reward: 2.054. Training.
+[INFO] 3DBall. Step: 1240000. Time Elapsed: 844.740 s. Mean Reward: 2.633. Std of Reward: 1.682. Training.
+[INFO] 3DBall. Step: 1250000. Time Elapsed: 848.995 s. Mean Reward: 2.430. Std of Reward: 1.550. Training.
+[INFO] 3DBall. Step: 1260000. Time Elapsed: 852.784 s. Mean Reward: 2.603. Std of Reward: 1.770. Training.
+[INFO] 3DBall. Step: 1270000. Time Elapsed: 856.530 s. Mean Reward: 2.612. Std of Reward: 1.950. Training.
+[INFO] 3DBall. Step: 1280000. Time Elapsed: 860.280 s. Mean Reward: 2.535. Std of Reward: 1.520. Training.
+[INFO] 3DBall. Step: 1290000. Time Elapsed: 863.996 s. Mean Reward: 2.561. Std of Reward: 1.630. Training.
+[INFO] 3DBall. Step: 1300000. Time Elapsed: 867.718 s. Mean Reward: 2.526. Std of Reward: 1.840. Training.
+[INFO] 3DBall. Step: 1310000. Time Elapsed: 872.018 s. Mean Reward: 2.527. Std of Reward: 1.856. Training.
+[INFO] 3DBall. Step: 1320000. Time Elapsed: 875.748 s. Mean Reward: 2.648. Std of Reward: 1.597. Training.
+[INFO] 3DBall. Step: 1330000. Time Elapsed: 879.487 s. Mean Reward: 2.529. Std of Reward: 1.760. Training.
+[INFO] 3DBall. Step: 1340000. Time Elapsed: 883.241 s. Mean Reward: 2.490. Std of Reward: 1.661. Training.
+[INFO] 3DBall. Step: 1350000. Time Elapsed: 989.154 s. Mean Reward: 2.525. Std of Reward: 1.740. Training.
+[INFO] 3DBall. Step: 1360000. Time Elapsed: 992.627 s. Mean Reward: 5.746. Std of Reward: 4.990. Training.
+[INFO] 3DBall. Step: 1370000. Time Elapsed: 996.119 s. Mean Reward: 5.270. Std of Reward: 4.397. Training.
+[INFO] 3DBall. Step: 1380000. Time Elapsed: 999.589 s. Mean Reward: 5.210. Std of Reward: 3.825. Training.
+[INFO] 3DBall. Step: 1390000. Time Elapsed: 1003.265 s. Mean Reward: 4.625. Std of Reward: 4.103. Training.
+[INFO] 3DBall. Step: 1400000. Time Elapsed: 1006.767 s. Mean Reward: 5.254. Std of Reward: 4.204. Training.
+[INFO] 3DBall. Step: 1410000. Time Elapsed: 1010.517 s. Mean Reward: 5.030. Std of Reward: 4.127. Training.
+[INFO] 3DBall. Step: 1420000. Time Elapsed: 1013.984 s. Mean Reward: 4.773. Std of Reward: 3.842. Training.
+[INFO] 3DBall. Step: 1430000. Time Elapsed: 1017.528 s. Mean Reward: 4.331. Std of Reward: 3.659. Training.
+[INFO] 3DBall. Step: 1440000. Time Elapsed: 1021.270 s. Mean Reward: 5.318. Std of Reward: 4.447. Training.
+[INFO] 3DBall. Step: 1450000. Time Elapsed: 1024.721 s. Mean Reward: 5.178. Std of Reward: 4.200. Training.
+[INFO] 3DBall. Step: 1460000. Time Elapsed: 1028.324 s. Mean Reward: 5.001. Std of Reward: 4.167. Training.
+[INFO] 3DBall. Step: 1470000. Time Elapsed: 1032.102 s. Mean Reward: 5.175. Std of Reward: 4.117. Training.
+[INFO] 3DBall. Step: 1480000. Time Elapsed: 1035.640 s. Mean Reward: 4.402. Std of Reward: 3.204. Training.
+[INFO] 3DBall. Step: 1490000. Time Elapsed: 1039.213 s. Mean Reward: 4.164. Std of Reward: 3.485. Training.
+[INFO] 3DBall. Step: 1500000. Time Elapsed: 1042.672 s. Mean Reward: 4.845. Std of Reward: 4.057. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 13:22:15.033000 9484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 13:22:15.378000 9484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 2 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_ppo_f04855adee\3DBall\3DBall-1499982.onnx
+[INFO] 3DBall. Step: 1510000. Time Elapsed: 1047.259 s. Mean Reward: 5.109. Std of Reward: 3.830. Training.
+[INFO] 3DBall. Step: 1520000. Time Elapsed: 1050.763 s. Mean Reward: 4.724. Std of Reward: 3.701. Training.
+[INFO] 3DBall. Step: 1530000. Time Elapsed: 1054.252 s. Mean Reward: 4.498. Std of Reward: 3.716. Training.
+[INFO] 3DBall. Step: 1540000. Time Elapsed: 1058.239 s. Mean Reward: 4.467. Std of Reward: 3.694. Training.
+[INFO] 3DBall. Step: 1550000. Time Elapsed: 1061.722 s. Mean Reward: 4.696. Std of Reward: 5.102. Training.
+[INFO] 3DBall. Step: 1560000. Time Elapsed: 1065.194 s. Mean Reward: 5.219. Std of Reward: 4.414. Training.
+[INFO] 3DBall. Step: 1570000. Time Elapsed: 1068.641 s. Mean Reward: 4.605. Std of Reward: 3.650. Training.
+[INFO] 3DBall. Step: 1580000. Time Elapsed: 1072.165 s. Mean Reward: 5.028. Std of Reward: 4.468. Training.
+[INFO] 3DBall. Step: 1590000. Time Elapsed: 1075.681 s. Mean Reward: 4.865. Std of Reward: 3.969. Training.
+[INFO] 3DBall. Step: 1600000. Time Elapsed: 1079.650 s. Mean Reward: 4.805. Std of Reward: 4.517. Training.
+[INFO] 3DBall. Step: 1610000. Time Elapsed: 1083.189 s. Mean Reward: 4.674. Std of Reward: 4.264. Training.
+[INFO] 3DBall. Step: 1620000. Time Elapsed: 1086.676 s. Mean Reward: 4.923. Std of Reward: 4.387. Training.
+[INFO] 3DBall. Step: 1630000. Time Elapsed: 1090.154 s. Mean Reward: 4.646. Std of Reward: 3.971. Training.
+[INFO] 3DBall. Step: 1640000. Time Elapsed: 1093.616 s. Mean Reward: 4.878. Std of Reward: 4.129. Training.
+[INFO] 3DBall. Step: 1650000. Time Elapsed: 1097.158 s. Mean Reward: 4.968. Std of Reward: 3.898. Training.
+[INFO] 3DBall. Step: 1660000. Time Elapsed: 1101.185 s. Mean Reward: 5.138. Std of Reward: 4.786. Training.
+[INFO] 3DBall. Step: 1670000. Time Elapsed: 1104.708 s. Mean Reward: 4.561. Std of Reward: 3.598. Training.
+[INFO] 3DBall. Step: 1680000. Time Elapsed: 1108.192 s. Mean Reward: 4.908. Std of Reward: 3.817. Training.
+[INFO] 3DBall. Step: 1690000. Time Elapsed: 1213.897 s. Mean Reward: 4.852. Std of Reward: 4.614. Training.
+[INFO] 3DBall. Step: 1700000. Time Elapsed: 1217.290 s. Mean Reward: 14.795. Std of Reward: 13.378. Training.
+[INFO] 3DBall. Step: 1710000. Time Elapsed: 1220.647 s. Mean Reward: 13.228. Std of Reward: 10.534. Training.
+[INFO] 3DBall. Step: 1720000. Time Elapsed: 1223.999 s. Mean Reward: 14.534. Std of Reward: 12.707. Training.
+[INFO] 3DBall. Step: 1730000. Time Elapsed: 1227.335 s. Mean Reward: 13.345. Std of Reward: 11.149. Training.
+[INFO] 3DBall. Step: 1740000. Time Elapsed: 1230.958 s. Mean Reward: 11.424. Std of Reward: 12.282. Training.
+[INFO] 3DBall. Step: 1750000. Time Elapsed: 1234.449 s. Mean Reward: 15.873. Std of Reward: 17.554. Training.
+[INFO] 3DBall. Step: 1760000. Time Elapsed: 1238.079 s. Mean Reward: 13.284. Std of Reward: 14.325. Training.
+[INFO] 3DBall. Step: 1770000. Time Elapsed: 1241.421 s. Mean Reward: 14.760. Std of Reward: 13.673. Training.
+[INFO] 3DBall. Step: 1780000. Time Elapsed: 1244.810 s. Mean Reward: 13.031. Std of Reward: 11.802. Training.
+[INFO] 3DBall. Step: 1790000. Time Elapsed: 1248.520 s. Mean Reward: 13.087. Std of Reward: 12.471. Training.
+[INFO] 3DBall. Step: 1800000. Time Elapsed: 1251.816 s. Mean Reward: 16.595. Std of Reward: 14.874. Training.
+[INFO] 3DBall. Step: 1810000. Time Elapsed: 1255.164 s. Mean Reward: 12.959. Std of Reward: 13.469. Training.
+[INFO] 3DBall. Step: 1820000. Time Elapsed: 1258.524 s. Mean Reward: 15.519. Std of Reward: 15.109. Training.
+[INFO] 3DBall. Step: 1830000. Time Elapsed: 1262.218 s. Mean Reward: 13.010. Std of Reward: 10.168. Training.
+[INFO] 3DBall. Step: 1840000. Time Elapsed: 1265.594 s. Mean Reward: 12.976. Std of Reward: 12.589. Training.
+[INFO] 3DBall. Step: 1850000. Time Elapsed: 1268.944 s. Mean Reward: 18.954. Std of Reward: 18.083. Training.
+[INFO] 3DBall. Step: 1860000. Time Elapsed: 1272.309 s. Mean Reward: 14.861. Std of Reward: 11.253. Training.
+[INFO] 3DBall. Step: 1870000. Time Elapsed: 1276.114 s. Mean Reward: 16.787. Std of Reward: 16.277. Training.
+[INFO] 3DBall. Step: 1880000. Time Elapsed: 1279.484 s. Mean Reward: 13.582. Std of Reward: 12.509. Training.
+[INFO] 3DBall. Step: 1890000. Time Elapsed: 1282.810 s. Mean Reward: 15.206. Std of Reward: 12.460. Training.
+[INFO] 3DBall. Step: 1900000. Time Elapsed: 1286.217 s. Mean Reward: 14.429. Std of Reward: 15.660. Training.
+[INFO] 3DBall. Step: 1910000. Time Elapsed: 1290.018 s. Mean Reward: 11.975. Std of Reward: 9.972. Training.
+[INFO] 3DBall. Step: 1920000. Time Elapsed: 1293.425 s. Mean Reward: 13.577. Std of Reward: 14.654. Training.
+[INFO] 3DBall. Step: 1930000. Time Elapsed: 1296.828 s. Mean Reward: 13.295. Std of Reward: 11.554. Training.
+[INFO] 3DBall. Step: 1940000. Time Elapsed: 1300.153 s. Mean Reward: 13.903. Std of Reward: 16.132. Training.
+[INFO] 3DBall. Step: 1950000. Time Elapsed: 1303.516 s. Mean Reward: 13.879. Std of Reward: 12.740. Training.
+[INFO] 3DBall. Step: 1960000. Time Elapsed: 1306.898 s. Mean Reward: 15.155. Std of Reward: 15.382. Training.
+[INFO] 3DBall. Step: 1970000. Time Elapsed: 1310.815 s. Mean Reward: 14.331. Std of Reward: 13.366. Training.
+[INFO] 3DBall. Step: 1980000. Time Elapsed: 1314.184 s. Mean Reward: 14.717. Std of Reward: 13.591. Training.
+[INFO] 3DBall. Step: 1990000. Time Elapsed: 1317.555 s. Mean Reward: 14.969. Std of Reward: 14.078. Training.
+[INFO] 3DBall. Step: 2000000. Time Elapsed: 1320.964 s. Mean Reward: 15.487. Std of Reward: 14.466. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 13:26:52.933000 9484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 13:26:53.282000 9484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 2 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_ppo_f04855adee\3DBall\3DBall-1999988.onnx
+[INFO] 3DBall. Step: 2010000. Time Elapsed: 1325.044 s. Mean Reward: 13.210. Std of Reward: 12.923. Training.
+[INFO] 3DBall. Step: 2020000. Time Elapsed: 1328.398 s. Mean Reward: 12.932. Std of Reward: 11.882. Training.
+[INFO] 3DBall. Step: 2030000. Time Elapsed: 1433.834 s. Mean Reward: 21.969. Std of Reward: 23.306. Training.
+[INFO] 3DBall. Step: 2040000. Time Elapsed: 1437.379 s. Mean Reward: 50.639. Std of Reward: 36.668. Training.
+[INFO] 3DBall. Step: 2050000. Time Elapsed: 1440.874 s. Mean Reward: 53.320. Std of Reward: 35.908. Training.
+[INFO] 3DBall. Step: 2060000. Time Elapsed: 1444.169 s. Mean Reward: 53.818. Std of Reward: 34.783. Training.
+[INFO] 3DBall. Step: 2070000. Time Elapsed: 1447.686 s. Mean Reward: 48.319. Std of Reward: 36.160. Training.
+[INFO] 3DBall. Step: 2080000. Time Elapsed: 1451.058 s. Mean Reward: 60.771. Std of Reward: 37.356. Training.
+[INFO] 3DBall. Step: 2090000. Time Elapsed: 1454.582 s. Mean Reward: 38.844. Std of Reward: 32.789. Training.
+[INFO] 3DBall. Step: 2100000. Time Elapsed: 1457.873 s. Mean Reward: 66.719. Std of Reward: 37.513. Training.
+[INFO] 3DBall. Step: 2110000. Time Elapsed: 1461.181 s. Mean Reward: 60.511. Std of Reward: 40.358. Training.
+[INFO] 3DBall. Step: 2120000. Time Elapsed: 1464.828 s. Mean Reward: 56.067. Std of Reward: 31.596. Training.
+[INFO] 3DBall. Step: 2130000. Time Elapsed: 1468.112 s. Mean Reward: 55.017. Std of Reward: 37.050. Training.
+[INFO] 3DBall. Step: 2140000. Time Elapsed: 1471.419 s. Mean Reward: 50.947. Std of Reward: 39.433. Training.
+[INFO] 3DBall. Step: 2150000. Time Elapsed: 1475.101 s. Mean Reward: 58.731. Std of Reward: 33.841. Training.
+[INFO] 3DBall. Step: 2160000. Time Elapsed: 1478.479 s. Mean Reward: 47.226. Std of Reward: 34.518. Training.
+[INFO] 3DBall. Step: 2170000. Time Elapsed: 1481.791 s. Mean Reward: 63.979. Std of Reward: 35.114. Training.
+[INFO] 3DBall. Step: 2180000. Time Elapsed: 1485.213 s. Mean Reward: 59.050. Std of Reward: 38.412. Training.
+[INFO] 3DBall. Step: 2190000. Time Elapsed: 1488.910 s. Mean Reward: 64.511. Std of Reward: 37.530. Training.
+[INFO] 3DBall. Step: 2200000. Time Elapsed: 1492.274 s. Mean Reward: 73.721. Std of Reward: 33.543. Training.
+[INFO] 3DBall. Step: 2210000. Time Elapsed: 1495.686 s. Mean Reward: 41.618. Std of Reward: 32.573. Training.
+[INFO] 3DBall. Step: 2220000. Time Elapsed: 1498.992 s. Mean Reward: 57.636. Std of Reward: 34.959. Training.
+[INFO] 3DBall. Step: 2230000. Time Elapsed: 1502.345 s. Mean Reward: 55.806. Std of Reward: 37.835. Training.
+[INFO] 3DBall. Step: 2240000. Time Elapsed: 1506.280 s. Mean Reward: 53.677. Std of Reward: 39.279. Training.
+[INFO] 3DBall. Step: 2250000. Time Elapsed: 1509.942 s. Mean Reward: 36.187. Std of Reward: 32.109. Training.
+[INFO] 3DBall. Step: 2260000. Time Elapsed: 1513.667 s. Mean Reward: 63.941. Std of Reward: 35.530. Training.
+[INFO] 3DBall. Step: 2270000. Time Elapsed: 1517.450 s. Mean Reward: 57.060. Std of Reward: 31.902. Training.
+[INFO] 3DBall. Step: 2280000. Time Elapsed: 1520.944 s. Mean Reward: 69.533. Std of Reward: 32.238. Training.
+[INFO] 3DBall. Step: 2290000. Time Elapsed: 1524.870 s. Mean Reward: 60.178. Std of Reward: 39.945. Training.
+[INFO] 3DBall. Step: 2300000. Time Elapsed: 1528.209 s. Mean Reward: 66.636. Std of Reward: 36.073. Training.
+[INFO] 3DBall. Step: 2310000. Time Elapsed: 1531.560 s. Mean Reward: 49.830. Std of Reward: 36.774. Training.
+[INFO] 3DBall. Step: 2320000. Time Elapsed: 1534.875 s. Mean Reward: 41.795. Std of Reward: 33.263. Training.
+[INFO] 3DBall. Step: 2330000. Time Elapsed: 1538.198 s. Mean Reward: 50.964. Std of Reward: 36.159. Training.
+[INFO] 3DBall. Step: 2340000. Time Elapsed: 1541.503 s. Mean Reward: 71.664. Std of Reward: 34.148. Training.
+[INFO] 3DBall. Step: 2350000. Time Elapsed: 1544.854 s. Mean Reward: 64.843. Std of Reward: 32.099. Training.
+[INFO] 3DBall. Step: 2360000. Time Elapsed: 1549.046 s. Mean Reward: 60.653. Std of Reward: 39.588. Training.
+[INFO] 3DBall. Step: 2370000. Time Elapsed: 1656.075 s. Mean Reward: 93.022. Std of Reward: 19.736. Training.
+[INFO] 3DBall. Step: 2380000. Time Elapsed: 1659.420 s. Mean Reward: 80.046. Std of Reward: 36.058. Training.
+[INFO] 3DBall. Step: 2390000. Time Elapsed: 1662.672 s. Mean Reward: 96.133. Std of Reward: 11.427. Training.
+[INFO] 3DBall. Step: 2400000. Time Elapsed: 1665.935 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2410000. Time Elapsed: 1669.183 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2420000. Time Elapsed: 1672.528 s. Mean Reward: 98.591. Std of Reward: 4.456. Training.
+[INFO] 3DBall. Step: 2430000. Time Elapsed: 1676.055 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2440000. Time Elapsed: 1679.365 s. Mean Reward: 87.183. Std of Reward: 26.650. Training.
+[INFO] 3DBall. Step: 2450000. Time Elapsed: 1682.682 s. Mean Reward: 94.433. Std of Reward: 18.463. Training.
+[INFO] 3DBall. Step: 2460000. Time Elapsed: 1686.266 s. Mean Reward: 97.020. Std of Reward: 8.940. Training.
+[INFO] 3DBall. Step: 2470000. Time Elapsed: 1689.593 s. Mean Reward: 90.830. Std of Reward: 27.510. Training.
+[INFO] 3DBall. Step: 2480000. Time Elapsed: 1692.903 s. Mean Reward: 88.855. Std of Reward: 23.645. Training.
+[INFO] 3DBall. Step: 2490000. Time Elapsed: 1696.202 s. Mean Reward: 85.192. Std of Reward: 33.346. Training.
+[INFO] 3DBall. Step: 2500000. Time Elapsed: 1699.811 s. Mean Reward: 84.717. Std of Reward: 28.013. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0112 13:33:11.781000 9484 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0112 13:33:12.123000 9484 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 2 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_ppo_f04855adee\3DBall\3DBall-2499985.onnx
+[INFO] 3DBall. Step: 2510000. Time Elapsed: 1703.838 s. Mean Reward: 93.155. Std of Reward: 21.647. Training.
+[INFO] 3DBall. Step: 2520000. Time Elapsed: 1707.096 s. Mean Reward: 82.538. Std of Reward: 32.337. Training.
+[INFO] 3DBall. Step: 2530000. Time Elapsed: 1710.828 s. Mean Reward: 91.533. Std of Reward: 16.028. Training.
+[INFO] 3DBall. Step: 2540000. Time Elapsed: 1714.077 s. Mean Reward: 98.656. Std of Reward: 3.803. Training.
+[INFO] 3DBall. Step: 2550000. Time Elapsed: 1717.352 s. Mean Reward: 77.400. Std of Reward: 34.350. Training.
+[INFO] 3DBall. Step: 2560000. Time Elapsed: 1720.636 s. Mean Reward: 99.410. Std of Reward: 1.770. Training.
+[INFO] 3DBall. Step: 2570000. Time Elapsed: 1723.960 s. Mean Reward: 94.270. Std of Reward: 17.190. Training.
+[INFO] 3DBall. Step: 2580000. Time Elapsed: 1727.705 s. Mean Reward: 93.608. Std of Reward: 14.452. Training.
+[INFO] 3DBall. Step: 2590000. Time Elapsed: 1731.022 s. Mean Reward: 89.690. Std of Reward: 29.238. Training.
+[INFO] 3DBall. Step: 2600000. Time Elapsed: 1734.262 s. Mean Reward: 89.264. Std of Reward: 27.621. Training.
+[INFO] 3DBall. Step: 2610000. Time Elapsed: 1737.517 s. Mean Reward: 90.633. Std of Reward: 26.609. Training.
+[INFO] 3DBall. Step: 2620000. Time Elapsed: 1740.845 s. Mean Reward: 84.960. Std of Reward: 30.516. Training.
+[INFO] 3DBall. Step: 2630000. Time Elapsed: 1744.665 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2640000. Time Elapsed: 1747.959 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2650000. Time Elapsed: 1751.229 s. Mean Reward: 94.418. Std of Reward: 17.651. Training.
+[INFO] 3DBall. Step: 2660000. Time Elapsed: 1754.504 s. Mean Reward: 85.330. Std of Reward: 30.016. Training.
+[INFO] 3DBall. Step: 2670000. Time Elapsed: 1757.849 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2680000. Time Elapsed: 1761.149 s. Mean Reward: 93.210. Std of Reward: 20.370. Training.
+[INFO] 3DBall. Step: 2690000. Time Elapsed: 1764.420 s. Mean Reward: 91.427. Std of Reward: 27.109. Training.
+[INFO] 3DBall. Step: 2700000. Time Elapsed: 1871.416 s. Mean Reward: 99.717. Std of Reward: 0.940. Training.
+[INFO] 3DBall. Step: 2710000. Time Elapsed: 1874.702 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2720000. Time Elapsed: 1878.029 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2730000. Time Elapsed: 1881.307 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2740000. Time Elapsed: 1884.601 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[ERROR] UnityEnvironment worker 0: environment raised an unexpected exception.
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 312, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+BrokenPipeError: [WinError 109] The pipe has been ended
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 175, in worker
+    req: EnvironmentRequest = parent_conn.recv()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 321, in _recv_bytes
+    raise EOFError
+EOFError
+Process Process-1:
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 312, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+BrokenPipeError: [WinError 109] The pipe has been ended
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 175, in worker
+    req: EnvironmentRequest = parent_conn.recv()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 321, in _recv_bytes
+    raise EOFError
+EOFError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 235, in worker
+    _send_response(EnvironmentCommand.ENV_EXITED, ex)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 150, in _send_response
+    parent_conn.send(EnvironmentResponse(cmd_name, worker_id, payload))
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 206, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 280, in _send_bytes
+    ov, err = _winapi.WriteFile(self._handle, buf, overlapped=True)
+BrokenPipeError: [WinError 232] The pipe is being closed
