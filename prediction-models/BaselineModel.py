@@ -2,8 +2,8 @@
 Base preprocessing and evaluation utilities for regression models on main.csv.
 
 - Drops ID/leakage columns.
-- Coerces target to numeric and keeps non-converged as -1 sentinel.
-- One-hot encodes categoricals and fills missing features with 0.
+- Coerces target to numeric and drops any rows with missing values.
+- One-hot encodes categoricals for model consumption.
 """
 
 from pathlib import Path
@@ -22,7 +22,7 @@ class BaseModel:
         "machine_id",
         "run_log_file",
        # "train_duration_s",     # leakage
-       # "steps_to_convergence",  # leakage
+       # "steps_to_convergence"  # leakage
     ]
 
     def __init__(self, data_path: Optional[Path] = None):
@@ -34,14 +34,15 @@ class BaseModel:
         
         df = df.drop(columns=self.drop_cols, errors="ignore")
         
-        df[self.target_col] = pd.to_numeric(df[self.target_col], errors="coerce").fillna(-1)
+        df = df.replace("NA", pd.NA)
+        df[self.target_col] = pd.to_numeric(df[self.target_col], errors="coerce")
+        df = df.dropna()
 
         # One-hot encode remaining categorical/string columns so the regressor can consume them.
-        # Keep NA features by filling missing values with 0 after encoding.
         X = df.drop(columns=[self.target_col], errors="ignore")
         y = df[self.target_col]
 
-        X = pd.get_dummies(X, drop_first=True).fillna(0)
+        X = pd.get_dummies(X, drop_first=True)
         
         return X, y
 
@@ -73,7 +74,6 @@ class BaseModel:
         
         encoded = X.copy()
         encoded[self.target_col] = y
-        encoded["converged"] = (encoded[self.target_col] > 0).astype(int)
         
         out = out_path or (Path(__file__).resolve().parent / "encoded_dataset.csv")
         encoded.to_csv(out, index=False)
