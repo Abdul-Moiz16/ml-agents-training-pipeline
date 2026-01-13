@@ -1,0 +1,196 @@
+/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/torch_utils/torch.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/torch/__init__.py:1275: UserWarning: torch.set_default_tensor_type() is deprecated as of PyTorch 2.1, please use torch.set_default_dtype() and torch.set_default_device() as alternatives. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/tensor/python_tensor.cpp:436.)
+  _C._set_default_tensor_type(t)
+
+            ┐  ╖
+        ╓╖╬│╡  ││╬╖╖
+    ╓╖╬│││││┘  ╬│││││╬╖
+ ╖╬│││││╬╜        ╙╬│││││╖╖                               ╗╗╗
+ ╬╬╬╬╖││╦╖        ╖╬││╗╣╣╣╬      ╟╣╣╬    ╟╣╣╣             ╜╜╜  ╟╣╣
+ ╬╬╬╬╬╬╬╬╖│╬╖╖╓╬╪│╓╣╣╣╣╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╒╣╣╖╗╣╣╣╗   ╣╣╣ ╣╣╣╣╣╣ ╟╣╣╖   ╣╣╣
+ ╬╬╬╬┐  ╙╬╬╬╬│╓╣╣╣╝╜  ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╣╙ ╙╣╣╣  ╣╣╣ ╙╟╣╣╜╙  ╫╣╣  ╟╣╣
+ ╬╬╬╬┐     ╙╬╬╣╣      ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣     ╣╣╣┌╣╣╜
+ ╬╬╬╜       ╬╬╣╣      ╙╝╣╣╬      ╙╣╣╣╗╖╓╗╣╣╣╜ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣╦╓    ╣╣╣╣╣
+ ╙   ╓╦╖    ╬╬╣╣   ╓╗╗╖            ╙╝╣╣╣╣╝╜   ╘╝╝╜   ╝╝╝  ╝╝╝   ╙╣╣╣    ╟╣╣╣
+   ╩╬╬╬╬╬╬╦╦╬╬╣╣╗╣╣╣╣╣╣╣╝                                             ╫╣╣╣╣
+      ╙╬╬╬╬╬╬╬╣╣╣╣╣╣╝╜
+          ╙╬╬╬╣╣╣╜
+             ╙
+        
+ Version information:
+  ml-agents: 1.1.0.dev0,
+  ml-agents-envs: 1.1.0.dev0,
+  Communicator API: 1.5.0,
+  PyTorch: 2.9.1
+/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/torch_utils/torch.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/torch/__init__.py:1275: UserWarning: torch.set_default_tensor_type() is deprecated as of PyTorch 2.1, please use torch.set_default_dtype() and torch.set_default_device() as alternatives. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/tensor/python_tensor.cpp:436.)
+  _C._set_default_tensor_type(t)
+[INFO] Connected to Unity environment with package version 3.0.0-exp.1 and communication version 1.5.0
+[INFO] Connected new brain: 3DBall?team=0
+[INFO] Hyperparameters for behavior name 3DBall: 
+	trainer_type:	ppo
+	hyperparameters:	
+	  batch_size:	32
+	  buffer_size:	251232
+	  learning_rate:	0.0003
+	  beta:	0.005
+	  epsilon:	0.2
+	  lambd:	0.95
+	  num_epoch:	3
+	  shared_critic:	False
+	  learning_rate_schedule:	linear
+	  beta_schedule:	linear
+	  epsilon_schedule:	linear
+	checkpoint_interval:	500000
+	network_settings:	
+	  normalize:	False
+	  hidden_units:	81
+	  num_layers:	2
+	  vis_encode_type:	simple
+	  memory:	None
+	  goal_conditioning_type:	hyper
+	  deterministic:	False
+	reward_signals:	
+	  extrinsic:	
+	    gamma:	0.99
+	    strength:	1.0
+	    network_settings:	
+	      normalize:	False
+	      hidden_units:	128
+	      num_layers:	2
+	      vis_encode_type:	simple
+	      memory:	None
+	      goal_conditioning_type:	hyper
+	      deterministic:	False
+	init_path:	None
+	keep_checkpoints:	5
+	even_checkpoints:	False
+	max_steps:	2000000
+	time_horizon:	64
+	summary_freq:	10000
+	threaded:	False
+	self_play:	None
+	behavioral_cloning:	None
+[INFO] 3DBall. Step: 10000. Time Elapsed: 23.647 s. Mean Reward: 1.233. Std of Reward: 0.766. Training.
+[INFO] 3DBall. Step: 20000. Time Elapsed: 39.997 s. Mean Reward: 1.171. Std of Reward: 0.675. Training.
+[INFO] 3DBall. Step: 30000. Time Elapsed: 58.157 s. Mean Reward: 1.236. Std of Reward: 0.760. Training.
+[INFO] 3DBall. Step: 40000. Time Elapsed: 75.696 s. Mean Reward: 1.218. Std of Reward: 0.758. Training.
+[INFO] 3DBall. Step: 50000. Time Elapsed: 87.939 s. Mean Reward: 1.217. Std of Reward: 0.715. Training.
+[INFO] 3DBall. Step: 60000. Time Elapsed: 102.122 s. Mean Reward: 1.287. Std of Reward: 0.697. Training.
+[INFO] 3DBall. Step: 70000. Time Elapsed: 107.122 s. Mean Reward: 1.154. Std of Reward: 0.694. Training.
+[INFO] 3DBall. Step: 80000. Time Elapsed: 112.111 s. Mean Reward: 1.221. Std of Reward: 0.769. Training.
+[INFO] 3DBall. Step: 90000. Time Elapsed: 117.125 s. Mean Reward: 1.189. Std of Reward: 0.707. Training.
+[INFO] 3DBall. Step: 100000. Time Elapsed: 122.029 s. Mean Reward: 1.213. Std of Reward: 0.744. Training.
+[INFO] 3DBall. Step: 110000. Time Elapsed: 126.696 s. Mean Reward: 1.229. Std of Reward: 0.764. Training.
+[INFO] 3DBall. Step: 120000. Time Elapsed: 134.990 s. Mean Reward: 1.202. Std of Reward: 0.752. Training.
+[INFO] 3DBall. Step: 130000. Time Elapsed: 140.013 s. Mean Reward: 1.228. Std of Reward: 0.794. Training.
+[INFO] 3DBall. Step: 140000. Time Elapsed: 144.501 s. Mean Reward: 1.197. Std of Reward: 0.764. Training.
+[INFO] 3DBall. Step: 150000. Time Elapsed: 149.300 s. Mean Reward: 1.252. Std of Reward: 0.767. Training.
+[INFO] 3DBall. Step: 160000. Time Elapsed: 154.276 s. Mean Reward: 1.233. Std of Reward: 0.738. Training.
+[INFO] 3DBall. Step: 170000. Time Elapsed: 158.990 s. Mean Reward: 1.196. Std of Reward: 0.745. Training.
+[INFO] 3DBall. Step: 180000. Time Elapsed: 163.937 s. Mean Reward: 1.137. Std of Reward: 0.646. Training.
+[INFO] 3DBall. Step: 190000. Time Elapsed: 169.123 s. Mean Reward: 1.237. Std of Reward: 0.745. Training.
+[INFO] 3DBall. Step: 200000. Time Elapsed: 174.276 s. Mean Reward: 1.197. Std of Reward: 0.659. Training.
+[INFO] 3DBall. Step: 210000. Time Elapsed: 179.187 s. Mean Reward: 1.188. Std of Reward: 0.695. Training.
+[INFO] 3DBall. Step: 220000. Time Elapsed: 183.838 s. Mean Reward: 1.191. Std of Reward: 0.689. Training.
+[INFO] 3DBall. Step: 230000. Time Elapsed: 189.169 s. Mean Reward: 1.200. Std of Reward: 0.682. Training.
+[INFO] 3DBall. Step: 240000. Time Elapsed: 201.532 s. Mean Reward: 1.166. Std of Reward: 0.677. Training.
+[INFO] 3DBall. Step: 250000. Time Elapsed: 206.572 s. Mean Reward: 1.209. Std of Reward: 0.735. Training.
+[INFO] 3DBall. Step: 260000. Time Elapsed: 266.813 s. Mean Reward: 1.278. Std of Reward: 0.768. Training.
+[INFO] 3DBall. Step: 270000. Time Elapsed: 271.759 s. Mean Reward: 1.341. Std of Reward: 0.859. Training.
+[INFO] 3DBall. Step: 280000. Time Elapsed: 276.601 s. Mean Reward: 1.349. Std of Reward: 0.916. Training.
+[INFO] 3DBall. Step: 290000. Time Elapsed: 281.223 s. Mean Reward: 1.318. Std of Reward: 0.782. Training.
+[INFO] 3DBall. Step: 300000. Time Elapsed: 285.953 s. Mean Reward: 1.329. Std of Reward: 0.775. Training.
+[INFO] 3DBall. Step: 310000. Time Elapsed: 290.968 s. Mean Reward: 1.328. Std of Reward: 0.840. Training.
+[INFO] 3DBall. Step: 320000. Time Elapsed: 302.324 s. Mean Reward: 1.365. Std of Reward: 0.831. Training.
+[INFO] 3DBall. Step: 330000. Time Elapsed: 306.540 s. Mean Reward: 1.400. Std of Reward: 0.841. Training.
+[INFO] 3DBall. Step: 340000. Time Elapsed: 310.750 s. Mean Reward: 1.348. Std of Reward: 0.880. Training.
+[INFO] 3DBall. Step: 350000. Time Elapsed: 314.797 s. Mean Reward: 1.391. Std of Reward: 0.978. Training.
+[INFO] 3DBall. Step: 360000. Time Elapsed: 318.951 s. Mean Reward: 1.335. Std of Reward: 0.833. Training.
+[INFO] 3DBall. Step: 370000. Time Elapsed: 323.180 s. Mean Reward: 1.387. Std of Reward: 0.854. Training.
+[INFO] 3DBall. Step: 380000. Time Elapsed: 327.265 s. Mean Reward: 1.299. Std of Reward: 0.839. Training.
+[INFO] 3DBall. Step: 390000. Time Elapsed: 331.324 s. Mean Reward: 1.370. Std of Reward: 0.839. Training.
+[INFO] 3DBall. Step: 400000. Time Elapsed: 335.570 s. Mean Reward: 1.463. Std of Reward: 0.878. Training.
+[INFO] 3DBall. Step: 410000. Time Elapsed: 339.641 s. Mean Reward: 1.356. Std of Reward: 0.817. Training.
+[INFO] 3DBall. Step: 420000. Time Elapsed: 343.762 s. Mean Reward: 1.317. Std of Reward: 0.823. Training.
+[INFO] 3DBall. Step: 430000. Time Elapsed: 347.787 s. Mean Reward: 1.452. Std of Reward: 0.870. Training.
+[INFO] 3DBall. Step: 440000. Time Elapsed: 352.081 s. Mean Reward: 1.331. Std of Reward: 0.811. Training.
+[INFO] 3DBall. Step: 450000. Time Elapsed: 356.114 s. Mean Reward: 1.424. Std of Reward: 0.873. Training.
+[INFO] 3DBall. Step: 460000. Time Elapsed: 360.202 s. Mean Reward: 1.349. Std of Reward: 0.883. Training.
+[INFO] 3DBall. Step: 470000. Time Elapsed: 364.266 s. Mean Reward: 1.334. Std of Reward: 0.823. Training.
+[INFO] 3DBall. Step: 480000. Time Elapsed: 368.318 s. Mean Reward: 1.372. Std of Reward: 0.893. Training.
+[INFO] 3DBall. Step: 490000. Time Elapsed: 372.399 s. Mean Reward: 1.390. Std of Reward: 0.932. Training.
+[INFO] 3DBall. Step: 500000. Time Elapsed: 376.742 s. Mean Reward: 1.330. Std of Reward: 0.845. Training.
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/trainer_controller.py", line 175, in start_learning
+    n_steps = self.advance(env_manager)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents_envs/timers.py", line 305, in wrapped
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/trainer_controller.py", line 250, in advance
+    trainer.advance()
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/trainer/rl_trainer.py", line 293, in advance
+    self._process_trajectory(t)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/ppo/trainer.py", line 74, in _process_trajectory
+    super()._process_trajectory(trajectory)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/trainer/rl_trainer.py", line 224, in _process_trajectory
+    self._maybe_save_model(self.get_step + len(trajectory.steps))
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/trainer/rl_trainer.py", line 264, in _maybe_save_model
+    self._checkpoint()
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents_envs/timers.py", line 305, in wrapped
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/trainer/rl_trainer.py", line 144, in _checkpoint
+    export_path, auxillary_paths = self.model_saver.save_checkpoint(
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/model_saver/torch_model_saver.py", line 60, in save_checkpoint
+    self.export(checkpoint_path, behavior_name)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/model_saver/torch_model_saver.py", line 65, in export
+    self.exporter.export_policy_model(output_filepath)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/torch_entities/model_serialization.py", line 164, in export_policy_model
+    torch.onnx.export(
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/torch/onnx/__init__.py", line 282, in export
+    from torch.onnx._internal.exporter import _compat
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/torch/onnx/_internal/exporter/_compat.py", line 16, in <module>
+    from torch.onnx._internal.exporter import (
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/torch/onnx/_internal/exporter/_core.py", line 18, in <module>
+    import onnxscript
+ModuleNotFoundError: No module named 'onnxscript'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/mlagents31012/bin/mlagents-learn", line 7, in <module>
+    sys.exit(main())
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/learn.py", line 270, in main
+    run_cli(parse_command_line())
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/learn.py", line 266, in run_cli
+    run_training(run_seed, options, num_areas)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/learn.py", line 138, in run_training
+    tc.start_learning(env_manager)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents_envs/timers.py", line 305, in wrapped
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/trainer_controller.py", line 200, in start_learning
+    self._save_models()
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents_envs/timers.py", line 305, in wrapped
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/trainer_controller.py", line 80, in _save_models
+    self.trainers[brain_name].save_model()
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/trainer/rl_trainer.py", line 172, in save_model
+    model_checkpoint = self._checkpoint()
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents_envs/timers.py", line 305, in wrapped
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/trainer/rl_trainer.py", line 144, in _checkpoint
+    export_path, auxillary_paths = self.model_saver.save_checkpoint(
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/model_saver/torch_model_saver.py", line 60, in save_checkpoint
+    self.export(checkpoint_path, behavior_name)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/model_saver/torch_model_saver.py", line 65, in export
+    self.exporter.export_policy_model(output_filepath)
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/mlagents/trainers/torch_entities/model_serialization.py", line 164, in export_policy_model
+    torch.onnx.export(
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/torch/onnx/__init__.py", line 282, in export
+    from torch.onnx._internal.exporter import _compat
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/torch/onnx/_internal/exporter/_compat.py", line 16, in <module>
+    from torch.onnx._internal.exporter import (
+  File "/opt/anaconda3/envs/mlagents31012/lib/python3.10/site-packages/torch/onnx/_internal/exporter/_core.py", line 18, in <module>
+    import onnxscript
+ModuleNotFoundError: No module named 'onnxscript'
