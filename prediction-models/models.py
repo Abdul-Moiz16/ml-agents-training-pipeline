@@ -1,6 +1,9 @@
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, ExtraTreesRegressor, GradientBoostingRegressor
 from sklearn.linear_model import LinearRegression
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
 
 from BaselineModel import BaseModel
 
@@ -28,3 +31,19 @@ class GradientBoostingModel(BaseModel):
 class LinearRegressionModel(BaseModel):
     def build_model(self):
         return LinearRegression()
+
+
+class KNNModel(BaseModel):
+    def __init__(self, n_neighbors: int = 3, data_path=None):
+        super().__init__(data_path)
+        self.n_neighbors = n_neighbors
+
+    def build_model(self):
+        return Pipeline([
+            ('scaler', StandardScaler()),
+            ('knn', KNeighborsRegressor(
+                n_neighbors=self.n_neighbors,
+                weights='distance',
+                n_jobs=-1
+            ))
+        ])

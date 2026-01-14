@@ -1,0 +1,30 @@
+behaviors:
+  3DBall:
+
+    trainer_type: ppo
+
+    hyperparameters:
+      batch_size: 64
+      buffer_size: 704
+      learning_rate: 0.0009649508890442561
+      beta: 0.004782892361919181
+      epsilon: 0.1740451444788913
+      lambd: 0.9459918831635422
+      num_epoch: 4
+      learning_rate_schedule: linear
+
+    network_settings:
+      normalize: False
+      hidden_units: 256
+      num_layers: 1
+      vis_encode_type: simple
+
+    reward_signals:
+      extrinsic:
+        gamma: 0.8932476837872632
+        strength: 1
+
+    keep_checkpoints: 5
+    max_steps: 5000000
+    time_horizon: 64
+    summary_freq: 10000

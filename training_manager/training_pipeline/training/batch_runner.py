@@ -19,39 +19,42 @@ CONFIGS_DIR = paths.configs_dir
 DELAY_BETWEEN_RUNS_S = 3
 
 
-def cleanup_unity_processes():
+def cleanup_unity_processes(base_port: int | None = None):
     """
-    kills any unity processes that are still running from previous runs
-     fixes the annoying 'address already in use' error I kept getting
+    Cleanup Unity processes/ports.
+
+    If base_port is provided (parallel runs), avoid killing by process name to
+    prevent terminating other workers; only clear the specific port.
     """
     system = platform.system()
     
-    # Process names to kill (Unity environment)
-    targets = ["3DBall", "UnityEnvironment"]
-    
     killed_any = False
+
+    # Only kill by name when not running parallel (no base_port specified).
+    if base_port is None:
+        targets = ["3DBall", "UnityEnvironment"]
+        for target in targets:
+            try:
+                if system == "Windows":
+                    subprocess.run(
+                        ["taskkill", "/F", "/IM", f"{target}*"],
+                        capture_output=True,
+                        timeout=10,
+                    )
+                else:
+                    # mac/linux
+                    result = subprocess.run(
+                        ["pkill", "-9", "-f", target],
+                        capture_output=True,
+                        timeout=10,
+                    )
+                    if result.returncode == 0:
+                        killed_any = True
+            except Exception:
+                pass
     
-    for target in targets:
-        try:
-            if system == "Windows":
-                subprocess.run(
-                    ["taskkill", "/F", "/IM", f"{target}*"],
-                    capture_output=True,
-                    timeout=10
-                )
-            else:
-                # mac/linux
-                result = subprocess.run(
-                    ["pkill", "-9", "-f", target],
-                    capture_output=True,
-                    timeout=10
-                )
-                if result.returncode == 0:
-                    killed_any = True
-        except Exception:
-            pass
-    
-    # also check if something is using port 5004 (mlagents uses this)
+    # also check if something is using the mlagents port
+    port = base_port if base_port is not None else 5004
     try:
         if system == "Windows":
             # windows way - parse netstat output
@@ -62,7 +65,7 @@ def cleanup_unity_processes():
                 timeout=10
             )
             for line in result.stdout.split('\n'):
-                if ':5004' in line and 'LISTENING' in line:
+                if f':{port}' in line and 'LISTENING' in line:
                     parts = line.split()
                     if parts:
                         pid = parts[-1]
@@ -74,7 +77,7 @@ def cleanup_unity_processes():
         else:
             # mac/linux - lsof is way easier
             result = subprocess.run(
-                ["lsof", "-ti", ":5004"],
+                ["lsof", "-ti", f":{port}"],
                 capture_output=True,
                 text=True,
                 timeout=5
@@ -131,6 +134,9 @@ def cleanup_incomplete_runs():
         
         # Skip if already complete
         if (run_folder / "complete.flag").exists():
+            continue
+        # Skip if another worker is actively using this run
+        if (run_folder / "inuse.flag").exists():
             continue
         
         # look for checkpoint files in the behavior folder (like 3DBall/)
@@ -189,6 +195,10 @@ class BatchRunner:
         cv_max: float = 0.10,
         mean_jitter: float = 2.0,
         min_steps_before_check: int = 200_000,
+        base_port: int | None = None,
+        shard_index: int = 0,
+        shard_count: int = 1,
+        inuse_timeout_hours: int = 6,
     ):
         self.runner = Runner(
             max_steps=max_steps,
@@ -197,15 +207,19 @@ class BatchRunner:
             cv_max=cv_max,
             mean_jitter=mean_jitter,
             min_steps_before_check=min_steps_before_check,
+            base_port=base_port,
         )
         self.rebuild_main = rebuild_main
+        self.base_port = base_port
+        self.shard_index = shard_index
+        self.shard_count = shard_count
+        self.inuse_timeout_s = inuse_timeout_hours * 3600
 
     def _maybe_rebuild(self):
         if self.rebuild_main:
             rebuild()
 
-    @staticmethod
-    def run_completed(run_id: str) -> str:
+    def run_completed(self, run_id: str) -> str:
         """
         checks whats up with a run:
         - done: has complete.flag, skip it
@@ -217,10 +231,29 @@ class BatchRunner:
         run_base = RESULTS_DIR / MACHINE_NAME
         run_folder = run_base / run_id
         flag_file = run_folder / "complete.flag"
+        inuse_flag = run_folder / "inuse.flag"
         
         # No folder = fresh start
         if not run_folder.exists():
             return "fresh"
+
+        # In-use flag check (avoid concurrent runs)
+        if inuse_flag.exists():
+            try:
+                import json
+                meta = json.loads(inuse_flag.read_text(encoding="utf-8"))
+                started_ts = float(meta.get("started_ts", 0))
+            except Exception:
+                started_ts = 0
+
+            if started_ts and (time.time() - started_ts) > self.inuse_timeout_s:
+                try:
+                    inuse_flag.unlink()
+                    print(f"~i removed stale inuse.flag for {run_id}")
+                except Exception:
+                    return "inuse"
+            else:
+                return "inuse"
 
         # Complete flag exists = done, skip this run
         if flag_file.exists():
@@ -280,15 +313,20 @@ class BatchRunner:
 
         try:
             for i, cfg in enumerate(configs):
+                if self.shard_count > 1 and (i % self.shard_count) != self.shard_index:
+                    continue
                 run_id = make_run_id(cfg)
                 status = self.run_completed(run_id)
 
                 if status == "done":
                     print(f"~i skip {run_id}: already completed")
                     continue
+                if status == "inuse":
+                    print(f"~i skip {run_id}: in use by another worker")
+                    continue
 
                 # kill any zombie unity processes before starting
-                cleanup_unity_processes()
+                cleanup_unity_processes(self.base_port)
 
                 resume = status == "resume"
 
@@ -313,7 +351,7 @@ class BatchRunner:
             print("\n-----------------------------------------------------------------")
             print("~i batch interrupted by user (Ctrl+C)")
             print("~i cleaning up lingering processes...")
-            cleanup_unity_processes()
+            cleanup_unity_processes(self.base_port)
             print("~i exiting gracefully")
             print("-----------------------------------------------------------------")
             raise  # re-raise so the program actually stops
@@ -353,8 +391,10 @@ class BatchRunner:
 
                 print("\n~i running new configs...")
                 for i, cfg in enumerate(new_cfgs):
+                    if self.shard_count > 1 and (i % self.shard_count) != self.shard_index:
+                        continue
                     # Cleanup before each run
-                    cleanup_unity_processes()
+                    cleanup_unity_processes(self.base_port)
                     
                     run_id = make_run_id(cfg)
                     print(f"   → running {run_id}")
@@ -371,7 +411,7 @@ class BatchRunner:
             print("\n-----------------------------------------------------------------")
             print("~i batch interrupted by user (Ctrl+C)")
             print("~i cleaning up lingering processes...")
-            cleanup_unity_processes()
+            cleanup_unity_processes(self.base_port)
             print("~i exiting gracefully")
             print("-----------------------------------------------------------------")
 

@@ -119,6 +119,8 @@ class Runner:
         min_steps_before_check: int = 200_000,
         # stopping behavior
         graceful_timeout_s: int = 120,  # wait after SIGINT before escalating
+        # base port for parallel runs (mlagents-learn --base-port)
+        base_port: int | None = None,
     ):
         self.env_path = Path(env_path)
 
@@ -129,6 +131,7 @@ class Runner:
         self.mean_jitter = float(mean_jitter)
         self.min_steps_before_check = int(min_steps_before_check)
         self.graceful_timeout_s = int(graceful_timeout_s)
+        self.base_port = base_port
 
     def _converged(self, means: list[float], stds: list[float]) -> bool:
         if len(means) < self.window_rows:
@@ -164,6 +167,23 @@ class Runner:
         log_dir.mkdir(parents=True, exist_ok=True)
         log_file = log_dir / "stream.log"
         run_log_file = log_dir / "run_log.csv"
+        inuse_flag = run_folder / "inuse.flag"
+
+        try:
+            inuse_flag.write_text(
+                json.dumps(
+                    {
+                        "machine": MACHINE_NAME,
+                        "run_id": run_id,
+                        "started_ts": time.time(),
+                        "pid": None,
+                    },
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+        except Exception:
+            pass
 
         # Write a patched config copy (enforces max_steps) and run THAT
         cfg_copy = run_folder / "configuration.yaml"
@@ -184,6 +204,8 @@ class Runner:
             "--no-graphics",
             f"--results-dir={run_base}",
         ]
+        if self.base_port is not None:
+            cmd.append(f"--base-port={self.base_port}")
 
         if resume:
             cmd.append("--resume")
@@ -258,6 +280,21 @@ class Runner:
                     ps_proc = psutil.Process(proc.pid)
                     ps_proc.cpu_percent(interval=None)
                     hw_monitor._process = ps_proc
+                    try:
+                        inuse_flag.write_text(
+                            json.dumps(
+                                {
+                                    "machine": MACHINE_NAME,
+                                    "run_id": run_id,
+                                    "started_ts": time.time(),
+                                    "pid": proc.pid,
+                                },
+                                indent=2,
+                            ),
+                            encoding="utf-8",
+                        )
+                    except Exception:
+                        pass
                 except psutil.NoSuchProcess:
                     pass
 
@@ -343,6 +380,11 @@ class Runner:
             hw_monitor.record_final_state()
             hw_monitor.save_to_csv()  # Always save hardware data (run_log.csv)
             end = time.time()
+            try:
+                if inuse_flag.exists():
+                    inuse_flag.unlink()
+            except Exception:
+                pass
 
         # Determine if run completed successfully FIRST
         rc = returncode if returncode is not None else -999
@@ -446,14 +488,12 @@ def make_run_id(config_file: Path) -> str:
 
 MAIN_HEADERS = [
     "run_id", "machine_id", "run_log_file",
-    "algo", "seed", "env_name",
+    "algo", "env_name",
     "os_name", "cpu_physical_cores", "cpu_logical_cores", "cpu_clock_ghz", "ram_mb",
     "avg_cpu_usage", "avg_ram_usage", "peak_cpu_usage", "peak_ram_usage",
     "learning_rate", "learning_rate_schedule", "batch_size", "buffer_size",
     "normalize", "hidden_units", "num_layers", "vis_encode_type", "gamma", "strength",
     "keep_checkpoints", "max_steps", "time_horizon", "summary_freq",
-    "buffer_init_steps", "tau", "steps_per_update", "save_replay_buffer",
-    "init_entcoef", "reward_signal_steps_per_update",
     "beta", "epsilon", "lambd", "num_epoch",
     "train_duration_s", "final_mean_reward", "final_std_reward",
     "time_to_convergence", "steps_to_convergence",
@@ -475,7 +515,6 @@ def load_config(yaml_path: Path) -> dict:
 
     return {
         "algo": trainer_type,
-        "seed": env_cfg.get("seed", "NA"),
         "env_name": env_name,
         "learning_rate": g(hyper, "learning_rate"),
         "learning_rate_schedule": g(hyper, "learning_rate_schedule"),
@@ -491,12 +530,6 @@ def load_config(yaml_path: Path) -> dict:
         "max_steps": env_cfg.get("max_steps", "NA"),
         "time_horizon": env_cfg.get("time_horizon", "NA"),
         "summary_freq": env_cfg.get("summary_freq", "NA"),
-        "buffer_init_steps": g(hyper, "buffer_init_steps"),
-        "tau": g(hyper, "tau"),
-        "steps_per_update": g(hyper, "steps_per_update"),
-        "save_replay_buffer": g(hyper, "save_replay_buffer"),
-        "init_entcoef": g(hyper, "init_entcoef"),
-        "reward_signal_steps_per_update": g(hyper, "reward_signal_steps_per_update") or g(hyper, "reward_signal_per_step"),
         "beta": g(hyper, "beta"),
         "epsilon": g(hyper, "epsilon"),
         "lambd": g(hyper, "lambd"),
