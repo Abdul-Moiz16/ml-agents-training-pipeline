@@ -2,7 +2,7 @@ import pandas as pd
 from pathlib import Path
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import mean_absolute_error, r2_score
+from sklearn.metrics import accuracy_score, confusion_matrix
 
 # Load data from a CSV file
 def load_data(data : str):
@@ -13,7 +13,7 @@ def load_data(data : str):
     return df
 
 # Drop unnecessary columns and prepare features X and target y for prediction
-def select_columns(df: pd.DataFrame, target_col: str = "time_to_convergance"):
+def select_columns(df: pd.DataFrame, target_col: str = "time_to_convergence"):
     
     drop_columns = [
         "run_id",
@@ -52,7 +52,7 @@ def split_data(X, y, test_size: float = 0.2, seed: int = 42):
     return X_train, X_test, y_train, y_test
 
 # Build and train a Decision Tree model
-def build_and_train_model(X_train, y_train, max_depth=None, seed: int = 42):
+def build_and_train_model(X_train, y_train, max_depth=6, seed: int = 42):
 
     model = DecisionTreeClassifier(max_depth=max_depth, random_state=seed)
     model.fit(X_train, y_train)
@@ -60,17 +60,18 @@ def build_and_train_model(X_train, y_train, max_depth=None, seed: int = 42):
     print("Classifier trained successfully.")
     return model
 
-# Evaluate the model using Mean Absolute Error (Lower is Better) and R^2 Score (Closer to 1 is Better)
-def evaluate_model(model,X_test, y_test):
+# Evaluation for classification
+def evaluate_model(model, X_test, y_test):
 
     preds = model.predict(X_test)
-    mae = mean_absolute_error(y_test, preds)
-    r2 = r2_score(y_test, preds)
 
-    print(f"Mean Absolute Error: {mae}")
-    print(f"R^2 Score: {r2}")
+    acc = accuracy_score(y_test, preds)
+    print(f"Accuracy: {acc:.4f}")
 
-    return preds, mae, r2
+    print("\nConfusion Matrix:")
+    print(confusion_matrix(y_test, preds))
+
+    return preds, acc
 
 # Display which features were most important to the model
 def feature_importance(model, X_train):
@@ -102,5 +103,5 @@ print(encoded.shape)
 
 X_train, X_test, y_train, y_test = split_data(X, y)
 model = build_and_train_model(X_train, y_train)
-preds, mae, r2 = evaluate_model(model, X_test, y_test)
-importance = feature_importance(model, X_train)
+preds, acc = evaluate_model(model, X_test, y_test)
+#importance = feature_importance(model, X_train)
