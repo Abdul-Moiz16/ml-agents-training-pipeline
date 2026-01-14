@@ -488,14 +488,12 @@ def make_run_id(config_file: Path) -> str:
 
 MAIN_HEADERS = [
     "run_id", "machine_id", "run_log_file",
-    "algo", "seed", "env_name",
+    "algo", "env_name",
     "os_name", "cpu_physical_cores", "cpu_logical_cores", "cpu_clock_ghz", "ram_mb",
     "avg_cpu_usage", "avg_ram_usage", "peak_cpu_usage", "peak_ram_usage",
     "learning_rate", "learning_rate_schedule", "batch_size", "buffer_size",
     "normalize", "hidden_units", "num_layers", "vis_encode_type", "gamma", "strength",
     "keep_checkpoints", "max_steps", "time_horizon", "summary_freq",
-    "buffer_init_steps", "tau", "steps_per_update", "save_replay_buffer",
-    "init_entcoef", "reward_signal_steps_per_update",
     "beta", "epsilon", "lambd", "num_epoch",
     "train_duration_s", "final_mean_reward", "final_std_reward",
     "time_to_convergence", "steps_to_convergence",
@@ -517,7 +515,6 @@ def load_config(yaml_path: Path) -> dict:
 
     return {
         "algo": trainer_type,
-        "seed": env_cfg.get("seed", "NA"),
         "env_name": env_name,
         "learning_rate": g(hyper, "learning_rate"),
         "learning_rate_schedule": g(hyper, "learning_rate_schedule"),
@@ -533,12 +530,6 @@ def load_config(yaml_path: Path) -> dict:
         "max_steps": env_cfg.get("max_steps", "NA"),
         "time_horizon": env_cfg.get("time_horizon", "NA"),
         "summary_freq": env_cfg.get("summary_freq", "NA"),
-        "buffer_init_steps": g(hyper, "buffer_init_steps"),
-        "tau": g(hyper, "tau"),
-        "steps_per_update": g(hyper, "steps_per_update"),
-        "save_replay_buffer": g(hyper, "save_replay_buffer"),
-        "init_entcoef": g(hyper, "init_entcoef"),
-        "reward_signal_steps_per_update": g(hyper, "reward_signal_steps_per_update") or g(hyper, "reward_signal_per_step"),
         "beta": g(hyper, "beta"),
         "epsilon": g(hyper, "epsilon"),
         "lambd": g(hyper, "lambd"),
