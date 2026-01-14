@@ -1,0 +1,374 @@
+/Users/filippomorini/miniconda3/envs/mlagents/lib/python3.10/site-packages/mlagents/torch_utils/torch.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/Users/filippomorini/miniconda3/envs/mlagents/lib/python3.10/site-packages/torch/__init__.py:614: UserWarning: torch.set_default_tensor_type() is deprecated as of PyTorch 2.1, please use torch.set_default_dtype() and torch.set_default_device() as alternatives. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/tensor/python_tensor.cpp:453.)
+  _C._set_default_tensor_type(t)
+
+            ┐  ╖
+        ╓╖╬│╡  ││╬╖╖
+    ╓╖╬│││││┘  ╬│││││╬╖
+ ╖╬│││││╬╜        ╙╬│││││╖╖                               ╗╗╗
+ ╬╬╬╬╖││╦╖        ╖╬││╗╣╣╣╬      ╟╣╣╬    ╟╣╣╣             ╜╜╜  ╟╣╣
+ ╬╬╬╬╬╬╬╬╖│╬╖╖╓╬╪│╓╣╣╣╣╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╒╣╣╖╗╣╣╣╗   ╣╣╣ ╣╣╣╣╣╣ ╟╣╣╖   ╣╣╣
+ ╬╬╬╬┐  ╙╬╬╬╬│╓╣╣╣╝╜  ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╣╙ ╙╣╣╣  ╣╣╣ ╙╟╣╣╜╙  ╫╣╣  ╟╣╣
+ ╬╬╬╬┐     ╙╬╬╣╣      ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣     ╣╣╣┌╣╣╜
+ ╬╬╬╜       ╬╬╣╣      ╙╝╣╣╬      ╙╣╣╣╗╖╓╗╣╣╣╜ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣╦╓    ╣╣╣╣╣
+ ╙   ╓╦╖    ╬╬╣╣   ╓╗╗╖            ╙╝╣╣╣╣╝╜   ╘╝╝╜   ╝╝╝  ╝╝╝   ╙╣╣╣    ╟╣╣╣
+   ╩╬╬╬╬╬╬╦╦╬╬╣╣╗╣╣╣╣╣╣╣╝                                             ╫╣╣╣╣
+      ╙╬╬╬╬╬╬╬╣╣╣╣╣╣╝╜
+          ╙╬╬╬╣╣╣╜
+             ╙
+        
+ Version information:
+  ml-agents: 1.1.0.dev0,
+  ml-agents-envs: 1.1.0.dev0,
+  Communicator API: 1.5.0,
+  PyTorch: 2.1.2
+/Users/filippomorini/miniconda3/envs/mlagents/lib/python3.10/site-packages/mlagents/torch_utils/torch.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/Users/filippomorini/miniconda3/envs/mlagents/lib/python3.10/site-packages/torch/__init__.py:614: UserWarning: torch.set_default_tensor_type() is deprecated as of PyTorch 2.1, please use torch.set_default_dtype() and torch.set_default_device() as alternatives. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/tensor/python_tensor.cpp:453.)
+  _C._set_default_tensor_type(t)
+[INFO] Connected to Unity environment with package version 3.0.0-exp.1 and communication version 1.5.0
+[INFO] Connected new brain: 3DBall?team=0
+[INFO] Hyperparameters for behavior name 3DBall: 
+	trainer_type:	ppo
+	hyperparameters:	
+	  batch_size:	32
+	  buffer_size:	401280
+	  learning_rate:	0.0003
+	  beta:	0.005
+	  epsilon:	0.2
+	  lambd:	0.95
+	  num_epoch:	3
+	  shared_critic:	False
+	  learning_rate_schedule:	linear
+	  beta_schedule:	linear
+	  epsilon_schedule:	linear
+	checkpoint_interval:	500000
+	network_settings:	
+	  normalize:	False
+	  hidden_units:	90
+	  num_layers:	1
+	  vis_encode_type:	simple
+	  memory:	None
+	  goal_conditioning_type:	hyper
+	  deterministic:	False
+	reward_signals:	
+	  extrinsic:	
+	    gamma:	0.99
+	    strength:	1.0
+	    network_settings:	
+	      normalize:	False
+	      hidden_units:	128
+	      num_layers:	2
+	      vis_encode_type:	simple
+	      memory:	None
+	      goal_conditioning_type:	hyper
+	      deterministic:	False
+	init_path:	None
+	keep_checkpoints:	5
+	even_checkpoints:	False
+	max_steps:	10000000
+	time_horizon:	64
+	summary_freq:	10000
+	threaded:	False
+	self_play:	None
+	behavioral_cloning:	None
+[INFO] 3DBall. Step: 10000. Time Elapsed: 12.838 s. Mean Reward: 1.156. Std of Reward: 0.710. Training.
+[INFO] 3DBall. Step: 20000. Time Elapsed: 21.987 s. Mean Reward: 1.139. Std of Reward: 0.701. Training.
+[INFO] 3DBall. Step: 30000. Time Elapsed: 30.977 s. Mean Reward: 1.213. Std of Reward: 0.743. Training.
+[INFO] 3DBall. Step: 40000. Time Elapsed: 39.980 s. Mean Reward: 1.192. Std of Reward: 0.701. Training.
+[INFO] 3DBall. Step: 50000. Time Elapsed: 48.725 s. Mean Reward: 1.192. Std of Reward: 0.797. Training.
+[INFO] 3DBall. Step: 60000. Time Elapsed: 57.506 s. Mean Reward: 1.203. Std of Reward: 0.712. Training.
+[INFO] 3DBall. Step: 70000. Time Elapsed: 66.291 s. Mean Reward: 1.203. Std of Reward: 0.750. Training.
+[INFO] 3DBall. Step: 80000. Time Elapsed: 74.954 s. Mean Reward: 1.227. Std of Reward: 0.720. Training.
+[INFO] 3DBall. Step: 90000. Time Elapsed: 83.757 s. Mean Reward: 1.223. Std of Reward: 0.711. Training.
+[INFO] 3DBall. Step: 100000. Time Elapsed: 92.944 s. Mean Reward: 1.172. Std of Reward: 0.689. Training.
+[INFO] 3DBall. Step: 110000. Time Elapsed: 101.632 s. Mean Reward: 1.198. Std of Reward: 0.732. Training.
+[INFO] 3DBall. Step: 120000. Time Elapsed: 110.649 s. Mean Reward: 1.162. Std of Reward: 0.703. Training.
+[INFO] 3DBall. Step: 130000. Time Elapsed: 119.734 s. Mean Reward: 1.205. Std of Reward: 0.783. Training.
+[INFO] 3DBall. Step: 140000. Time Elapsed: 128.784 s. Mean Reward: 1.200. Std of Reward: 0.780. Training.
+[INFO] 3DBall. Step: 150000. Time Elapsed: 138.860 s. Mean Reward: 1.150. Std of Reward: 0.696. Training.
+[INFO] 3DBall. Step: 160000. Time Elapsed: 148.460 s. Mean Reward: 1.215. Std of Reward: 0.712. Training.
+[INFO] 3DBall. Step: 170000. Time Elapsed: 157.828 s. Mean Reward: 1.198. Std of Reward: 0.762. Training.
+[INFO] 3DBall. Step: 180000. Time Elapsed: 167.519 s. Mean Reward: 1.202. Std of Reward: 0.770. Training.
+[INFO] 3DBall. Step: 190000. Time Elapsed: 176.908 s. Mean Reward: 1.180. Std of Reward: 0.692. Training.
+[INFO] 3DBall. Step: 200000. Time Elapsed: 186.306 s. Mean Reward: 1.251. Std of Reward: 0.735. Training.
+[INFO] 3DBall. Step: 210000. Time Elapsed: 195.398 s. Mean Reward: 1.250. Std of Reward: 0.782. Training.
+[INFO] 3DBall. Step: 220000. Time Elapsed: 204.558 s. Mean Reward: 1.238. Std of Reward: 0.739. Training.
+[INFO] 3DBall. Step: 230000. Time Elapsed: 213.935 s. Mean Reward: 1.137. Std of Reward: 0.707. Training.
+[INFO] 3DBall. Step: 240000. Time Elapsed: 223.344 s. Mean Reward: 1.190. Std of Reward: 0.690. Training.
+[INFO] 3DBall. Step: 250000. Time Elapsed: 232.661 s. Mean Reward: 1.244. Std of Reward: 0.801. Training.
+[INFO] 3DBall. Step: 260000. Time Elapsed: 241.784 s. Mean Reward: 1.135. Std of Reward: 0.659. Training.
+[INFO] 3DBall. Step: 270000. Time Elapsed: 250.925 s. Mean Reward: 1.194. Std of Reward: 0.694. Training.
+[INFO] 3DBall. Step: 280000. Time Elapsed: 259.917 s. Mean Reward: 1.179. Std of Reward: 0.675. Training.
+[INFO] 3DBall. Step: 290000. Time Elapsed: 268.951 s. Mean Reward: 1.213. Std of Reward: 0.767. Training.
+[INFO] 3DBall. Step: 300000. Time Elapsed: 278.027 s. Mean Reward: 1.166. Std of Reward: 0.685. Training.
+[INFO] 3DBall. Step: 310000. Time Elapsed: 287.143 s. Mean Reward: 1.236. Std of Reward: 0.763. Training.
+[INFO] 3DBall. Step: 320000. Time Elapsed: 296.515 s. Mean Reward: 1.153. Std of Reward: 0.716. Training.
+[INFO] 3DBall. Step: 330000. Time Elapsed: 305.402 s. Mean Reward: 1.207. Std of Reward: 0.718. Training.
+[INFO] 3DBall. Step: 340000. Time Elapsed: 314.432 s. Mean Reward: 1.153. Std of Reward: 0.674. Training.
+[INFO] 3DBall. Step: 350000. Time Elapsed: 323.506 s. Mean Reward: 1.172. Std of Reward: 0.685. Training.
+[INFO] 3DBall. Step: 360000. Time Elapsed: 332.488 s. Mean Reward: 1.243. Std of Reward: 0.763. Training.
+[INFO] 3DBall. Step: 370000. Time Elapsed: 341.297 s. Mean Reward: 1.183. Std of Reward: 0.713. Training.
+[INFO] 3DBall. Step: 380000. Time Elapsed: 350.302 s. Mean Reward: 1.224. Std of Reward: 0.716. Training.
+[INFO] 3DBall. Step: 390000. Time Elapsed: 359.771 s. Mean Reward: 1.242. Std of Reward: 0.769. Training.
+[INFO] 3DBall. Step: 400000. Time Elapsed: 368.648 s. Mean Reward: 1.171. Std of Reward: 0.659. Training.
+[INFO] 3DBall. Step: 410000. Time Elapsed: 468.187 s. Mean Reward: 1.341. Std of Reward: 0.769. Training.
+[INFO] 3DBall. Step: 420000. Time Elapsed: 477.590 s. Mean Reward: 1.366. Std of Reward: 0.849. Training.
+[INFO] 3DBall. Step: 430000. Time Elapsed: 486.544 s. Mean Reward: 1.343. Std of Reward: 0.824. Training.
+[INFO] 3DBall. Step: 440000. Time Elapsed: 495.259 s. Mean Reward: 1.353. Std of Reward: 0.821. Training.
+[INFO] 3DBall. Step: 450000. Time Elapsed: 503.998 s. Mean Reward: 1.487. Std of Reward: 0.970. Training.
+[INFO] 3DBall. Step: 460000. Time Elapsed: 512.728 s. Mean Reward: 1.391. Std of Reward: 0.869. Training.
+[INFO] 3DBall. Step: 470000. Time Elapsed: 521.357 s. Mean Reward: 1.373. Std of Reward: 0.829. Training.
+[INFO] 3DBall. Step: 480000. Time Elapsed: 530.029 s. Mean Reward: 1.375. Std of Reward: 0.876. Training.
+[INFO] 3DBall. Step: 490000. Time Elapsed: 538.905 s. Mean Reward: 1.399. Std of Reward: 0.911. Training.
+[INFO] 3DBall. Step: 500000. Time Elapsed: 547.729 s. Mean Reward: 1.382. Std of Reward: 0.830. Training.
+[INFO] Exported /Users/filippomorini/Documents/Documents - Filippo’s MacBook Air/Development/Group8-AI-ML/training_manager/experiments/results/filippomorini_macOS/filippomorini_macOS_ppo_18a39762c9/3DBall/3DBall-499992.onnx
+[INFO] 3DBall. Step: 510000. Time Elapsed: 556.146 s. Mean Reward: 1.390. Std of Reward: 0.916. Training.
+[INFO] 3DBall. Step: 520000. Time Elapsed: 564.614 s. Mean Reward: 1.423. Std of Reward: 0.891. Training.
+[INFO] 3DBall. Step: 530000. Time Elapsed: 573.270 s. Mean Reward: 1.366. Std of Reward: 0.807. Training.
+[INFO] 3DBall. Step: 540000. Time Elapsed: 582.045 s. Mean Reward: 1.362. Std of Reward: 0.821. Training.
+[INFO] 3DBall. Step: 550000. Time Elapsed: 591.007 s. Mean Reward: 1.455. Std of Reward: 0.913. Training.
+[INFO] 3DBall. Step: 560000. Time Elapsed: 599.713 s. Mean Reward: 1.376. Std of Reward: 0.855. Training.
+[INFO] 3DBall. Step: 570000. Time Elapsed: 608.405 s. Mean Reward: 1.387. Std of Reward: 0.861. Training.
+[INFO] 3DBall. Step: 580000. Time Elapsed: 617.672 s. Mean Reward: 1.360. Std of Reward: 0.864. Training.
+[INFO] 3DBall. Step: 590000. Time Elapsed: 626.406 s. Mean Reward: 1.366. Std of Reward: 0.815. Training.
+[INFO] 3DBall. Step: 600000. Time Elapsed: 635.198 s. Mean Reward: 1.368. Std of Reward: 0.858. Training.
+[INFO] 3DBall. Step: 610000. Time Elapsed: 643.887 s. Mean Reward: 1.360. Std of Reward: 0.836. Training.
+[INFO] 3DBall. Step: 620000. Time Elapsed: 652.761 s. Mean Reward: 1.298. Std of Reward: 0.884. Training.
+[INFO] 3DBall. Step: 630000. Time Elapsed: 662.134 s. Mean Reward: 1.359. Std of Reward: 0.836. Training.
+[INFO] 3DBall. Step: 640000. Time Elapsed: 670.909 s. Mean Reward: 1.414. Std of Reward: 0.926. Training.
+[INFO] 3DBall. Step: 650000. Time Elapsed: 679.521 s. Mean Reward: 1.419. Std of Reward: 0.876. Training.
+[INFO] 3DBall. Step: 660000. Time Elapsed: 688.237 s. Mean Reward: 1.414. Std of Reward: 0.839. Training.
+[INFO] 3DBall. Step: 670000. Time Elapsed: 697.155 s. Mean Reward: 1.427. Std of Reward: 0.934. Training.
+[INFO] 3DBall. Step: 680000. Time Elapsed: 706.046 s. Mean Reward: 1.366. Std of Reward: 0.827. Training.
+[INFO] 3DBall. Step: 690000. Time Elapsed: 715.175 s. Mean Reward: 1.394. Std of Reward: 0.870. Training.
+[INFO] 3DBall. Step: 700000. Time Elapsed: 724.072 s. Mean Reward: 1.381. Std of Reward: 0.909. Training.
+[INFO] 3DBall. Step: 710000. Time Elapsed: 732.912 s. Mean Reward: 1.395. Std of Reward: 0.910. Training.
+[INFO] 3DBall. Step: 720000. Time Elapsed: 741.807 s. Mean Reward: 1.383. Std of Reward: 0.897. Training.
+[INFO] 3DBall. Step: 730000. Time Elapsed: 750.524 s. Mean Reward: 1.458. Std of Reward: 0.927. Training.
+[INFO] 3DBall. Step: 740000. Time Elapsed: 759.299 s. Mean Reward: 1.392. Std of Reward: 0.852. Training.
+[INFO] 3DBall. Step: 750000. Time Elapsed: 768.689 s. Mean Reward: 1.395. Std of Reward: 0.923. Training.
+[INFO] 3DBall. Step: 760000. Time Elapsed: 779.074 s. Mean Reward: 1.327. Std of Reward: 0.849. Training.
+[INFO] 3DBall. Step: 770000. Time Elapsed: 788.565 s. Mean Reward: 1.347. Std of Reward: 0.804. Training.
+[INFO] 3DBall. Step: 780000. Time Elapsed: 797.674 s. Mean Reward: 1.393. Std of Reward: 0.776. Training.
+[INFO] 3DBall. Step: 790000. Time Elapsed: 806.913 s. Mean Reward: 1.434. Std of Reward: 0.857. Training.
+[INFO] 3DBall. Step: 800000. Time Elapsed: 816.200 s. Mean Reward: 1.345. Std of Reward: 0.803. Training.
+[INFO] 3DBall. Step: 810000. Time Elapsed: 911.407 s. Mean Reward: 1.801. Std of Reward: 1.259. Training.
+[INFO] 3DBall. Step: 820000. Time Elapsed: 919.990 s. Mean Reward: 1.948. Std of Reward: 1.363. Training.
+[INFO] 3DBall. Step: 830000. Time Elapsed: 928.715 s. Mean Reward: 1.949. Std of Reward: 1.391. Training.
+[INFO] 3DBall. Step: 840000. Time Elapsed: 937.471 s. Mean Reward: 1.993. Std of Reward: 1.420. Training.
+[INFO] 3DBall. Step: 850000. Time Elapsed: 946.302 s. Mean Reward: 2.049. Std of Reward: 1.375. Training.
+[INFO] 3DBall. Step: 860000. Time Elapsed: 955.013 s. Mean Reward: 1.963. Std of Reward: 1.355. Training.
+[INFO] 3DBall. Step: 870000. Time Elapsed: 963.749 s. Mean Reward: 2.021. Std of Reward: 1.457. Training.
+[INFO] 3DBall. Step: 880000. Time Elapsed: 972.681 s. Mean Reward: 1.902. Std of Reward: 1.250. Training.
+[INFO] 3DBall. Step: 890000. Time Elapsed: 981.260 s. Mean Reward: 1.952. Std of Reward: 1.459. Training.
+[INFO] 3DBall. Step: 900000. Time Elapsed: 990.069 s. Mean Reward: 2.002. Std of Reward: 1.483. Training.
+[INFO] 3DBall. Step: 910000. Time Elapsed: 998.664 s. Mean Reward: 1.996. Std of Reward: 1.443. Training.
+[INFO] 3DBall. Step: 920000. Time Elapsed: 1007.649 s. Mean Reward: 1.951. Std of Reward: 1.245. Training.
+[INFO] 3DBall. Step: 930000. Time Elapsed: 1016.444 s. Mean Reward: 2.095. Std of Reward: 1.401. Training.
+[INFO] 3DBall. Step: 940000. Time Elapsed: 1025.083 s. Mean Reward: 2.006. Std of Reward: 1.317. Training.
+[INFO] 3DBall. Step: 950000. Time Elapsed: 1033.726 s. Mean Reward: 1.965. Std of Reward: 1.222. Training.
+[INFO] 3DBall. Step: 960000. Time Elapsed: 1042.558 s. Mean Reward: 2.075. Std of Reward: 1.357. Training.
+[INFO] 3DBall. Step: 970000. Time Elapsed: 1051.458 s. Mean Reward: 2.006. Std of Reward: 1.292. Training.
+[INFO] 3DBall. Step: 980000. Time Elapsed: 1060.202 s. Mean Reward: 2.036. Std of Reward: 1.371. Training.
+[INFO] 3DBall. Step: 990000. Time Elapsed: 1068.727 s. Mean Reward: 2.033. Std of Reward: 1.406. Training.
+[INFO] 3DBall. Step: 1000000. Time Elapsed: 1077.848 s. Mean Reward: 2.004. Std of Reward: 1.373. Training.
+[INFO] Exported /Users/filippomorini/Documents/Documents - Filippo’s MacBook Air/Development/Group8-AI-ML/training_manager/experiments/results/filippomorini_macOS/filippomorini_macOS_ppo_18a39762c9/3DBall/3DBall-999986.onnx
+[INFO] 3DBall. Step: 1010000. Time Elapsed: 1086.826 s. Mean Reward: 2.067. Std of Reward: 1.338. Training.
+[INFO] 3DBall. Step: 1020000. Time Elapsed: 1096.093 s. Mean Reward: 1.927. Std of Reward: 1.274. Training.
+[INFO] 3DBall. Step: 1030000. Time Elapsed: 1106.379 s. Mean Reward: 2.078. Std of Reward: 1.442. Training.
+[INFO] 3DBall. Step: 1040000. Time Elapsed: 1115.842 s. Mean Reward: 1.921. Std of Reward: 1.209. Training.
+[INFO] 3DBall. Step: 1050000. Time Elapsed: 1125.323 s. Mean Reward: 2.093. Std of Reward: 1.401. Training.
+[INFO] 3DBall. Step: 1060000. Time Elapsed: 1135.075 s. Mean Reward: 1.980. Std of Reward: 1.299. Training.
+[INFO] 3DBall. Step: 1070000. Time Elapsed: 1144.357 s. Mean Reward: 1.996. Std of Reward: 1.259. Training.
+[INFO] 3DBall. Step: 1080000. Time Elapsed: 1153.433 s. Mean Reward: 2.046. Std of Reward: 1.290. Training.
+[INFO] 3DBall. Step: 1090000. Time Elapsed: 1162.692 s. Mean Reward: 1.924. Std of Reward: 1.322. Training.
+[INFO] 3DBall. Step: 1100000. Time Elapsed: 1172.288 s. Mean Reward: 2.035. Std of Reward: 1.254. Training.
+[INFO] 3DBall. Step: 1110000. Time Elapsed: 1181.549 s. Mean Reward: 2.078. Std of Reward: 1.320. Training.
+[INFO] 3DBall. Step: 1120000. Time Elapsed: 1190.663 s. Mean Reward: 2.085. Std of Reward: 1.408. Training.
+[INFO] 3DBall. Step: 1130000. Time Elapsed: 1199.826 s. Mean Reward: 1.884. Std of Reward: 1.188. Training.
+[INFO] 3DBall. Step: 1140000. Time Elapsed: 1208.923 s. Mean Reward: 1.975. Std of Reward: 1.295. Training.
+[INFO] 3DBall. Step: 1150000. Time Elapsed: 1218.412 s. Mean Reward: 1.898. Std of Reward: 1.286. Training.
+[INFO] 3DBall. Step: 1160000. Time Elapsed: 1227.653 s. Mean Reward: 1.997. Std of Reward: 1.313. Training.
+[INFO] 3DBall. Step: 1170000. Time Elapsed: 1237.323 s. Mean Reward: 1.936. Std of Reward: 1.306. Training.
+[INFO] 3DBall. Step: 1180000. Time Elapsed: 1246.587 s. Mean Reward: 2.031. Std of Reward: 1.347. Training.
+[INFO] 3DBall. Step: 1190000. Time Elapsed: 1255.787 s. Mean Reward: 1.961. Std of Reward: 1.282. Training.
+[INFO] 3DBall. Step: 1200000. Time Elapsed: 1264.983 s. Mean Reward: 2.093. Std of Reward: 1.386. Training.
+[INFO] 3DBall. Step: 1210000. Time Elapsed: 1358.634 s. Mean Reward: 2.974. Std of Reward: 2.678. Training.
+[INFO] 3DBall. Step: 1220000. Time Elapsed: 1367.695 s. Mean Reward: 3.732. Std of Reward: 3.052. Training.
+[INFO] 3DBall. Step: 1230000. Time Elapsed: 1376.482 s. Mean Reward: 3.582. Std of Reward: 3.256. Training.
+[INFO] 3DBall. Step: 1240000. Time Elapsed: 1385.159 s. Mean Reward: 3.966. Std of Reward: 3.799. Training.
+[INFO] 3DBall. Step: 1250000. Time Elapsed: 1394.245 s. Mean Reward: 3.760. Std of Reward: 2.800. Training.
+[INFO] 3DBall. Step: 1260000. Time Elapsed: 1402.867 s. Mean Reward: 3.549. Std of Reward: 2.866. Training.
+[INFO] 3DBall. Step: 1270000. Time Elapsed: 1411.850 s. Mean Reward: 3.427. Std of Reward: 2.643. Training.
+[INFO] 3DBall. Step: 1280000. Time Elapsed: 1421.412 s. Mean Reward: 3.837. Std of Reward: 3.023. Training.
+[INFO] 3DBall. Step: 1290000. Time Elapsed: 1431.291 s. Mean Reward: 3.701. Std of Reward: 3.203. Training.
+[INFO] 3DBall. Step: 1300000. Time Elapsed: 1440.399 s. Mean Reward: 3.700. Std of Reward: 2.999. Training.
+[INFO] 3DBall. Step: 1310000. Time Elapsed: 1449.728 s. Mean Reward: 3.576. Std of Reward: 2.511. Training.
+[INFO] 3DBall. Step: 1320000. Time Elapsed: 1458.957 s. Mean Reward: 3.794. Std of Reward: 3.069. Training.
+[INFO] 3DBall. Step: 1330000. Time Elapsed: 1467.942 s. Mean Reward: 3.862. Std of Reward: 2.961. Training.
+[INFO] 3DBall. Step: 1340000. Time Elapsed: 1477.032 s. Mean Reward: 3.880. Std of Reward: 3.333. Training.
+[INFO] 3DBall. Step: 1350000. Time Elapsed: 1485.698 s. Mean Reward: 4.058. Std of Reward: 3.439. Training.
+[INFO] 3DBall. Step: 1360000. Time Elapsed: 1494.578 s. Mean Reward: 3.517. Std of Reward: 2.819. Training.
+[INFO] 3DBall. Step: 1370000. Time Elapsed: 1503.593 s. Mean Reward: 3.791. Std of Reward: 3.153. Training.
+[INFO] 3DBall. Step: 1380000. Time Elapsed: 1512.172 s. Mean Reward: 3.712. Std of Reward: 3.041. Training.
+[INFO] 3DBall. Step: 1390000. Time Elapsed: 1520.969 s. Mean Reward: 4.020. Std of Reward: 3.580. Training.
+[INFO] 3DBall. Step: 1400000. Time Elapsed: 1529.519 s. Mean Reward: 3.943. Std of Reward: 3.308. Training.
+[INFO] 3DBall. Step: 1410000. Time Elapsed: 1538.378 s. Mean Reward: 3.926. Std of Reward: 3.210. Training.
+[INFO] 3DBall. Step: 1420000. Time Elapsed: 1547.062 s. Mean Reward: 3.670. Std of Reward: 2.715. Training.
+[INFO] 3DBall. Step: 1430000. Time Elapsed: 1555.846 s. Mean Reward: 3.859. Std of Reward: 2.799. Training.
+[INFO] 3DBall. Step: 1440000. Time Elapsed: 1564.516 s. Mean Reward: 3.200. Std of Reward: 2.316. Training.
+[INFO] 3DBall. Step: 1450000. Time Elapsed: 1572.917 s. Mean Reward: 4.145. Std of Reward: 3.467. Training.
+[INFO] 3DBall. Step: 1460000. Time Elapsed: 1582.127 s. Mean Reward: 3.758. Std of Reward: 2.951. Training.
+[INFO] 3DBall. Step: 1470000. Time Elapsed: 1590.834 s. Mean Reward: 3.564. Std of Reward: 3.088. Training.
+[INFO] 3DBall. Step: 1480000. Time Elapsed: 1599.833 s. Mean Reward: 3.466. Std of Reward: 2.656. Training.
+[INFO] 3DBall. Step: 1490000. Time Elapsed: 1608.597 s. Mean Reward: 3.779. Std of Reward: 3.047. Training.
+[INFO] 3DBall. Step: 1500000. Time Elapsed: 1617.256 s. Mean Reward: 3.693. Std of Reward: 2.881. Training.
+[INFO] Exported /Users/filippomorini/Documents/Documents - Filippo’s MacBook Air/Development/Group8-AI-ML/training_manager/experiments/results/filippomorini_macOS/filippomorini_macOS_ppo_18a39762c9/3DBall/3DBall-1499978.onnx
+[INFO] 3DBall. Step: 1510000. Time Elapsed: 1625.920 s. Mean Reward: 3.484. Std of Reward: 2.614. Training.
+[INFO] 3DBall. Step: 1520000. Time Elapsed: 1635.207 s. Mean Reward: 3.810. Std of Reward: 2.969. Training.
+[INFO] 3DBall. Step: 1530000. Time Elapsed: 1644.226 s. Mean Reward: 3.765. Std of Reward: 3.331. Training.
+[INFO] 3DBall. Step: 1540000. Time Elapsed: 1653.383 s. Mean Reward: 3.600. Std of Reward: 2.563. Training.
+[INFO] 3DBall. Step: 1550000. Time Elapsed: 1662.124 s. Mean Reward: 3.934. Std of Reward: 3.172. Training.
+[INFO] 3DBall. Step: 1560000. Time Elapsed: 1670.859 s. Mean Reward: 3.719. Std of Reward: 3.261. Training.
+[INFO] 3DBall. Step: 1570000. Time Elapsed: 1679.430 s. Mean Reward: 3.552. Std of Reward: 2.673. Training.
+[INFO] 3DBall. Step: 1580000. Time Elapsed: 1687.927 s. Mean Reward: 3.975. Std of Reward: 3.146. Training.
+[INFO] 3DBall. Step: 1590000. Time Elapsed: 1696.892 s. Mean Reward: 3.877. Std of Reward: 3.068. Training.
+[INFO] 3DBall. Step: 1600000. Time Elapsed: 1705.527 s. Mean Reward: 3.638. Std of Reward: 2.978. Training.
+[INFO] 3DBall. Step: 1610000. Time Elapsed: 1801.858 s. Mean Reward: 4.443. Std of Reward: 4.142. Training.
+[INFO] 3DBall. Step: 1620000. Time Elapsed: 1810.148 s. Mean Reward: 8.988. Std of Reward: 8.494. Training.
+[INFO] 3DBall. Step: 1630000. Time Elapsed: 1818.520 s. Mean Reward: 8.657. Std of Reward: 7.413. Training.
+[INFO] 3DBall. Step: 1640000. Time Elapsed: 1827.041 s. Mean Reward: 10.273. Std of Reward: 11.223. Training.
+[INFO] 3DBall. Step: 1650000. Time Elapsed: 1835.424 s. Mean Reward: 9.623. Std of Reward: 9.488. Training.
+[INFO] 3DBall. Step: 1660000. Time Elapsed: 1843.850 s. Mean Reward: 8.993. Std of Reward: 8.321. Training.
+[INFO] 3DBall. Step: 1670000. Time Elapsed: 1852.109 s. Mean Reward: 10.364. Std of Reward: 9.756. Training.
+[INFO] 3DBall. Step: 1680000. Time Elapsed: 1861.047 s. Mean Reward: 8.365. Std of Reward: 6.930. Training.
+[INFO] 3DBall. Step: 1690000. Time Elapsed: 1869.409 s. Mean Reward: 9.596. Std of Reward: 9.441. Training.
+[INFO] 3DBall. Step: 1700000. Time Elapsed: 1877.933 s. Mean Reward: 9.361. Std of Reward: 9.977. Training.
+[INFO] 3DBall. Step: 1710000. Time Elapsed: 1886.278 s. Mean Reward: 9.093. Std of Reward: 9.117. Training.
+[INFO] 3DBall. Step: 1720000. Time Elapsed: 1895.226 s. Mean Reward: 9.793. Std of Reward: 9.412. Training.
+[INFO] 3DBall. Step: 1730000. Time Elapsed: 1903.333 s. Mean Reward: 10.436. Std of Reward: 12.099. Training.
+[INFO] 3DBall. Step: 1740000. Time Elapsed: 1911.614 s. Mean Reward: 9.704. Std of Reward: 8.766. Training.
+[INFO] 3DBall. Step: 1750000. Time Elapsed: 1920.353 s. Mean Reward: 9.500. Std of Reward: 8.953. Training.
+[INFO] 3DBall. Step: 1760000. Time Elapsed: 1928.633 s. Mean Reward: 9.863. Std of Reward: 10.232. Training.
+[INFO] 3DBall. Step: 1770000. Time Elapsed: 1937.037 s. Mean Reward: 8.665. Std of Reward: 7.465. Training.
+[INFO] 3DBall. Step: 1780000. Time Elapsed: 1945.972 s. Mean Reward: 10.051. Std of Reward: 11.204. Training.
+[INFO] 3DBall. Step: 1790000. Time Elapsed: 1954.381 s. Mean Reward: 9.563. Std of Reward: 9.403. Training.
+[INFO] 3DBall. Step: 1800000. Time Elapsed: 1963.089 s. Mean Reward: 8.695. Std of Reward: 7.753. Training.
+[INFO] 3DBall. Step: 1810000. Time Elapsed: 1971.944 s. Mean Reward: 10.648. Std of Reward: 10.597. Training.
+[INFO] 3DBall. Step: 1820000. Time Elapsed: 1980.720 s. Mean Reward: 9.400. Std of Reward: 10.137. Training.
+[INFO] 3DBall. Step: 1830000. Time Elapsed: 1989.354 s. Mean Reward: 8.510. Std of Reward: 7.771. Training.
+[INFO] 3DBall. Step: 1840000. Time Elapsed: 1997.761 s. Mean Reward: 9.118. Std of Reward: 9.039. Training.
+[INFO] 3DBall. Step: 1850000. Time Elapsed: 2006.206 s. Mean Reward: 9.846. Std of Reward: 9.614. Training.
+[INFO] 3DBall. Step: 1860000. Time Elapsed: 2014.922 s. Mean Reward: 9.180. Std of Reward: 7.696. Training.
+[INFO] 3DBall. Step: 1870000. Time Elapsed: 2023.831 s. Mean Reward: 8.828. Std of Reward: 7.406. Training.
+[INFO] 3DBall. Step: 1880000. Time Elapsed: 2032.486 s. Mean Reward: 9.995. Std of Reward: 8.663. Training.
+[INFO] 3DBall. Step: 1890000. Time Elapsed: 2041.454 s. Mean Reward: 13.838. Std of Reward: 14.563. Training.
+[INFO] 3DBall. Step: 1900000. Time Elapsed: 2050.048 s. Mean Reward: 8.858. Std of Reward: 8.414. Training.
+[INFO] 3DBall. Step: 1910000. Time Elapsed: 2058.664 s. Mean Reward: 10.744. Std of Reward: 9.868. Training.
+[INFO] 3DBall. Step: 1920000. Time Elapsed: 2068.155 s. Mean Reward: 9.181. Std of Reward: 8.315. Training.
+[INFO] 3DBall. Step: 1930000. Time Elapsed: 2077.793 s. Mean Reward: 8.956. Std of Reward: 8.439. Training.
+[INFO] 3DBall. Step: 1940000. Time Elapsed: 2086.824 s. Mean Reward: 9.014. Std of Reward: 8.754. Training.
+[INFO] 3DBall. Step: 1950000. Time Elapsed: 2096.111 s. Mean Reward: 9.327. Std of Reward: 8.563. Training.
+[INFO] 3DBall. Step: 1960000. Time Elapsed: 2105.114 s. Mean Reward: 9.868. Std of Reward: 8.930. Training.
+[INFO] 3DBall. Step: 1970000. Time Elapsed: 2113.920 s. Mean Reward: 9.350. Std of Reward: 8.873. Training.
+[INFO] 3DBall. Step: 1980000. Time Elapsed: 2122.659 s. Mean Reward: 9.141. Std of Reward: 8.674. Training.
+[INFO] 3DBall. Step: 1990000. Time Elapsed: 2131.898 s. Mean Reward: 8.129. Std of Reward: 8.191. Training.
+[INFO] 3DBall. Step: 2000000. Time Elapsed: 2140.360 s. Mean Reward: 9.374. Std of Reward: 8.580. Training.
+[INFO] Exported /Users/filippomorini/Documents/Documents - Filippo’s MacBook Air/Development/Group8-AI-ML/training_manager/experiments/results/filippomorini_macOS/filippomorini_macOS_ppo_18a39762c9/3DBall/3DBall-1999976.onnx
+[INFO] 3DBall. Step: 2010000. Time Elapsed: 2231.446 s. Mean Reward: 9.043. Std of Reward: 9.970. Training.
+[INFO] 3DBall. Step: 2020000. Time Elapsed: 2239.721 s. Mean Reward: 44.048. Std of Reward: 29.245. Training.
+[INFO] 3DBall. Step: 2030000. Time Elapsed: 2248.070 s. Mean Reward: 34.208. Std of Reward: 31.519. Training.
+[INFO] 3DBall. Step: 2040000. Time Elapsed: 2256.381 s. Mean Reward: 43.407. Std of Reward: 36.436. Training.
+[INFO] 3DBall. Step: 2050000. Time Elapsed: 2264.794 s. Mean Reward: 44.260. Std of Reward: 32.786. Training.
+[INFO] 3DBall. Step: 2060000. Time Elapsed: 2273.296 s. Mean Reward: 49.576. Std of Reward: 22.628. Training.
+[INFO] 3DBall. Step: 2070000. Time Elapsed: 2281.934 s. Mean Reward: 42.404. Std of Reward: 34.615. Training.
+[INFO] 3DBall. Step: 2080000. Time Elapsed: 2290.376 s. Mean Reward: 41.023. Std of Reward: 30.852. Training.
+[INFO] 3DBall. Step: 2090000. Time Elapsed: 2298.976 s. Mean Reward: 40.714. Std of Reward: 30.657. Training.
+[INFO] 3DBall. Step: 2100000. Time Elapsed: 2307.273 s. Mean Reward: 40.508. Std of Reward: 27.892. Training.
+[INFO] 3DBall. Step: 2110000. Time Elapsed: 2315.774 s. Mean Reward: 41.463. Std of Reward: 33.473. Training.
+[INFO] 3DBall. Step: 2120000. Time Elapsed: 2324.160 s. Mean Reward: 53.174. Std of Reward: 34.904. Training.
+[INFO] 3DBall. Step: 2130000. Time Elapsed: 2332.435 s. Mean Reward: 31.019. Std of Reward: 33.713. Training.
+[INFO] 3DBall. Step: 2140000. Time Elapsed: 2340.818 s. Mean Reward: 48.188. Std of Reward: 35.025. Training.
+[INFO] 3DBall. Step: 2150000. Time Elapsed: 2349.262 s. Mean Reward: 44.428. Std of Reward: 30.346. Training.
+[INFO] 3DBall. Step: 2160000. Time Elapsed: 2357.455 s. Mean Reward: 47.108. Std of Reward: 38.642. Training.
+[INFO] 3DBall. Step: 2170000. Time Elapsed: 2366.320 s. Mean Reward: 48.043. Std of Reward: 33.778. Training.
+[INFO] 3DBall. Step: 2180000. Time Elapsed: 2374.666 s. Mean Reward: 39.641. Std of Reward: 33.737. Training.
+[INFO] 3DBall. Step: 2190000. Time Elapsed: 2383.403 s. Mean Reward: 34.010. Std of Reward: 29.200. Training.
+[INFO] 3DBall. Step: 2200000. Time Elapsed: 2393.097 s. Mean Reward: 47.861. Std of Reward: 33.887. Training.
+[INFO] 3DBall. Step: 2210000. Time Elapsed: 2402.008 s. Mean Reward: 38.104. Std of Reward: 36.351. Training.
+[INFO] 3DBall. Step: 2220000. Time Elapsed: 2410.949 s. Mean Reward: 56.542. Std of Reward: 33.987. Training.
+[INFO] 3DBall. Step: 2230000. Time Elapsed: 2419.823 s. Mean Reward: 48.505. Std of Reward: 38.934. Training.
+[INFO] 3DBall. Step: 2240000. Time Elapsed: 2428.746 s. Mean Reward: 37.097. Std of Reward: 31.235. Training.
+[INFO] 3DBall. Step: 2250000. Time Elapsed: 2437.718 s. Mean Reward: 45.547. Std of Reward: 34.802. Training.
+[INFO] 3DBall. Step: 2260000. Time Elapsed: 2446.413 s. Mean Reward: 50.470. Std of Reward: 33.763. Training.
+[INFO] 3DBall. Step: 2270000. Time Elapsed: 2455.108 s. Mean Reward: 47.700. Std of Reward: 35.221. Training.
+[INFO] 3DBall. Step: 2280000. Time Elapsed: 2463.715 s. Mean Reward: 57.750. Std of Reward: 33.677. Training.
+[INFO] 3DBall. Step: 2290000. Time Elapsed: 2472.066 s. Mean Reward: 41.663. Std of Reward: 26.727. Training.
+[INFO] 3DBall. Step: 2300000. Time Elapsed: 2480.691 s. Mean Reward: 49.447. Std of Reward: 27.840. Training.
+[INFO] 3DBall. Step: 2310000. Time Elapsed: 2488.816 s. Mean Reward: 51.019. Std of Reward: 40.062. Training.
+[INFO] 3DBall. Step: 2320000. Time Elapsed: 2497.303 s. Mean Reward: 37.142. Std of Reward: 32.135. Training.
+[INFO] 3DBall. Step: 2330000. Time Elapsed: 2506.095 s. Mean Reward: 46.205. Std of Reward: 34.471. Training.
+[INFO] 3DBall. Step: 2340000. Time Elapsed: 2514.491 s. Mean Reward: 33.993. Std of Reward: 34.589. Training.
+[INFO] 3DBall. Step: 2350000. Time Elapsed: 2522.784 s. Mean Reward: 47.777. Std of Reward: 31.751. Training.
+[INFO] 3DBall. Step: 2360000. Time Elapsed: 2531.455 s. Mean Reward: 47.442. Std of Reward: 31.906. Training.
+[INFO] 3DBall. Step: 2370000. Time Elapsed: 2539.731 s. Mean Reward: 45.500. Std of Reward: 35.538. Training.
+[INFO] 3DBall. Step: 2380000. Time Elapsed: 2547.757 s. Mean Reward: 54.284. Std of Reward: 34.073. Training.
+[INFO] 3DBall. Step: 2390000. Time Elapsed: 2556.285 s. Mean Reward: 44.771. Std of Reward: 37.017. Training.
+[INFO] 3DBall. Step: 2400000. Time Elapsed: 2564.775 s. Mean Reward: 40.255. Std of Reward: 35.899. Training.
+[INFO] 3DBall. Step: 2410000. Time Elapsed: 2664.480 s. Mean Reward: 44.287. Std of Reward: 40.350. Training.
+[INFO] 3DBall. Step: 2420000. Time Elapsed: 2672.697 s. Mean Reward: 90.250. Std of Reward: 22.116. Training.
+[INFO] 3DBall. Step: 2430000. Time Elapsed: 2681.112 s. Mean Reward: 98.700. Std of Reward: 3.439. Training.
+[INFO] 3DBall. Step: 2440000. Time Elapsed: 2689.555 s. Mean Reward: 83.127. Std of Reward: 30.566. Training.
+[INFO] 3DBall. Step: 2450000. Time Elapsed: 2697.700 s. Mean Reward: 96.136. Std of Reward: 9.370. Training.
+[INFO] 3DBall. Step: 2460000. Time Elapsed: 2706.732 s. Mean Reward: 84.110. Std of Reward: 24.929. Training.
+[INFO] 3DBall. Step: 2470000. Time Elapsed: 2715.825 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2480000. Time Elapsed: 2724.434 s. Mean Reward: 99.400. Std of Reward: 1.897. Training.
+[INFO] 3DBall. Step: 2490000. Time Elapsed: 2732.955 s. Mean Reward: 95.060. Std of Reward: 14.820. Training.
+[INFO] 3DBall. Step: 2500000. Time Elapsed: 2741.573 s. Mean Reward: 92.350. Std of Reward: 15.922. Training.
+[INFO] Exported /Users/filippomorini/Documents/Documents - Filippo’s MacBook Air/Development/Group8-AI-ML/training_manager/experiments/results/filippomorini_macOS/filippomorini_macOS_ppo_18a39762c9/3DBall/3DBall-2499965.onnx
+[INFO] 3DBall. Step: 2510000. Time Elapsed: 2750.178 s. Mean Reward: 75.014. Std of Reward: 35.802. Training.
+[INFO] 3DBall. Step: 2520000. Time Elapsed: 2758.674 s. Mean Reward: 82.922. Std of Reward: 33.332. Training.
+[INFO] 3DBall. Step: 2530000. Time Elapsed: 2767.403 s. Mean Reward: 78.743. Std of Reward: 37.048. Training.
+[INFO] 3DBall. Step: 2540000. Time Elapsed: 2775.847 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2550000. Time Elapsed: 2784.178 s. Mean Reward: 92.817. Std of Reward: 17.946. Training.
+[INFO] 3DBall. Step: 2560000. Time Elapsed: 2792.841 s. Mean Reward: 98.960. Std of Reward: 2.658. Training.
+[INFO] 3DBall. Step: 2570000. Time Elapsed: 2801.042 s. Mean Reward: 89.231. Std of Reward: 25.402. Training.
+[INFO] 3DBall. Step: 2580000. Time Elapsed: 2809.208 s. Mean Reward: 68.620. Std of Reward: 38.428. Training.
+[INFO] 3DBall. Step: 2590000. Time Elapsed: 2817.512 s. Mean Reward: 95.542. Std of Reward: 14.787. Training.
+[INFO] 3DBall. Step: 2600000. Time Elapsed: 2826.000 s. Mean Reward: 86.855. Std of Reward: 24.259. Training.
+[INFO] 3DBall. Step: 2610000. Time Elapsed: 2834.146 s. Mean Reward: 92.460. Std of Reward: 22.620. Training.
+[INFO] 3DBall. Step: 2620000. Time Elapsed: 2842.382 s. Mean Reward: 85.969. Std of Reward: 32.910. Training.
+[INFO] 3DBall. Step: 2630000. Time Elapsed: 2850.477 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2640000. Time Elapsed: 2858.790 s. Mean Reward: 82.218. Std of Reward: 33.421. Training.
+[INFO] 3DBall. Step: 2650000. Time Elapsed: 2867.063 s. Mean Reward: 81.046. Std of Reward: 34.472. Training.
+[INFO] 3DBall. Step: 2660000. Time Elapsed: 2875.316 s. Mean Reward: 85.864. Std of Reward: 30.252. Training.
+[INFO] 3DBall. Step: 2670000. Time Elapsed: 2883.466 s. Mean Reward: 91.740. Std of Reward: 24.780. Training.
+[INFO] 3DBall. Step: 2680000. Time Elapsed: 2891.447 s. Mean Reward: 89.377. Std of Reward: 25.093. Training.
+[INFO] 3DBall. Step: 2690000. Time Elapsed: 2900.130 s. Mean Reward: 98.830. Std of Reward: 3.510. Training.
+[INFO] 3DBall. Step: 2700000. Time Elapsed: 2908.415 s. Mean Reward: 99.388. Std of Reward: 1.621. Training.
+[INFO] 3DBall. Step: 2710000. Time Elapsed: 2916.681 s. Mean Reward: 84.071. Std of Reward: 31.643. Training.
+[INFO] 3DBall. Step: 2720000. Time Elapsed: 2925.177 s. Mean Reward: 96.840. Std of Reward: 9.480. Training.
+[INFO] 3DBall. Step: 2730000. Time Elapsed: 2933.671 s. Mean Reward: 90.330. Std of Reward: 25.293. Training.
+[INFO] 3DBall. Step: 2740000. Time Elapsed: 2941.938 s. Mean Reward: 91.015. Std of Reward: 17.374. Training.
+[INFO] 3DBall. Step: 2750000. Time Elapsed: 2950.521 s. Mean Reward: 93.400. Std of Reward: 21.890. Training.
+[INFO] 3DBall. Step: 2760000. Time Elapsed: 2958.880 s. Mean Reward: 84.663. Std of Reward: 23.534. Training.
+[INFO] 3DBall. Step: 2770000. Time Elapsed: 2967.115 s. Mean Reward: 91.415. Std of Reward: 17.522. Training.
+[INFO] 3DBall. Step: 2780000. Time Elapsed: 2975.238 s. Mean Reward: 92.309. Std of Reward: 24.321. Training.
+[INFO] 3DBall. Step: 2790000. Time Elapsed: 2983.539 s. Mean Reward: 91.760. Std of Reward: 24.720. Training.
+[INFO] 3DBall. Step: 2800000. Time Elapsed: 2991.889 s. Mean Reward: 78.229. Std of Reward: 33.276. Training.
+[INFO] 3DBall. Step: 2810000. Time Elapsed: 3101.370 s. Mean Reward: 99.789. Std of Reward: 0.597. Training.
+[INFO] 3DBall. Step: 2820000. Time Elapsed: 3109.744 s. Mean Reward: 94.856. Std of Reward: 14.551. Training.
+[INFO] 3DBall. Step: 2830000. Time Elapsed: 3117.930 s. Mean Reward: 90.250. Std of Reward: 26.527. Training.
+[INFO] 3DBall. Step: 2840000. Time Elapsed: 3126.238 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2850000. Time Elapsed: 3134.294 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2860000. Time Elapsed: 3142.458 s. Mean Reward: 94.946. Std of Reward: 17.507. Training.
+[INFO] 3DBall. Step: 2870000. Time Elapsed: 3150.690 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2880000. Time Elapsed: 3158.600 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2890000. Time Elapsed: 3166.854 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2900000. Time Elapsed: 3174.885 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 2910000. Time Elapsed: 3183.103 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] Learning was interrupted. Please wait while the graph is generated.
+[INFO] Exported /Users/filippomorini/Documents/Documents - Filippo’s MacBook Air/Development/Group8-AI-ML/training_manager/experiments/results/filippomorini_macOS/filippomorini_macOS_ppo_18a39762c9/3DBall/3DBall-2910504.onnx
+[INFO] Copied /Users/filippomorini/Documents/Documents - Filippo’s MacBook Air/Development/Group8-AI-ML/training_manager/experiments/results/filippomorini_macOS/filippomorini_macOS_ppo_18a39762c9/3DBall/3DBall-2910504.onnx to /Users/filippomorini/Documents/Documents - Filippo’s MacBook Air/Development/Group8-AI-ML/training_manager/experiments/results/filippomorini_macOS/filippomorini_macOS_ppo_18a39762c9/3DBall.onnx.
