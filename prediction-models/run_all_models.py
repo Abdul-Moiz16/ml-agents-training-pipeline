@@ -12,6 +12,7 @@ from models import (
     ExtraTreesModel,
     GradientBoostingModel,
     LinearRegressionModel,
+    KNNModel,
 )
 
 def main():
@@ -22,6 +23,7 @@ def main():
         ExtraTreesModel,
         GradientBoostingModel,
         LinearRegressionModel,
+        KNNModel,
     ]:
         model_instance = cls()
         mae, r2, _ = model_instance.train_test_eval(test_size=0.2, seed=42)
