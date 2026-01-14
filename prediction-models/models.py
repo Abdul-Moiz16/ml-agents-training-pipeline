@@ -4,6 +4,9 @@ from sklearn.linear_model import LinearRegression
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.metrics import mean_absolute_error, make_scorer
+
 
 from BaselineModel import BaseModel
 
@@ -20,7 +23,7 @@ class RandomForestModel(BaseModel):
 
 class ExtraTreesModel(BaseModel):
     def build_model(self):
-        return ExtraTreesRegressor(n_estimators=200, random_state=42, n_jobs=-1)
+        return ExtraTreesRegressor ( n_estimators=600, min_samples_leaf=2, max_features=0.8, random_state=42, n_jobs=-1)
 
 
 class GradientBoostingModel(BaseModel):
