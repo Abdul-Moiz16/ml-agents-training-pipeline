@@ -4,76 +4,108 @@ module at Maastricht University.
 Based on [The Unity Machine Learning Agents Toolkit](https://github.com/Unity-Technologies/ml-agents) (ML-Agents). The central topic is collection of data from real- time 3D video game enviroments with AI-controlled agents and applying Machine Learning techniques to that data.
 
 ## Requirements
-- **Python 3.10.12**
 - **Unity Editor 2023.2.12f1**
-- **ML-Agents 21**
 
 Recommended:
 - **Visual Studio Code**
-- **Miniconda**
 
 
-## ML-Agents Setup with Conda and Unity
+## 1) Install Docker
 
-### 1. Download and install the [Unity game engine](https://unity.com/)
-Using 2023.2.12f1 Editor version
+### Windows (Docker Desktop)
+1. Install **Docker Desktop** (Windows).
+2. Ensure **WSL 2** is enabled (Docker Desktop will guide you).
+3. Start Docker Desktop and wait until it says “Docker is running”.
 
-### 2. Download and install [Miniconda](https://www.anaconda.com/download/success) enviroment menager
-Using latest (25.7.0) version
+### macOS (Docker Desktop)
+1. Install **Docker Desktop** (Mac).
+2. Start Docker Desktop and wait until it says “Docker is running”.
 
-### 3. Create Conda Environment
-Create a new Conda environment with Python 3.10.12:
+### Linux
+Install Docker using your distro’s package manager and start the daemon:
+- Ensure the Docker service is running
+- Optional: add your user to the `docker` group to avoid `sudo`. Note you have to logout and log back in or reboot.
 
+### Verify
+You can verify using this bash commands:
 ```bash
-conda create -n mlagents python=3.10.12
-conda activate mlagents
+docker --version
+docker run --rm hello-world
 ```
 
-### 4. Install Ml-Agents
-Install ML-Agents and ML-Agents Environments from the local source. Navigate to directory where you have this repository downloaded, then run:
+## 2) Setup run scripts
+
+All commands below must be run from the repository root
+
+### Linux/macOs
+Make sure run.sh is executable:
 ```bash
-cd path\to\ml-agents
-python -m pip install ./ml-agents-envs
-python -m pip install ./ml-agents
+chmod +x scripts/run.sh
 ```
 
-## How to run training
+### Windows
+Run commands from PowerShell (no chmod needed).
 
-Currently works on Windows, Linux and MacOS
 
-Whilst in the root folder be sure to be in your python virtual env and have mlagents installed.
 
-If it is the first time running, in the terminal type:
 
+## 3) How to run
+All commands below must be run from the repository root
+
+### 3.1) Show help / all CLI options
+
+#### Linux/macOS
 ```bash
-pip install -e .
+./scripts/run.sh --help
 ```
 
-For help type:
-```bash
-mlrun -h
+#### Windows
+```powershell
+.\scripts\run.ps1 --help
 ```
 
-Then to run batch training, also in the terminal, type:
+### 3.2) Start continuous training (batch mode) ***and*** rebuild aggregated results (main.csv) after every run
+
+#### Linux/macOS
 ```bash
-mlrun --batch
+./scripts/run.sh --batch
 ```
 
-To rebuild the main csv and add newly collected data to it, type:
-```bash
-mlrun --rebuild-main
+#### Windows
+```powershell
+.\scripts\run.ps1 --batch
 ```
 
-You can also run batch training and rebuild after every trained model with:
+Stop at anytime using `Ctrl+c`
+
+
+### 3.3) Start continuous training (batch mode) ***without*** rebuilding aggregated results (main.csv)
+
+#### Linux/macOS
 ```bash
-mlrun --batch --rebuild-main
+./scripts/run.sh --batch
 ```
 
-Changes to the code are automatically applied to the package unless they are major and change absolutely everything.
+#### Windows
+```powershell
+.\scripts\run.ps1 --batch
+```
 
-Single run training currently not working
+Stop at anytime using `Ctrl+c`
 
-Results are saved in training_manager/experiments/results
+
+### 3.4) Rebuild aggregated results (main.csv)
+
+#### Linux/macOS
+```bash
+./scripts/run.sh --rebuild-main
+```
+
+#### Windows
+```powershell
+.\scripts\run.ps1 --rebuild-main
+```
+
 
 ## Data collection
 The data are stored as the CSV files. Data include hardware used, environment specs, DRL algorithm, [hyperparameters configuration](https://unity-technologies.github.io/ml-agents/Training-Configuration-File/) together with runtime and performance outcomes. Proper documentation of parameters that we collect can be found in the repository mentioned below under the **Group 8** directory.

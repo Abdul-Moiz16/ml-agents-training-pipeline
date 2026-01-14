@@ -1,0 +1,33 @@
+# git / misc
+.git
+.github
+.yamato
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# huge / not needed for runtime image
+DevProject/
+PerformanceProject/
+Project/
+ml-agents/
+ml-agents-envs/
+ml-agents-plugin-examples/
+ml-agents-trainer-plugin/
+protobuf-definitions/
+docs/
+localized_docs/
+colab/
+unity-volume/
+training_manager/experiments/
+training_manager/scripts/
+
+# results usually should be a volume, not baked into the image
+results/
+
+# if you have lots of raw data, exclude and mount it as a volume instead
+data/
+datasets/
+outputs/
+models/
