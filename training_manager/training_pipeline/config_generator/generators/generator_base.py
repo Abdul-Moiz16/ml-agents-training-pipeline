@@ -40,14 +40,14 @@ class ConfigGeneratorBase:
     def randomize_value(self, key, values):
         # Key = buffer_size (needs to be = k x batch_size)
         if key == "buffer_size":
-            return self.batch_size * randint(800, 14000) # TODO find optimal range for the multiple
+            return self.batch_size * randint(10, 40) # TODO find optimal range for the multiple
 
         # Key has 1 value: return it
         elif len(values) == 1:
             return values[0]
 
-        # Key has list of strings: randomly pick a string
-        elif isinstance(values[0], str):
+        # Key has list of strings OR list of integers having more than 2 integers: randomly pick a string/integer
+        elif isinstance(values[0], str) or len(values) > 2:
             rand_ind = randrange(len(values))
             return values[rand_ind]
 
@@ -62,7 +62,7 @@ class ConfigGeneratorBase:
                 return uniform(values[0], values[1])
 
         else:
-            raise ValueError(f"Values for {key} must be a numeric range or a list of strings")
+            raise ValueError(f"Values for {key} must be a numeric range or a list of strings/integers")
 
 
 
