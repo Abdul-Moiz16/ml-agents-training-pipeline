@@ -24,8 +24,14 @@ def main():
         LinearRegressionModel,
     ]:
         model_instance = cls()
-        mae, r2, _ = model_instance.train_test_eval(test_size=0.2, seed=42)
-        results.append({"model": cls.__name__, "mae": round(mae, 3), "r2": round(r2, 3)})
+
+        cv = model_instance.cross_validate_model(n_splits=5)
+
+        results.append({
+            "model": cls.__name__,
+            "mae": round(cv["mean_mae"], 3),
+            "r2": round(cv["mean_r2"], 3)
+        })
 
     df = pd.DataFrame(results).sort_values("mae")
     out = Path(__file__).resolve().parent / "model_comparison_results.csv"
