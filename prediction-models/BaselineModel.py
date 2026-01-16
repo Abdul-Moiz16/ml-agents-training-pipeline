@@ -19,7 +19,6 @@ class BaseModel:
     target_col: str = "time_to_convergence"
     drop_cols: List[str] = [
         "run_id",
-        "machine_id",
         "run_log_file",
         "train_duration_s",     # leakage
         "steps_to_convergence"  # leakage
@@ -66,6 +65,27 @@ class BaseModel:
         r2 = r2_score(y_test, preds)
         
         return mae, r2, model
+
+    def cross_validate_model(self, n_splits: int = 5, seed: int = 42) -> dict:
+        """K-fold CV evaluation; returns mean MAE and mean R^2."""
+        X, y = self.load_and_encode()
+        kf = KFold(n_splits=n_splits, shuffle=True, random_state=seed)
+        maes = []
+        r2s = []
+
+        for train_idx, test_idx in kf.split(X):
+            X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
+            y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+            model = self.build_model()
+            model.fit(X_train, y_train)
+            preds = model.predict(X_test)
+            maes.append(mean_absolute_error(y_test, preds))
+            r2s.append(r2_score(y_test, preds))
+
+        return {
+            "mean_mae": sum(maes) / len(maes) if maes else float("nan"),
+            "mean_r2": sum(r2s) / len(r2s) if r2s else float("nan"),
+        }
 
     def save_encoded(self, out_path: Optional[Path] = None) -> Path:
         """Persist the encoded feature matrix + target for inspection."""
