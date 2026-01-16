@@ -27,7 +27,7 @@ def main():
     ]:
         model_instance = cls()
 
-        cv = model_instance.cross_validate_model(n_splits=5)
+        cv = model_instance.cross_validate_with_scaling(n_splits=5)
 
         results.append({
             "model": cls.__name__,

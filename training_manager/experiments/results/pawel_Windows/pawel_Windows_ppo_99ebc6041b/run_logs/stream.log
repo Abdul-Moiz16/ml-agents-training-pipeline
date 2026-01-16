@@ -1,0 +1,199 @@
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\torch_utils\torch.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\torch_utils\torch.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[INFO] Connected to Unity environment with package version 3.0.0-exp.1 and communication version 1.5.0
+[INFO] Connected new brain: 3DBall?team=0
+
+            ┐  ╖
+        ╓╖╬│╡  ││╬╖╖
+    ╓╖╬│││││┘  ╬│││││╬╖
+ ╖╬│││││╬╜        ╙╬│││││╖╖                               ╗╗╗
+ ╬╬╬╬╖││╦╖        ╖╬││╗╣╣╣╬      ╟╣╣╬    ╟╣╣╣             ╜╜╜  ╟╣╣
+ ╬╬╬╬╬╬╬╬╖│╬╖╖╓╬╪│╓╣╣╣╣╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╒╣╣╖╗╣╣╣╗   ╣╣╣ ╣╣╣╣╣╣ ╟╣╣╖   ╣╣╣
+ ╬╬╬╬┐  ╙╬╬╬╬│╓╣╣╣╝╜  ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╣╙ ╙╣╣╣  ╣╣╣ ╙╟╣╣╜╙  ╫╣╣  ╟╣╣
+ ╬╬╬╬┐     ╙╬╬╣╣      ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣     ╣╣╣┌╣╣╜
+ ╬╬╬╜       ╬╬╣╣      ╙╝╣╣╬      ╙╣╣╣╗╖╓╗╣╣╣╜ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣╦╓    ╣╣╣╣╣
+ ╙   ╓╦╖    ╬╬╣╣   ╓╗╗╖            ╙╝╣╣╣╣╝╜   ╘╝╝╜   ╝╝╝  ╝╝╝   ╙╣╣╣    ╟╣╣╣
+   ╩╬╬╬╬╬╬╦╦╬╬╣╣╗╣╣╣╣╣╣╣╝                                             ╫╣╣╣╣
+      ╙╬╬╬╬╬╬╬╣╣╣╣╣╣╝╜
+          ╙╬╬╬╣╣╣╜
+             ╙
+        
+ Version information:
+  ml-agents: 1.1.0,
+  ml-agents-envs: 1.1.0,
+  Communicator API: 1.5.0,
+  PyTorch: 2.9.1+cpu
+[INFO] Hyperparameters for behavior name 3DBall: 
+	trainer_type:	ppo
+	hyperparameters:	
+	  batch_size:	256
+	  buffer_size:	8960
+	  learning_rate:	0.00014035392489616052
+	  beta:	0.0007618888449589526
+	  epsilon:	0.16776124583911456
+	  lambd:	0.9209988687052819
+	  num_epoch:	5
+	  shared_critic:	False
+	  learning_rate_schedule:	linear
+	  beta_schedule:	linear
+	  epsilon_schedule:	linear
+	checkpoint_interval:	500000
+	network_settings:	
+	  normalize:	False
+	  hidden_units:	64
+	  num_layers:	1
+	  vis_encode_type:	simple
+	  memory:	None
+	  goal_conditioning_type:	hyper
+	  deterministic:	False
+	reward_signals:	
+	  extrinsic:	
+	    gamma:	0.9224374192465162
+	    strength:	1.0
+	    network_settings:	
+	      normalize:	False
+	      hidden_units:	128
+	      num_layers:	2
+	      vis_encode_type:	simple
+	      memory:	None
+	      goal_conditioning_type:	hyper
+	      deterministic:	False
+	init_path:	None
+	keep_checkpoints:	5
+	even_checkpoints:	False
+	max_steps:	10000000
+	time_horizon:	64
+	summary_freq:	10000
+	threaded:	False
+	self_play:	None
+	behavioral_cloning:	None
+[INFO] 3DBall. Step: 10000. Time Elapsed: 12.626 s. Mean Reward: 1.159. Std of Reward: 0.641. Training.
+[INFO] 3DBall. Step: 20000. Time Elapsed: 20.407 s. Mean Reward: 1.100. Std of Reward: 0.620. Training.
+[INFO] 3DBall. Step: 30000. Time Elapsed: 28.164 s. Mean Reward: 1.207. Std of Reward: 0.717. Training.
+[INFO] 3DBall. Step: 40000. Time Elapsed: 35.820 s. Mean Reward: 1.250. Std of Reward: 0.719. Training.
+[INFO] 3DBall. Step: 50000. Time Elapsed: 43.606 s. Mean Reward: 1.342. Std of Reward: 0.768. Training.
+[INFO] 3DBall. Step: 60000. Time Elapsed: 51.517 s. Mean Reward: 1.455. Std of Reward: 0.853. Training.
+[INFO] 3DBall. Step: 70000. Time Elapsed: 59.298 s. Mean Reward: 1.513. Std of Reward: 0.820. Training.
+[INFO] 3DBall. Step: 80000. Time Elapsed: 67.262 s. Mean Reward: 1.675. Std of Reward: 0.971. Training.
+[INFO] 3DBall. Step: 90000. Time Elapsed: 76.574 s. Mean Reward: 1.854. Std of Reward: 1.071. Training.
+[INFO] 3DBall. Step: 100000. Time Elapsed: 83.986 s. Mean Reward: 1.989. Std of Reward: 1.083. Training.
+[INFO] 3DBall. Step: 110000. Time Elapsed: 91.552 s. Mean Reward: 2.056. Std of Reward: 1.135. Training.
+[INFO] 3DBall. Step: 120000. Time Elapsed: 98.949 s. Mean Reward: 2.152. Std of Reward: 1.247. Training.
+[INFO] 3DBall. Step: 130000. Time Elapsed: 106.467 s. Mean Reward: 2.427. Std of Reward: 1.577. Training.
+[INFO] 3DBall. Step: 140000. Time Elapsed: 113.998 s. Mean Reward: 2.581. Std of Reward: 1.629. Training.
+[INFO] 3DBall. Step: 150000. Time Elapsed: 121.343 s. Mean Reward: 2.794. Std of Reward: 1.786. Training.
+[INFO] 3DBall. Step: 160000. Time Elapsed: 128.806 s. Mean Reward: 2.717. Std of Reward: 1.786. Training.
+[INFO] 3DBall. Step: 170000. Time Elapsed: 136.277 s. Mean Reward: 3.060. Std of Reward: 2.007. Training.
+[INFO] 3DBall. Step: 180000. Time Elapsed: 145.218 s. Mean Reward: 3.270. Std of Reward: 2.388. Training.
+[INFO] 3DBall. Step: 190000. Time Elapsed: 151.613 s. Mean Reward: 3.212. Std of Reward: 2.333. Training.
+[INFO] 3DBall. Step: 200000. Time Elapsed: 158.944 s. Mean Reward: 4.141. Std of Reward: 3.260. Training.
+[INFO] 3DBall. Step: 210000. Time Elapsed: 166.315 s. Mean Reward: 3.938. Std of Reward: 2.861. Training.
+[INFO] 3DBall. Step: 220000. Time Elapsed: 174.008 s. Mean Reward: 4.179. Std of Reward: 3.072. Training.
+[INFO] 3DBall. Step: 230000. Time Elapsed: 181.302 s. Mean Reward: 4.385. Std of Reward: 3.852. Training.
+[INFO] 3DBall. Step: 240000. Time Elapsed: 188.533 s. Mean Reward: 5.259. Std of Reward: 4.897. Training.
+[INFO] 3DBall. Step: 250000. Time Elapsed: 195.886 s. Mean Reward: 5.789. Std of Reward: 5.364. Training.
+[INFO] 3DBall. Step: 260000. Time Elapsed: 201.439 s. Mean Reward: 5.283. Std of Reward: 5.076. Training.
+[INFO] 3DBall. Step: 270000. Time Elapsed: 210.026 s. Mean Reward: 6.264. Std of Reward: 6.027. Training.
+[INFO] 3DBall. Step: 280000. Time Elapsed: 217.282 s. Mean Reward: 7.625. Std of Reward: 8.267. Training.
+[INFO] 3DBall. Step: 290000. Time Elapsed: 224.416 s. Mean Reward: 7.860. Std of Reward: 8.593. Training.
+[INFO] 3DBall. Step: 300000. Time Elapsed: 231.389 s. Mean Reward: 8.095. Std of Reward: 9.008. Training.
+[INFO] 3DBall. Step: 310000. Time Elapsed: 238.493 s. Mean Reward: 12.070. Std of Reward: 12.589. Training.
+[INFO] 3DBall. Step: 320000. Time Elapsed: 245.758 s. Mean Reward: 12.881. Std of Reward: 15.595. Training.
+[INFO] 3DBall. Step: 330000. Time Elapsed: 252.788 s. Mean Reward: 13.160. Std of Reward: 13.936. Training.
+[INFO] 3DBall. Step: 340000. Time Elapsed: 259.880 s. Mean Reward: 18.168. Std of Reward: 23.361. Training.
+[INFO] 3DBall. Step: 350000. Time Elapsed: 265.953 s. Mean Reward: 18.724. Std of Reward: 20.219. Training.
+[INFO] 3DBall. Step: 360000. Time Elapsed: 274.506 s. Mean Reward: 30.900. Std of Reward: 33.706. Training.
+[INFO] 3DBall. Step: 370000. Time Elapsed: 281.358 s. Mean Reward: 34.987. Std of Reward: 35.305. Training.
+[INFO] 3DBall. Step: 380000. Time Elapsed: 287.743 s. Mean Reward: 28.652. Std of Reward: 32.589. Training.
+[INFO] 3DBall. Step: 390000. Time Elapsed: 294.510 s. Mean Reward: 75.550. Std of Reward: 33.093. Training.
+[INFO] 3DBall. Step: 400000. Time Elapsed: 300.259 s. Mean Reward: 75.575. Std of Reward: 33.123. Training.
+[INFO] 3DBall. Step: 410000. Time Elapsed: 307.188 s. Mean Reward: 82.464. Std of Reward: 34.058. Training.
+[INFO] 3DBall. Step: 420000. Time Elapsed: 314.183 s. Mean Reward: 90.385. Std of Reward: 17.846. Training.
+[INFO] 3DBall. Step: 430000. Time Elapsed: 321.069 s. Mean Reward: 58.475. Std of Reward: 43.765. Training.
+[INFO] 3DBall. Step: 440000. Time Elapsed: 328.133 s. Mean Reward: 76.992. Std of Reward: 38.459. Training.
+[INFO] 3DBall. Step: 450000. Time Elapsed: 336.463 s. Mean Reward: 97.170. Std of Reward: 8.490. Training.
+[INFO] 3DBall. Step: 460000. Time Elapsed: 343.521 s. Mean Reward: 94.864. Std of Reward: 16.243. Training.
+[INFO] 3DBall. Step: 470000. Time Elapsed: 350.200 s. Mean Reward: 92.508. Std of Reward: 24.847. Training.
+[INFO] 3DBall. Step: 480000. Time Elapsed: 357.201 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 490000. Time Elapsed: 363.293 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 500000. Time Elapsed: 369.318 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\torch_entities\model_serialization.py:164: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W0114 18:44:15.712000 10916 site-packages\torch\onnx\_internal\exporter\_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 9 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+W0114 18:44:16.170000 10916 site-packages\torch\onnx\_internal\exporter\_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 9).
+Failed to convert the model to the target version 9 using the ONNX C API. The model was not modified
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 127, in call
+    converted_proto = _c_api_utils.call_onnx_api(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\_c_api_utils.py", line 65, in call_onnx_api
+    result = func(proto)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnxscript\version_converter\__init__.py", line 122, in _partial_convert_version
+    return onnx.version_converter.convert_version(
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\onnx\version_converter.py", line 39, in convert_version
+    converted_model_str = C.convert_version(model_str, target_version)
+RuntimeError: D:\a\onnx\onnx\onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
+Skipped deduplication of initializer 'version_number' as it is a graph input or output
+Skipped deduplication of initializer 'memory_size' as it is a graph input or output
+Skipped deduplication of initializer 'continuous_action_output_shape' as it is a graph input or output
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `SimpleActor([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+Applied 2 of general pattern rewrite rules.
+[INFO] Exported C:\Users\pawel\Desktop\Project_2-1_code\training_manager\experiments\results\pawel_Windows\pawel_Windows_ppo_99ebc6041b\3DBall\3DBall-499965.onnx
+[INFO] 3DBall. Step: 510000. Time Elapsed: 377.367 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 520000. Time Elapsed: 384.153 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[ERROR] UnityEnvironment worker 0: environment raised an unexpected exception.
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 312, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+BrokenPipeError: [WinError 109] The pipe has been ended
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 175, in worker
+    req: EnvironmentRequest = parent_conn.recv()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 321, in _recv_bytes
+    raise EOFError
+EOFError
+Process Process-1:
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 312, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+BrokenPipeError: [WinError 109] The pipe has been ended
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 175, in worker
+    req: EnvironmentRequest = parent_conn.recv()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 321, in _recv_bytes
+    raise EOFError
+EOFError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 235, in worker
+    _send_response(EnvironmentCommand.ENV_EXITED, ex)
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 150, in _send_response
+    parent_conn.send(EnvironmentResponse(cmd_name, worker_id, payload))
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 206, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+  File "C:\Users\pawel\.conda\envs\mlagents2\lib\multiprocessing\connection.py", line 280, in _send_bytes
+    ov, err = _winapi.WriteFile(self._handle, buf, overlapped=True)
+BrokenPipeError: [WinError 232] The pipe is being closed
