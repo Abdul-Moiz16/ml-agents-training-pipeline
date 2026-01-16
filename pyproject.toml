@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "training-manager"
+version = "0.1.0"
+description = "MLAgents training with monitoring and result tracking"
+authors = [{ name = "Group 8" }]
+
+dependencies = ["mlagents", "psutil","onnx"]
+
+[project.scripts]
+mlrun = "training_pipeline.cli.run_experiment:main"
+
+[tool.setuptools.packages.find]
+where = ["training_manager"]
