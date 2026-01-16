@@ -6,7 +6,7 @@ from sklearn.metrics import mean_absolute_error, r2_score
 
 # Load data from a CSV file
 def load_data(data : str):
-    
+
     df = pd.read_csv(data)
 
     print("Shape: ", df.shape)
@@ -14,7 +14,7 @@ def load_data(data : str):
 
 # Drop unnecessary columns and prepare features X and target y for prediction
 def select_columns(df: pd.DataFrame, target_col: str = "time_to_convergence"):
-    
+
     # When drop 3 colums:
     # MAE = 4660
     # R^2 = 0.495
@@ -28,7 +28,14 @@ def select_columns(df: pd.DataFrame, target_col: str = "time_to_convergence"):
         "machine_id",
         "run_log_file",
         "train_duration_s",
-        "steps_to_convergence"
+        "steps_to_convergence",
+        # Following features added by Pawel since unavailable pre-run
+        "avg_cpu_usage",
+        "avg_ram_usage",
+        "peak_ram_usage",
+        "peak_cpu_usage",
+        "final_std_reward",
+        "final_mean_reward"
     ]
 
     df_clean = df.drop(columns=drop_columns, errors="ignore")
@@ -54,7 +61,7 @@ def select_columns(df: pd.DataFrame, target_col: str = "time_to_convergence"):
 def split_data(X, y, test_size: float = 0.2, seed: int = 42):
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=seed)
-    
+
     print("X_train shape: ", X_train.shape, "| y_train shape: ", y_train.shape)
     print("X_test shape: ", X_test.shape, "| y_test shape: ", y_test.shape)
 
