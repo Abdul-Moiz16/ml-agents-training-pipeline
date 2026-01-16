@@ -11,7 +11,7 @@ from typing import List, Optional, Tuple
 
 import pandas as pd
 from sklearn.metrics import mean_absolute_error, r2_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import KFold, train_test_split
 
 
 class BaseModel:
