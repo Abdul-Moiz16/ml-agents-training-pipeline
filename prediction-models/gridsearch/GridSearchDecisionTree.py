@@ -1,10 +1,12 @@
-import os
 import sys
+from pathlib import Path
 
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 from BaselineModel import BaseModel
 
@@ -24,9 +26,9 @@ class GridSearchDecisionTree(BaseModel):
         # 2. Define the Parameter Grid
         # NOTE: Use 'tree__' prefix to match the pipeline step name
         param_grid = {
-            'tree__max_depth': [None, 5, 10, 20],
-            'tree__min_samples_split': [2, 5, 10],
-            'tree__min_samples_leaf': [1, 2, 4]
+            'tree__max_depth': [None, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20],
+            'tree__min_samples_split': [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20],
+            'tree__min_samples_leaf': [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20]
         }
 
         # 3. Setup GridSearchCV
