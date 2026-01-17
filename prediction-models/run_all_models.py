@@ -31,11 +31,12 @@ def main():
 
         results.append({
             "model": cls.__name__,
-            "mae": round(cv["mean_mae"], 3),
-            "r2": round(cv["mean_r2"], 3)
+            "mean_ae": round(cv["mean_ae"], 3),
+            "r2": round(cv["mean_r2"], 3),
+            "median_ae": round(cv["median_ae"], 3),
         })
 
-    df = pd.DataFrame(results).sort_values("mae")
+    df = pd.DataFrame(results).sort_values("mean_ae")
     out = Path(__file__).resolve().parent / "model_comparison_results.csv"
     df.to_csv(out, index=False)
     out = BaseModel().save_encoded()

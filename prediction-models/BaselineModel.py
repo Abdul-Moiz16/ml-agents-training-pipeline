@@ -9,8 +9,9 @@ Base preprocessing and evaluation utilities for regression models on main.csv.
 from pathlib import Path
 from typing import List, Optional, Tuple
 
+import numpy as np
 import pandas as pd
-from sklearn.metrics import mean_absolute_error, r2_score
+from sklearn.metrics import mean_absolute_error, r2_score, median_absolute_error, make_scorer
 from sklearn.model_selection import train_test_split, KFold, cross_validate
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
@@ -22,8 +23,9 @@ class BaseModel:
     drop_cols: List[str] = [
         "run_id",
         "run_log_file",
-        "train_duration_s",
-        "steps_to_convergence",
+        "train_duration_s",     # leakage
+        "steps_to_convergence", # leakage
+
         # Following features added by Pawel since unavailable pre-run
         "avg_cpu_usage",
         "avg_ram_usage",
@@ -46,8 +48,12 @@ class BaseModel:
         df[self.target_col] = pd.to_numeric(df[self.target_col], errors="coerce")
         df = df.dropna()
 
+        # Log transform the target since skewed
+        df["time_to_convergence"] = np.log1p(df["time_to_convergence"])
+
         # One-hot encode remaining categorical/string columns so the regressor can consume them.
         X = df.drop(columns=[self.target_col], errors="ignore")
+
         y = df[self.target_col]
 
         X = pd.get_dummies(X, drop_first=True)
@@ -69,9 +75,13 @@ class BaseModel:
         model = self.build_model()
         model.fit(X_train, y_train)
 
+        y_test_secs = np.expm1(y_test)
+
         preds = model.predict(X_test)
-        mae = mean_absolute_error(y_test, preds)
-        r2 = r2_score(y_test, preds)
+        preds_secs = np.expm1(preds)
+
+        mae = median_absolute_error(y_test_secs, preds_secs)
+        r2 = r2_score(y_test_secs, preds_secs)
 
         return mae, r2, model
 
@@ -87,8 +97,22 @@ class BaseModel:
 
         cv_strategy = KFold(n_splits=n_splits, shuffle=True, random_state=seed)
 
+        def exp_mean_absolute_error(y_true_log, y_pred_log):
+            y_true = np.expm1(y_true_log)
+            y_pred = np.expm1(y_pred_log)
+            return mean_absolute_error(y_true, y_pred)
+
+        def exp_median_absolute_error(y_true_log, y_pred_log):
+            y_true = np.expm1(y_true_log)
+            y_pred = np.expm1(y_pred_log)
+            return median_absolute_error(y_true, y_pred)
+
+        mean_ae_scorer = make_scorer(exp_mean_absolute_error, greater_is_better=False)
+        median_ae_scorer = make_scorer(exp_median_absolute_error, greater_is_better=False)
+
         scoring = {
-            'mae': 'neg_mean_absolute_error',
+            'mean_ae': mean_ae_scorer,
+            'median_ae': median_ae_scorer,
             'r2': 'r2'
         }
 
@@ -101,10 +125,12 @@ class BaseModel:
         )
 
         return {
-            "mean_mae": -cv_results['test_mae'].mean(),
-            "std_mae": cv_results['test_mae'].std(),
+            "mean_ae": -cv_results['test_mean_ae'].mean(),
+            "std_mean_ae": cv_results['test_mean_ae'].std(),
             "mean_r2": cv_results['test_r2'].mean(),
-            "std_r2": cv_results['test_r2'].std()
+            "std_r2": cv_results['test_r2'].std(),
+            "median_ae": -cv_results['test_median_ae'].mean(),
+            "std_median_ae": cv_results['test_median_ae'].std(),
         }
 
     def save_encoded(self, out_path: Optional[Path] = None) -> Path:
@@ -115,12 +141,7 @@ class BaseModel:
         encoded = X.copy()
         encoded[self.target_col] = y
 
-        base_dir = Path(__file__).resolve().parent
-        out = out_path or (base_dir / "encoded_dataset.csv")
+        out = out_path or (Path(__file__).resolve().parent / "encoded_dataset.csv")
         encoded.to_csv(out, index=False)
 
-        feature_sel_dir = base_dir / "feature-selection"
-        feature_sel_dir.mkdir(parents=True, exist_ok=True)
-        encoded.to_csv(feature_sel_dir / "encoded_dataset.csv", index=False)
-        
         return out
