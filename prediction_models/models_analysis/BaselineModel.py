@@ -38,21 +38,24 @@ class BaseModel:
         cv_strategy = KFold(n_splits=n_splits, shuffle=True, random_state=seed)
 
         if transform_log:
-            y_true = np.expm1(y_true_log)
-            y_pred = np.expm1(y_pred_log)
-
-            def exp_mean_absolute_error(y_true, y_pred_):
+            def exp_mean_absolute_error(y_true_log, y_pred_log):
+                y_true = np.expm1(y_true_log)
+                y_pred = np.expm1(y_pred_log)
                 return mean_absolute_error(y_true, y_pred)
 
-            def exp_median_absolute_error(y_true, y_pred):
+            def exp_median_absolute_error(y_true_log, y_pred_log):
+                y_true = np.expm1(y_true_log)
+                y_pred = np.expm1(y_pred_log)
                 return median_absolute_error(y_true, y_pred)
 
-            def exp_r2_score(y_true, y_pred):
+            def exp_r2_score(y_true_log, y_pred_log):
+                y_true = np.expm1(y_true_log)
+                y_pred = np.expm1(y_pred_log)
                 return r2_score(y_true, y_pred)
 
             mean_ae_scorer = make_scorer(exp_mean_absolute_error, greater_is_better=False)
             median_ae_scorer = make_scorer(exp_median_absolute_error, greater_is_better=False)
-            r2_scorer = make_scorer(exp_r2_score, greater_is_better=False)
+            r2_scorer = make_scorer(exp_r2_score, greater_is_better=True)
 
             scoring = {
                 'mean_ae': mean_ae_scorer,

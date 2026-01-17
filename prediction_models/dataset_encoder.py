@@ -24,7 +24,6 @@ class DatasetEncoder:
 
             # Following features highly influential for predictors (sort of cheating since if ran on another computer then predictor will be off)
             "machine_id",
-            "os_name"
         ]
 
         if target == "time_to_convergence":

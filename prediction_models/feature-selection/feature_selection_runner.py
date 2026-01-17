@@ -7,6 +7,8 @@ Methods included:
 - Permutation importance with a tree ensemble (more reliable than impurity-based RF importances)
 
 Examples:
+    python feature_selection_runner.py --target time_to_convergence --k 15
+    python feature_selection_runner.py --target avg_ram_usage --k 15
     python feature_selection_runner.py --encoded encoded_dataset.csv --target time_to_convergence --k 15
     python feature_selection_runner.py --encoded encoded_dataset.csv --target avg_ram_usage --k 15
 """
@@ -149,7 +151,7 @@ def run_feature_selection(encoded_path: Path, target: str, k: int, perm_model: s
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Feature selection on encoded ML-Agents dataset.")
-    p.add_argument("--encoded", type=str, required=True, help="Path to encoded_dataset.csv")
+    p.add_argument("--encoded", type=str, default=None, help="Path to encoded_dataset.csv")
     p.add_argument("--target", type=str, required=True, help="Target column name")
     p.add_argument("--k", type=int, default=15, help="Number of selected features (default 15)")
     p.add_argument(
@@ -165,13 +167,16 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    encoded_path = Path(args.encoded)
+    if args.encoded:
+        encoded_path = Path(args.encoded)
+    else:
+        encoded_path = Path(__file__).resolve().parents[1] / "encoded_datasets" / f"encoded_{args.target}.csv"
     if not encoded_path.exists():
         raise FileNotFoundError(f"Encoded dataset not found: {encoded_path}")
 
     res = run_feature_selection(encoded_path, target=args.target, k=args.k, perm_model=args.perm_model)
 
-    out_dir = encoded_path.parent
+    out_dir = Path(__file__).resolve().parent
     out_kbest = out_dir / f"feature_selection_kbest_{args.target}.csv"
     out_perm = out_dir / f"feature_selection_perm_{args.target}.csv"
     out_rfe = out_dir / f"feature_selection_rfe_{args.target}.txt"
