@@ -15,12 +15,16 @@ class DatasetEncoder:
             "train_duration_s",  # leakage
             "steps_to_convergence",  # leakage
 
-            # Following features added by Pawel since unavailable pre-run
+            # Following features unavailable pre-run
             "avg_cpu_usage",
             "peak_ram_usage",
             "peak_cpu_usage",
             "final_std_reward",
-            "final_mean_reward"
+            "final_mean_reward",
+
+            # Following features highly influential for predictors (sort of cheating since if ran on another computer then predictor will be off)
+            "machine_id",
+            "os_name"
         ]
 
         if target == "time_to_convergence":
@@ -33,7 +37,7 @@ class DatasetEncoder:
     def load_and_encode(self, target) -> Tuple[pd.DataFrame, pd.Series]:
         df = pd.read_csv(self.data_path)
 
-        df = df.drop(columns=self.drop_cols, errors="ignore")
+        df = df.drop(columns=self.drop_cols, errors="raise")
 
         df = df.replace("NA", pd.NA)
         df[target] = pd.to_numeric(df[target], errors="coerce")
@@ -63,6 +67,7 @@ class DatasetEncoder:
 
         encoded.to_csv(out_path, index=False)
         print(f"Dataset saved to {out_path}")
+
 
 def main():
     import sys
