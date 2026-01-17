@@ -30,7 +30,7 @@ from sklearn.ensemble import RandomForestRegressor, ExtraTreesRegressor, Gradien
 
 def load_encoded_dataset(encoded_path: Path, target: str) -> Tuple[pd.DataFrame, pd.Series]:
     """Load encoded_dataset.csv and return numeric X, y."""
-    
+
     df = pd.read_csv(encoded_path)
 
     if target not in df.columns:
@@ -48,49 +48,49 @@ def load_encoded_dataset(encoded_path: Path, target: str) -> Tuple[pd.DataFrame,
 
     # Ensure numeric
     X = X.apply(pd.to_numeric, errors="coerce").fillna(0)
-    
+
     return X, y
 
 
 def select_kbest_fregression(X: pd.DataFrame, y: pd.Series, k: int) -> pd.DataFrame:
     """Filter method: univariate linear relationship with y."""
-    
+
     k = min(k, X.shape[1])
-    
+
     selector = SelectKBest(score_func=f_regression, k=k)
     selector.fit(X, y)
-    
+
     mask = selector.get_support()
 
     scores = pd.DataFrame({"feature": X.columns, "score": selector.scores_})
     selected = scores[mask].sort_values("score", ascending=False)
-    
+
     return selected
 
 
 def rfe_with_ridge(X: pd.DataFrame, y: pd.Series, k: int, alpha: float = 1.0) -> List[str]:
     """Wrapper method: RFE using Ridge for stability with correlated features."""
-    
+
     k = min(k, X.shape[1])
     model = Ridge(alpha=alpha, random_state=42)
-    
+
     selector = RFE(model, n_features_to_select=k, step=0.1)
     selector.fit(X, y)
-    
+
     return list(X.columns[selector.get_support()])
 
 
 def permutation_importance_ranking(
     X: pd.DataFrame,
     y: pd.Series,
-    
+
     model_name: str = "extratrees",
     test_size: float = 0.2,
     seed: int = 42,
     n_repeats: int = 10,
 ) -> pd.DataFrame:
     """Permutation importance on a held-out split; scored by negative MAE."""
-    
+
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=seed)
 
     if model_name == "rf":
@@ -161,7 +161,7 @@ def parse_args() -> argparse.Namespace:
         choices=["rf", "extratrees", "gbr"],
         help="Model used for permutation importance (default extratrees)",
     )
-    
+
     return p.parse_args()
 
 
@@ -176,7 +176,7 @@ def main() -> None:
 
     res = run_feature_selection(encoded_path, target=args.target, k=args.k, perm_model=args.perm_model)
 
-    out_dir = Path(__file__).resolve().parent
+    out_dir = Path(__file__).resolve().parent / "results"
     out_kbest = out_dir / f"feature_selection_kbest_{args.target}.csv"
     out_perm = out_dir / f"feature_selection_perm_{args.target}.csv"
     out_rfe = out_dir / f"feature_selection_rfe_{args.target}.txt"
