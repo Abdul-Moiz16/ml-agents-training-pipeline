@@ -39,19 +39,13 @@ class BaseModel:
 
         if transform_log:
             def exp_mean_absolute_error(y_true_log, y_pred_log):
-                y_true = np.expm1(y_true_log)
-                y_pred = np.expm1(y_pred_log)
-                return mean_absolute_error(y_true, y_pred)
+                return mean_absolute_error(np.expm1(y_true_log), np.expm1(y_pred_log))
 
             def exp_median_absolute_error(y_true_log, y_pred_log):
-                y_true = np.expm1(y_true_log)
-                y_pred = np.expm1(y_pred_log)
-                return median_absolute_error(y_true, y_pred)
+                return median_absolute_error(np.expm1(y_true_log), np.expm1(y_pred_log))
 
             def exp_r2_score(y_true_log, y_pred_log):
-                y_true = np.expm1(y_true_log)
-                y_pred = np.expm1(y_pred_log)
-                return r2_score(y_true, y_pred)
+                return r2_score(np.expm1(y_true_log), np.expm1(y_pred_log))
 
             mean_ae_scorer = make_scorer(exp_mean_absolute_error, greater_is_better=False)
             median_ae_scorer = make_scorer(exp_median_absolute_error, greater_is_better=False)
