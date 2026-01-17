@@ -17,13 +17,15 @@ def main():
     results = []
     for k in k_values:
         model = KNNModel(n_neighbors=k)
-        mae, r2, _ = model.train_test_eval(test_size=0.2, seed=42)
+        cv = model.cross_validate_with_scaling(n_splits=5, seed=42)
+        mae = cv["mean_mae"]
+        r2 = cv["mean_r2"]
         results.append({
             "k": k,
             "mae": round(mae, 3),
             "r2": round(r2, 3)
         })
-        print(f"k={k:2d}  |  MAE={mae:8.3f}  |  R²={r2:.3f}")
+        print(f"k={k:2d}  |  MAE={mae:8.3f}  |  R^2={r2:.3f}")
 
     df = pd.DataFrame(results)
     

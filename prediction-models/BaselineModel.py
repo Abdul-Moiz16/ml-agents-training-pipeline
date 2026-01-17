@@ -21,10 +21,16 @@ class BaseModel:
     target_col: str = "time_to_convergence"
     drop_cols: List[str] = [
         "run_id",
-        "machine_id",
         "run_log_file",
-        "train_duration_s",     # leakage
-        "steps_to_convergence"  # leakage
+        "train_duration_s",
+        "steps_to_convergence",
+        # Following features added by Pawel since unavailable pre-run
+        "avg_cpu_usage",
+        "avg_ram_usage",
+        "peak_ram_usage",
+        "peak_cpu_usage",
+        "final_std_reward",
+        "final_mean_reward"
     ]
 
     def __init__(self, data_path: Optional[Path] = None):
@@ -109,7 +115,12 @@ class BaseModel:
         encoded = X.copy()
         encoded[self.target_col] = y
 
-        out = out_path or (Path(__file__).resolve().parent / "encoded_dataset.csv")
+        base_dir = Path(__file__).resolve().parent
+        out = out_path or (base_dir / "encoded_dataset.csv")
         encoded.to_csv(out, index=False)
 
+        feature_sel_dir = base_dir / "feature-selection"
+        feature_sel_dir.mkdir(parents=True, exist_ok=True)
+        encoded.to_csv(feature_sel_dir / "encoded_dataset.csv", index=False)
+        
         return out

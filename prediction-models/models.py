@@ -13,22 +13,22 @@ from BaselineModel import BaseModel
 
 class DecisionTreeModel(BaseModel):
     def build_model(self):
-        return DecisionTreeRegressor(random_state=42)
+        return DecisionTreeRegressor(max_depth=2, min_samples_leaf=4, min_samples_split=2, random_state=42)
 
 
 class RandomForestModel(BaseModel):
     def build_model(self):
-        return RandomForestRegressor(n_estimators=200, random_state=42, n_jobs=-1)
+        return RandomForestRegressor(max_depth=8, min_samples_leaf=15, n_estimators=600, random_state=42, n_jobs=-1)
 
 
 class ExtraTreesModel(BaseModel):
     def build_model(self):
-        return ExtraTreesRegressor ( n_estimators=600, min_samples_leaf=2, max_features=0.8, random_state=42, n_jobs=-1)
+        return ExtraTreesRegressor ( n_estimators=300, min_samples_leaf=15, max_features=1.0, random_state=42, n_jobs=-1)
 
 
 class GradientBoostingModel(BaseModel):
     def build_model(self):
-        return GradientBoostingRegressor(random_state=42)
+        return GradientBoostingRegressor(learning_rate=0.1, max_depth=2, n_estimators=200, random_state=42)
 
 
 class LinearRegressionModel(BaseModel):
@@ -37,7 +37,7 @@ class LinearRegressionModel(BaseModel):
 
 
 class KNNModel(BaseModel):
-    def __init__(self, n_neighbors: int = 3, data_path=None):
+    def __init__(self, n_neighbors: int = 9, data_path=None):
         super().__init__(data_path)
         self.n_neighbors = n_neighbors
 
