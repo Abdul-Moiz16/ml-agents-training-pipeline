@@ -10,7 +10,7 @@ def main():
         model = joblib.load(Path(__file__).resolve().parents[1] / f"predictors/builds/{target}_predictor.pkl")
         test_data = pd.read_csv(sys.argv[2])
 
-        preds = model.predict(dataset_to_predict_path)
+        preds = model.predict(test_data)
 
         results = X_test.copy()
         results[f"Predicted_{target}"] = preds
