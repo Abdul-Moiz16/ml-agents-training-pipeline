@@ -4,9 +4,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import RandomizedSearchCV
-from sklearn.metrics import mean_absolute_error, make_scorer
-
 
 from BaselineModel import BaseModel
 
