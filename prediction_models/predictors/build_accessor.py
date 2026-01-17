@@ -11,6 +11,12 @@ def main():
         test_data = pd.read_csv(sys.argv[2])
 
         preds = model.predict(dataset_to_predict_path)
+
+        results = X_test.copy()
+        results[f"Predicted_{target}"] = preds
+        # TODO check if works correctly since untested (save to predicted_runs folder)
+        results.to_csv(Path(__file__).resolve().parents[1] / f"predicted_runs/predicted_{dataset_to_predict_path}", index=False)
+
         print(preds)
 
     else:
