@@ -24,8 +24,8 @@ def main():
 
     else:
         print("Provide target")
-        print("Usage example: python predictor_generator.py avg_ram_usage")
-        print("Usage example: python predictor_generator.py time_to_convergence")
+        print("Usage example: python build_generator.py avg_ram_usage")
+        print("Usage example: python build_generator.py time_to_convergence")
 
 if __name__ == "__main__":
     main()
