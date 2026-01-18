@@ -13,7 +13,16 @@ from build_accessor import get_hardware_specs, get_yaml_params
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Backtest predictions on holdout runs.")
+    p = argparse.ArgumentParser(
+        description="Backtest predictions on holdout runs.",
+        formatter_class=argparse.RawTextHelpFormatter,
+        epilog=(
+            "Examples:\n"
+            "  python run_holdout_backtest.py time_to_convergence\n"
+            "  python run_holdout_backtest.py avg_ram_usage --save-individual\n"
+            "  python run_holdout_backtest.py time_to_convergence --reuse-predictions\n"
+        ),
+    )
     p.add_argument("target", type=str, help="Target column name")
     p.add_argument(
         "--holdout-csv",

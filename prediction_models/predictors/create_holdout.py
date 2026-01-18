@@ -67,19 +67,17 @@ def select_holdout(
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Create holdout runs for backtesting.")
+    p = argparse.ArgumentParser(
+        description="Create holdout runs for backtesting.",
+        formatter_class=argparse.RawTextHelpFormatter,
+        epilog=(
+            "Examples:\n"
+            "  python create_holdout.py\n"
+            "  python create_holdout.py --per-machine 2 --seed 123\n"
+        ),
+    )
     p.add_argument("--per-machine", type=int, default=1, help="Holdout runs per machine_id")
     p.add_argument("--seed", type=int, default=42, help="Random seed")
-    p.add_argument(
-        "--allow-incomplete",
-        action="store_true",
-        help="Include runs without complete.flag",
-    )
-    p.add_argument(
-        "--allow-nonconverged",
-        action="store_true",
-        help="Include runs without time_to_convergence",
-    )
     return p.parse_args()
 
 
@@ -101,8 +99,8 @@ def main() -> None:
         results_root=results_root,
         per_machine=args.per_machine,
         seed=args.seed,
-        require_complete=not args.allow_incomplete,
-        require_converged=not args.allow_nonconverged,
+        require_complete=True,
+        require_converged=True,
     )
 
     if not holdout_rows:
