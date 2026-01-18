@@ -106,6 +106,40 @@ Stop at anytime using `Ctrl+c`
 .\scripts\run.ps1 --rebuild-main
 ```
 
+### 3.5) Dataset encoding
+```bash
+python prediction_models/dataset_encoder.py time_to_convergence
+python prediction_models/dataset_encoder.py avg_ram_usage
+```
+
+### 3.6) Feature selection
+TODO simpify so no encoded_dataset path needed --> deduce from target
+```bash
+python prediction_models/feature-selection/feature_selection_runner.py --encoded prediction_models/encoded_datasets/encoded_time_to_convergence.csv --target time_to_convergence
+python prediction_models/feature-selection/feature_selection_runner.py --encoded prediction_models/encoded_datasets/encoded_avg_ram_usage.csv --target avg_ram_usage 
+```
+### 3.7) Model analysis
+```bash
+python prediction_models/models_analysis/run_all_models.py time_to_convergence
+python prediction_models/models_analysis/run_all_models.py avg_ram_usage
+```
+
+### 3.8) Build generator
+Creates the prediction model and saves it as pkl
+```bash
+python prediction_models/predictors/build_generator.py time_to_convergence
+python prediction_models/predictors/build_generator.py avg_ram_usage
+```
+
+### 3.9) Build accessor
+Allows access to saved prediction model. Predicts target value based on inputted yaml file which is to be saved in:
+```bash
+prediction_models/runs_to_predict
+```
+```bash
+python prediction_models/predictors/build_accessor.py time_to_convergence <yaml_file>
+python prediction_models/predictors/build_accessor.py avg_ram_usage <yaml_file>
+```
 
 ## Data collection
 The data are stored as the CSV files. Data include hardware used, environment specs, DRL algorithm, [hyperparameters configuration](https://unity-technologies.github.io/ml-agents/Training-Configuration-File/) together with runtime and performance outcomes. Proper documentation of parameters that we collect can be found in the repository mentioned below under the **Group 8** directory.

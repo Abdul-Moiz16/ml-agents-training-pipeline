@@ -1,0 +1,80 @@
+default_settings: null
+behaviors:
+  3DBall:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 64
+      buffer_size: 2368
+      learning_rate: 0.000742377350978223
+      beta: 0.00870111727446844
+      epsilon: 0.11056893472622782
+      lambd: 0.9198280825572541
+      num_epoch: 3
+      shared_critic: false
+      learning_rate_schedule: linear
+      beta_schedule: linear
+      epsilon_schedule: linear
+    checkpoint_interval: 500000
+    network_settings:
+      normalize: false
+      hidden_units: 128
+      num_layers: 3
+      vis_encode_type: simple
+      memory: null
+      goal_conditioning_type: hyper
+      deterministic: false
+    reward_signals:
+      extrinsic:
+        gamma: 0.9363163260111257
+        strength: 1.0
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+          deterministic: false
+    init_path: null
+    keep_checkpoints: 5
+    even_checkpoints: false
+    max_steps: 10000000
+    time_horizon: 128
+    summary_freq: 10000
+    threaded: false
+    self_play: null
+    behavioral_cloning: null
+env_settings:
+  env_path: "/Users/filippomorini/Documents/Documents - Filippo\u2019s MacBook Air/Development/Group8-AI-ML/training_manager/builds/3DBall_MacOS/3DBall.app"
+  env_args: null
+  base_port: 5005
+  num_envs: 1
+  num_areas: 1
+  timeout_wait: 60
+  seed: -1
+  max_lifetime_restarts: 10
+  restarts_rate_limit_n: 1
+  restarts_rate_limit_period_s: 60
+engine_settings:
+  width: 84
+  height: 84
+  quality_level: 5
+  time_scale: 20
+  target_frame_rate: -1
+  capture_frame_rate: 60
+  no_graphics: true
+  no_graphics_monitor: false
+environment_parameters: null
+checkpoint_settings:
+  run_id: filippomorini_macOS_ppo_45940dfa50
+  initialize_from: null
+  load_model: false
+  resume: false
+  force: true
+  train_model: false
+  inference: false
+  results_dir: "/Users/filippomorini/Documents/Documents - Filippo\u2019s MacBook\
+    \ Air/Development/Group8-AI-ML/training_manager/experiments/results/filippomorini_macOS"
+torch_settings:
+  device: null
+debug: false
