@@ -84,7 +84,7 @@ def main():
         results[f"Predicted_{target}"] = pred
         # TODO check if works correctly since untested (save to predicted_runs folder)
         yaml_name = Path(yaml_path).stem
-        pred_path = Path(__file__).resolve().parents[1] / f"predicted_runs/predicted_{yaml_name}.csv"
+        pred_path = Path(__file__).resolve().parents[1] / f"predicted_runs/predicted_{target}_{yaml_name}.csv"
         results.to_csv(pred_path, index=False)
 
         print(f"Predicted: {pred}")
@@ -93,7 +93,7 @@ def main():
     else:
         print("Usage example: python build_accessor.py avg_ram_usage as argv[1]")
         print("Usage example: python build_accessor.py time_to_convergence as argv[1]\n")
-        print("Input path to dataset for prediction as an argv[2]")
+        print("Input path to yaml config for prediction as an argv[2]")
 
 
 if __name__ == "__main__":
