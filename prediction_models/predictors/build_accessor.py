@@ -64,7 +64,7 @@ def main():
         model = joblib.load(model_path)
         print(f"Loaded model from {model_path}")
 
-        yaml_params = get_yaml_params(yaml_path)
+        yaml_params = get_yaml_params(f"prediction_models/runs_to_predict/{yaml_path}")
         hardware_specs = get_hardware_specs()
 
         input_data_dict = {**yaml_params, **hardware_specs}
