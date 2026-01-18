@@ -5,7 +5,10 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 
-from BaselineModel import BaseModel
+try:
+    from .BaselineModel import BaseModel
+except ImportError:
+    from BaselineModel import BaseModel
 
 
 class DecisionTreeModel(BaseModel):
