@@ -1,77 +1,110 @@
 # Project 2.1 - AI and Machine Learning
 Semester project for Computer Science programme, AI and Machine Learning
 module at Maastricht University.
-Based on [The Unity Machine Learning Agents Toolkit](https://github.com/Unity-Technologies/ml-agents) (ML-Agents). The central topic is collection of data from real- time 3D video game enviroments with AI-controlled agents and applying Machine Learning techniques to that data.
+Based on [The Unity Machine Learning Agents Toolkit](https://github.com/Unity-Technologies/ml-agents) (ML-Agents). The central topic is collection of data from real-time 3D video game enviroments with AI-controlled agents and predicting certain features of the training runs by using Machine Learning techniques with the collected data.
+
+<!---
+maybe add research question here
+-->
 
 ## Requirements
+
+- **Python 3.10.12** - optional if using Docker
 - **Unity Editor 2023.2.12f1**
+- **ML-Agents 21** - optional if using Docker
 
 Recommended:
+
 - **Visual Studio Code**
+- **Miniconda** - optional if using Docker
 
 
-## 1) Install Docker
+## ML-Agents Setup with Conda and Unity
 
-### Windows (Docker Desktop)
-1. Install **Docker Desktop** (Windows).
-2. Ensure **WSL 2** is enabled (Docker Desktop will guide you).
-3. Start Docker Desktop and wait until it says “Docker is running”.
+### 1. Download and install the [Unity game engine](https://unity.com/)
 
-### macOS (Docker Desktop)
-1. Install **Docker Desktop** (Mac).
-2. Start Docker Desktop and wait until it says “Docker is running”.
+Using 2023.2.12f1 Editor version
 
-### Linux
-Install Docker using your distro’s package manager and start the daemon:
-- Ensure the Docker service is running
-- Optional: add your user to the `docker` group to avoid `sudo`. Note you have to logout and log back in or reboot.
+### 2. Download and install [Miniconda](https://www.anaconda.com/download/success) enviroment menager
 
-### Verify
+Using latest (25.7.0) version
+
+### 3. Create Conda Environment
+
+Create a new Conda environment with Python 3.10.12:
+
+```bash
+conda create -n mlagents python=3.10.12
+conda activate mlagents
+```
+
+### 4. Install Ml-Agents
+
+Install ML-Agents and ML-Agents Environments from the local source. Navigate to directory where you have this repository downloaded, then run:
+
+```bash
+cd path\to\ml-agents
+python -m pip install ./ml-agents-envs
+python -m pip install ./ml-agents
+```
+### 5. Run the training
+Then to run batch training, also in the terminal, type:
+
+```bash
+mlrun --batch
+```
+
+To rebuild the main csv, type:
+```bash
+mlrun --rebuild-main
+```
+To rebuild the main csv and add newly collected data to it, type:
+```bash
+mlrun --batch --rebuild-main
+```
+Stop at anytime using `Ctrl+c`
+
+Results are saved in training_manager/experiments/results
+
+## ML-Agents Setup with Dokcer
+
+### 1. Download and install [Docker Desktop](https://docs.docker.com/desktop/)
+
+If on Windows: ensure **WSL 2** is enabled - Docker Desktop will guide you.
+
+If on Linux: Install Docker using your distro’s package manager and start the daemon. Optionally you can add your user to the `docker` group to avoid `sudo`. Note that you have to logout and log back in or reboot.
+
+On all OSs: Ensure the Docker service is running
+
 You can verify using this bash commands:
 ```bash
 docker --version
 docker run --rm hello-world
 ```
 
-## 2) Setup run scripts
+### 2. Setup run scripts
 
 All commands below must be run from the repository root
 
-### Linux/macOs
+#### Linux/macOs
 Make sure run.sh is executable:
 ```bash
 chmod +x scripts/run.sh
 ```
 
-### Windows
+#### Windows
 Run commands from PowerShell (no chmod needed).
 
-
-
-
-## 3) How to run
+### 3. Run the training
 All commands below must be run from the repository root
+#### 3.1. Start continuous training (batch mode) ***and*** rebuild aggregated results (main.csv) after every run
 
-### 3.1) Show help / all CLI options
-
-#### Linux/macOS
-```bash
-./scripts/run.sh --help
-```
-
-#### Windows
-```powershell
-.\scripts\run.ps1 --help
-```
-
-### 3.2) Start continuous training (batch mode) ***and*** rebuild aggregated results (main.csv) after every run
-
-#### Linux/macOS
+ Linux/macOS
 ```bash
 ./scripts/run.sh --batch
 ```
 
-#### Windows
+ Windows
 ```powershell
 .\scripts\run.ps1 --batch
 ```
@@ -79,14 +112,14 @@ All commands below must be run from the repository root
 Stop at anytime using `Ctrl+c`
 
 
-### 3.3) Start continuous training (batch mode) ***without*** rebuilding aggregated results (main.csv)
+#### 3.2. Start continuous training (batch mode) ***without*** rebuilding aggregated results (main.csv)
 
-#### Linux/macOS
+Linux/macOS
 ```bash
 ./scripts/run.sh --batch
 ```
 
-#### Windows
+Windows
 ```powershell
 .\scripts\run.ps1 --batch
 ```
@@ -94,44 +127,51 @@ Stop at anytime using `Ctrl+c`
 Stop at anytime using `Ctrl+c`
 
 
-### 3.4) Rebuild aggregated results (main.csv)
+#### 3.3. Rebuild aggregated results (main.csv)
 
-#### Linux/macOS
+Linux/macOS
 ```bash
 ./scripts/run.sh --rebuild-main
 ```
 
-#### Windows
+Windows
 ```powershell
 .\scripts\run.ps1 --rebuild-main
 ```
+Results are saved in training_manager/experiments/results
 
-### 3.5) Dataset encoding
+## Running prediction models
+
+
+### Dataset encoding
+
+Creating the endoded dataset that we use for the models
 ```bash
 python prediction_models/dataset_encoder.py time_to_convergence
 python prediction_models/dataset_encoder.py avg_ram_usage
 ```
 
-### 3.6) Feature selection
+### Feature selection
 TODO simpify so no encoded_dataset path needed --> deduce from target
 ```bash
 python prediction_models/feature-selection/feature_selection_runner.py --encoded prediction_models/encoded_datasets/encoded_time_to_convergence.csv --target time_to_convergence
 python prediction_models/feature-selection/feature_selection_runner.py --encoded prediction_models/encoded_datasets/encoded_avg_ram_usage.csv --target avg_ram_usage 
 ```
-### 3.7) Model analysis
+### Model analysis
+Calculating the Mean Absolute Error (mean_ae), Coefficient of determination (r2) and Median Absolute Error (median_ae)
 ```bash
 python prediction_models/models_analysis/run_all_models.py time_to_convergence
 python prediction_models/models_analysis/run_all_models.py avg_ram_usage
 ```
 
-### 3.8) Build generator
+### Build generator
 Creates the prediction model and saves it as pkl
 ```bash
 python prediction_models/predictors/build_generator.py time_to_convergence
 python prediction_models/predictors/build_generator.py avg_ram_usage
 ```
 
-### 3.9) Build accessor
+### Build accessor
 Allows access to saved prediction model. Predicts target value based on inputted yaml file which is to be saved in:
 ```bash
 prediction_models/runs_to_predict
@@ -149,4 +189,5 @@ Firstly, group members add the generated data to the [forked repository](https:/
 
 ## Project Status
 
-In development. Gathering data from trainings, working on ML models...
+Polishing the prediction models...
+
