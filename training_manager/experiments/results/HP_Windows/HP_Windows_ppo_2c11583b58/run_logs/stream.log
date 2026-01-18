@@ -1,0 +1,131 @@
+[INFO] Connected to Unity environment with package version 3.0.0-exp.1 and communication version 1.5.0
+[INFO] Connected new brain: 3DBall?team=0
+
+
+	Unity Technologies
+
+ Version information:
+  ml-agents: 1.1.0,
+  ml-agents-envs: 1.1.0,
+  Communicator API: 1.5.0,
+  PyTorch: 2.8.0+cpu
+[INFO] Hyperparameters for behavior name 3DBall: 
+	trainer_type:	ppo
+	hyperparameters:	
+	  batch_size:	256
+	  buffer_size:	8448
+	  learning_rate:	0.0008593819129173681
+	  beta:	0.005950259869198192
+	  epsilon:	0.12716343828128834
+	  lambd:	0.94788392418612
+	  num_epoch:	4
+	  shared_critic:	False
+	  learning_rate_schedule:	linear
+	  beta_schedule:	linear
+	  epsilon_schedule:	linear
+	checkpoint_interval:	500000
+	network_settings:	
+	  normalize:	False
+	  hidden_units:	64
+	  num_layers:	3
+	  vis_encode_type:	simple
+	  memory:	None
+	  goal_conditioning_type:	hyper
+	  deterministic:	False
+	reward_signals:	
+	  extrinsic:	
+	    gamma:	0.9788205908656181
+	    strength:	1.0
+	    network_settings:	
+	      normalize:	False
+	      hidden_units:	128
+	      num_layers:	2
+	      vis_encode_type:	simple
+	      memory:	None
+	      goal_conditioning_type:	hyper
+	      deterministic:	False
+	init_path:	None
+	keep_checkpoints:	5
+	even_checkpoints:	False
+	max_steps:	10000000
+	time_horizon:	64
+	summary_freq:	10000
+	threaded:	False
+	self_play:	None
+	behavioral_cloning:	None
+[INFO] 3DBall. Step: 10000. Time Elapsed: 13.882 s. Mean Reward: 1.172. Std of Reward: 0.763. Training.
+[INFO] 3DBall. Step: 20000. Time Elapsed: 21.695 s. Mean Reward: 1.231. Std of Reward: 0.759. Training.
+[INFO] 3DBall. Step: 30000. Time Elapsed: 29.740 s. Mean Reward: 1.460. Std of Reward: 0.886. Training.
+[INFO] 3DBall. Step: 40000. Time Elapsed: 37.236 s. Mean Reward: 1.766. Std of Reward: 1.119. Training.
+[INFO] 3DBall. Step: 50000. Time Elapsed: 44.755 s. Mean Reward: 2.324. Std of Reward: 1.601. Training.
+[INFO] 3DBall. Step: 60000. Time Elapsed: 53.824 s. Mean Reward: 2.850. Std of Reward: 2.058. Training.
+[INFO] 3DBall. Step: 70000. Time Elapsed: 60.903 s. Mean Reward: 4.398. Std of Reward: 3.520. Training.
+[INFO] 3DBall. Step: 80000. Time Elapsed: 67.676 s. Mean Reward: 9.646. Std of Reward: 10.326. Training.
+[INFO] 3DBall. Step: 90000. Time Elapsed: 74.616 s. Mean Reward: 21.072. Std of Reward: 18.772. Training.
+[INFO] 3DBall. Step: 100000. Time Elapsed: 81.645 s. Mean Reward: 66.318. Std of Reward: 31.759. Training.
+[INFO] 3DBall. Step: 110000. Time Elapsed: 88.237 s. Mean Reward: 75.164. Std of Reward: 37.284. Training.
+[INFO] 3DBall. Step: 120000. Time Elapsed: 96.442 s. Mean Reward: 83.469. Std of Reward: 30.759. Training.
+[INFO] 3DBall. Step: 130000. Time Elapsed: 103.245 s. Mean Reward: 89.255. Std of Reward: 25.461. Training.
+[INFO] 3DBall. Step: 140000. Time Elapsed: 109.977 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 150000. Time Elapsed: 116.598 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 160000. Time Elapsed: 123.381 s. Mean Reward: 83.455. Std of Reward: 35.244. Training.
+[INFO] 3DBall. Step: 170000. Time Elapsed: 132.248 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 180000. Time Elapsed: 139.488 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 190000. Time Elapsed: 146.320 s. Mean Reward: 78.427. Std of Reward: 29.115. Training.
+[INFO] 3DBall. Step: 200000. Time Elapsed: 153.072 s. Mean Reward: 52.680. Std of Reward: 37.619. Training.
+[INFO] 3DBall. Step: 210000. Time Elapsed: 159.923 s. Mean Reward: 79.562. Std of Reward: 22.122. Training.
+[INFO] 3DBall. Step: 220000. Time Elapsed: 166.668 s. Mean Reward: 90.678. Std of Reward: 21.494. Training.
+[INFO] 3DBall. Step: 230000. Time Elapsed: 175.055 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 240000. Time Elapsed: 181.804 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 250000. Time Elapsed: 188.413 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 260000. Time Elapsed: 195.152 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 270000. Time Elapsed: 202.214 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[ERROR] UnityEnvironment worker 0: environment raised an unexpected exception.
+Traceback (most recent call last):
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 301, in _recv_bytes
+    ov, err = _winapi.ReadFile(self._handle, bsize,
+BrokenPipeError: [WinError 109] Potok został zakończony
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 175, in worker
+    req: EnvironmentRequest = parent_conn.recv()
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 321, in _recv_bytes
+    raise EOFError
+EOFError
+Process Process-1:
+Traceback (most recent call last):
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 301, in _recv_bytes
+    ov, err = _winapi.ReadFile(self._handle, bsize,
+BrokenPipeError: [WinError 109] Potok został zakończony
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 175, in worker
+    req: EnvironmentRequest = parent_conn.recv()
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 321, in _recv_bytes
+    raise EOFError
+EOFError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 235, in worker
+    _send_response(EnvironmentCommand.ENV_EXITED, ex)
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 150, in _send_response
+    parent_conn.send(EnvironmentResponse(cmd_name, worker_id, payload))
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 206, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+  File "C:\Users\HP\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 280, in _send_bytes
+    ov, err = _winapi.WriteFile(self._handle, buf, overlapped=True)
+BrokenPipeError: [WinError 232] Trwa zamykanie potoku
