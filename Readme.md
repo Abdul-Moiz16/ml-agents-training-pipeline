@@ -142,43 +142,91 @@ Results are saved in training_manager/experiments/results
 
 ## Running prediction models
 
+### 1) Holdout
 
-### Dataset encoding
+This select runs form the main CSV which will not be used in training for model and will be used to compare Actual vs Predicted values.
 
-Creating the endoded dataset that we use for the models
+Defaults to 1 per machine and only converged + complete:
+
 ```bash
-python prediction_models/dataset_encoder.py time_to_convergence
-python prediction_models/dataset_encoder.py avg_ram_usage
+python prediction_models/predictors/create_holdout.py --per-machine 5
+```
+This writes:
+- prediction_models/predictors/actual_and_predicted/holdout_runs.csv
+- prediction_models/predictors/actual_and_predicted/holdout_run_ids.txt
+- prediction_models/predictors/configs_to_predict/holdout/*.yaml
+
+### 2) Dataset encoding
+
+Create encoded datasets. Make sure you exclude holdouts.
+
+```bash
+python prediction_models/dataset_encoder.py time_to_convergence --exclude prediction_models/predictors/actual_and_predicted/holdout_run_ids.txt
+
+python prediction_models/dataset_encoder.py avg_ram_usage --exclude prediction_models/predictors/actual_and_predicted/holdout_run_ids.txt
 ```
 
-### Feature selection
-TODO simpify so no encoded_dataset path needed --> deduce from target
+### 3) Feature selection (optional)
+
+This will generate best features that works best together for a given target feature to be used for prediction.
+
 ```bash
-python prediction_models/feature-selection/feature_selection_runner.py --encoded prediction_models/encoded_datasets/encoded_time_to_convergence.csv --target time_to_convergence
-python prediction_models/feature-selection/feature_selection_runner.py --encoded prediction_models/encoded_datasets/encoded_avg_ram_usage.csv --target avg_ram_usage 
+python prediction_models/feature-selection/feature_selection_runner.py --target time_to_convergence
+
+python prediction_models/feature-selection/feature_selection_runner.py --target avg_ram_usage
 ```
-### Model analysis
-Calculating the Mean Absolute Error (mean_ae), Coefficient of determination (r2) and Median Absolute Error (median_ae)
+Outputs are written to prediction_models/feature-selection/results/.
+
+### 4) Model analysis
+
+Compute mean_ae, r2, and median_ae per model and gives best model to use:
+
 ```bash
 python prediction_models/models_analysis/run_all_models.py time_to_convergence
+
 python prediction_models/models_analysis/run_all_models.py avg_ram_usage
 ```
 
-### Build generator
-Creates the prediction model and saves it as pkl
+### 5) Grid search (optional, this might take long time)
+
+Gives best paramters to be used for each model.
+
+```bash
+python prediction_models/gridsearch/run_all_gridsearch.py time_to_convergence
+
+python prediction_models/gridsearch/run_all_gridsearch.py avg_ram_usage
+```
+Results are saved to prediction_models/gridsearch/gridsearch_results_<target>.csv.
+
+### 6) Build predictor
+
+Creates and saves the best model (selected by median_ae) as a .pkl:
+
 ```bash
 python prediction_models/predictors/build_generator.py time_to_convergence
+
 python prediction_models/predictors/build_generator.py avg_ram_usage
 ```
 
-### Build accessor
-Allows access to saved prediction model. Predicts target value based on inputted yaml file which is to be saved in:
+### 7) Backtest
+
+Actual vs Predicted values.
+
 ```bash
-prediction_models/runs_to_predict
+python prediction_models/predictors/run_holdout_backtest.py time_to_convergence
+
+python prediction_models/predictors/run_holdout_backtest.py avg_ram_usage
 ```
+Results are saved to prediction_models/predictors/actual_and_predicted/.
+
+### 8) Predict a new config
+
+Put configs in prediction_models/predictors/configs_to_predict/ and run:
+
 ```bash
-python prediction_models/predictors/build_accessor.py time_to_convergence <yaml_file>
-python prediction_models/predictors/build_accessor.py avg_ram_usage <yaml_file>
+python prediction_models/predictors/build_accessor.py time_to_convergence prediction_models/predictors/configs_to_predict/<yaml_file>
+
+python prediction_models/predictors/build_accessor.py avg_ram_usage prediction_models/predictors/configs_to_predict/<yaml_file>
 ```
 
 ## Data collection
