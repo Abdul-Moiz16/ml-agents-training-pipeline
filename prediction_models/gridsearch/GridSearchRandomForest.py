@@ -6,9 +6,10 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-sys.path.append(str(Path(__file__).resolve().parents[1]))
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJECT_ROOT))
 
-from BaselineModel import BaseModel
+from prediction_models.models_analysis.BaselineModel import BaseModel
 
 class GridSearchRandomForest(BaseModel):
     def build_model(self):
