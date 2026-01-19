@@ -6,9 +6,10 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-sys.path.append(str(Path(__file__).resolve().parents[1]))
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJECT_ROOT))
 
-from BaselineModel import BaseModel
+from prediction_models.models_analysis.BaselineModel import BaseModel
 
 class GridSearchExtraTrees(BaseModel):
     def build_model(self):
@@ -17,9 +18,9 @@ class GridSearchExtraTrees(BaseModel):
             ('et', ExtraTreesRegressor(random_state=42, n_jobs=-1))
         ])
         param_grid = {
-            'et__n_estimators': [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+            'et__n_estimators': [100, 200, 300, 400, 500, 600, 700, 800],
             'et__max_features': [0.8, 'sqrt', 'log2', 1.0],
-            'et__min_samples_leaf': [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20]
+            'et__min_samples_leaf': [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 20]
         }
         return GridSearchCV(pipe, param_grid, scoring='neg_mean_absolute_error', cv=5, n_jobs=-1, verbose=1)
 

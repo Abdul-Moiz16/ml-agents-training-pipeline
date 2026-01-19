@@ -1,0 +1,32 @@
+hardware:
+  os_name: Windows
+  cpu_physical_cores: 8
+  cpu_logical_cores: 16
+  cpu_clock_ghz: 2.6
+  ram_mb: 8246
+
+behaviors:
+  3DBall:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 64
+      buffer_size: 1664
+      learning_rate: 0.00025
+      beta: 0.0011
+      epsilon: 0.15
+      lambd: 0.9
+      num_epoch: 4
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: False
+      hidden_units: 128
+      num_layers: 3
+      vis_encode_type: simple
+    reward_signals:
+      extrinsic:
+        gamma: 0.85
+        strength: 1.0
+    keep_checkpoints: 5
+    max_steps: 5000000
+    time_horizon: 128
+    summary_freq: 10000

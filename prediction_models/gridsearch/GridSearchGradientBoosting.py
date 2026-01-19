@@ -6,9 +6,10 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-sys.path.append(str(Path(__file__).resolve().parents[1]))
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJECT_ROOT))
 
-from BaselineModel import BaseModel
+from prediction_models.models_analysis.BaselineModel import BaseModel
 
 class GridSearchGradientBoosting(BaseModel):
     def build_model(self):
@@ -17,9 +18,9 @@ class GridSearchGradientBoosting(BaseModel):
             ('gb', GradientBoostingRegressor(random_state=42))
         ])
         param_grid = {
-            'gb__n_estimators': [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+            'gb__n_estimators': [100, 200, 300, 400, 500, 600, 700, 800],
             'gb__learning_rate': [0.01, 0.03, 0.05, 0.07, 0.09, 0.1, 0.15, 0.2],
-            'gb__max_depth': [None, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20],
+            'gb__max_depth': [None, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 20],
         }
         return GridSearchCV(pipe, param_grid, scoring='neg_mean_absolute_error', cv=5, n_jobs=-1, verbose=1)
 
