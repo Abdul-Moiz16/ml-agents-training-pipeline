@@ -1,0 +1,127 @@
+[INFO] Connected to Unity environment with package version 3.0.0-exp.1 and communication version 1.5.0
+[INFO] Connected new brain: 3DBall?team=0
+
+
+	Unity Technologies
+
+ Version information:
+  ml-agents: 1.1.0,
+  ml-agents-envs: 1.1.0,
+  Communicator API: 1.5.0,
+  PyTorch: 2.8.0+cpu
+[INFO] Hyperparameters for behavior name 3DBall: 
+	trainer_type:	ppo
+	hyperparameters:	
+	  batch_size:	64
+	  buffer_size:	640
+	  learning_rate:	9.686026552412576e-05
+	  beta:	0.007706020943157897
+	  epsilon:	0.2535991866539615
+	  lambd:	0.9204908727056844
+	  num_epoch:	3
+	  shared_critic:	False
+	  learning_rate_schedule:	linear
+	  beta_schedule:	linear
+	  epsilon_schedule:	linear
+	checkpoint_interval:	500000
+	network_settings:	
+	  normalize:	False
+	  hidden_units:	128
+	  num_layers:	2
+	  vis_encode_type:	simple
+	  memory:	None
+	  goal_conditioning_type:	hyper
+	  deterministic:	False
+	reward_signals:	
+	  extrinsic:	
+	    gamma:	0.9461804946212246
+	    strength:	1.0
+	    network_settings:	
+	      normalize:	False
+	      hidden_units:	128
+	      num_layers:	2
+	      vis_encode_type:	simple
+	      memory:	None
+	      goal_conditioning_type:	hyper
+	      deterministic:	False
+	init_path:	None
+	keep_checkpoints:	5
+	even_checkpoints:	False
+	max_steps:	10000000
+	time_horizon:	256
+	summary_freq:	10000
+	threaded:	False
+	self_play:	None
+	behavioral_cloning:	None
+[INFO] 3DBall. Step: 10000. Time Elapsed: 15.883 s. Mean Reward: 1.290. Std of Reward: 0.739. Training.
+[INFO] 3DBall. Step: 20000. Time Elapsed: 27.937 s. Mean Reward: 1.539. Std of Reward: 0.813. Training.
+[INFO] 3DBall. Step: 30000. Time Elapsed: 39.313 s. Mean Reward: 2.307. Std of Reward: 1.452. Training.
+[INFO] 3DBall. Step: 40000. Time Elapsed: 50.337 s. Mean Reward: 3.159. Std of Reward: 2.184. Training.
+[INFO] 3DBall. Step: 50000. Time Elapsed: 61.599 s. Mean Reward: 4.104. Std of Reward: 3.770. Training.
+[INFO] 3DBall. Step: 60000. Time Elapsed: 72.746 s. Mean Reward: 5.122. Std of Reward: 4.456. Training.
+[INFO] 3DBall. Step: 70000. Time Elapsed: 83.895 s. Mean Reward: 7.153. Std of Reward: 7.469. Training.
+[INFO] 3DBall. Step: 80000. Time Elapsed: 94.510 s. Mean Reward: 12.497. Std of Reward: 13.714. Training.
+[INFO] 3DBall. Step: 90000. Time Elapsed: 104.962 s. Mean Reward: 19.051. Std of Reward: 19.169. Training.
+[INFO] 3DBall. Step: 100000. Time Elapsed: 115.688 s. Mean Reward: 23.380. Std of Reward: 24.056. Training.
+[INFO] 3DBall. Step: 110000. Time Elapsed: 126.080 s. Mean Reward: 45.443. Std of Reward: 38.853. Training.
+[INFO] 3DBall. Step: 120000. Time Elapsed: 136.598 s. Mean Reward: 80.192. Std of Reward: 35.759. Training.
+[INFO] 3DBall. Step: 130000. Time Elapsed: 146.811 s. Mean Reward: 94.556. Std of Reward: 11.882. Training.
+[INFO] 3DBall. Step: 140000. Time Elapsed: 157.268 s. Mean Reward: 87.160. Std of Reward: 29.663. Training.
+[INFO] 3DBall. Step: 150000. Time Elapsed: 168.082 s. Mean Reward: 54.306. Std of Reward: 45.486. Training.
+[INFO] 3DBall. Step: 160000. Time Elapsed: 178.321 s. Mean Reward: 86.336. Std of Reward: 33.492. Training.
+[INFO] 3DBall. Step: 170000. Time Elapsed: 188.773 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 180000. Time Elapsed: 199.189 s. Mean Reward: 88.700. Std of Reward: 29.386. Training.
+[INFO] 3DBall. Step: 190000. Time Elapsed: 209.807 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 200000. Time Elapsed: 220.307 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 210000. Time Elapsed: 230.718 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 220000. Time Elapsed: 241.198 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[INFO] 3DBall. Step: 230000. Time Elapsed: 251.663 s. Mean Reward: 100.000. Std of Reward: 0.000. Training.
+[ERROR] UnityEnvironment worker 0: environment raised an unexpected exception.
+Traceback (most recent call last):
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 301, in _recv_bytes
+    ov, err = _winapi.ReadFile(self._handle, bsize,
+BrokenPipeError: [WinError 109] Die Pipe wurde beendet
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 175, in worker
+    req: EnvironmentRequest = parent_conn.recv()
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 321, in _recv_bytes
+    raise EOFError
+EOFError
+Process Process-1:
+Traceback (most recent call last):
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 301, in _recv_bytes
+    ov, err = _winapi.ReadFile(self._handle, bsize,
+BrokenPipeError: [WinError 109] Die Pipe wurde beendet
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 175, in worker
+    req: EnvironmentRequest = parent_conn.recv()
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 321, in _recv_bytes
+    raise EOFError
+EOFError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 235, in worker
+    _send_response(EnvironmentCommand.ENV_EXITED, ex)
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\site-packages\mlagents\trainers\subprocess_env_manager.py", line 150, in _send_response
+    parent_conn.send(EnvironmentResponse(cmd_name, worker_id, payload))
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 206, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+  File "C:\Users\nico\miniconda3\envs\mlagents\lib\multiprocessing\connection.py", line 280, in _send_bytes
+    ov, err = _winapi.WriteFile(self._handle, buf, overlapped=True)
+BrokenPipeError: [WinError 232] Die Pipe wird gerade geschlossen
