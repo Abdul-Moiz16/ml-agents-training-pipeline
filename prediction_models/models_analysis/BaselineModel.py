@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import List, Optional, Tuple
 
 import numpy as np
+import pandas as pd
 from sklearn.metrics import mean_absolute_error, r2_score, median_absolute_error, make_scorer
 from sklearn.model_selection import train_test_split, KFold, cross_validate
 from sklearn.pipeline import Pipeline
@@ -18,12 +19,23 @@ from sklearn.preprocessing import StandardScaler
 
 class BaseModel:
 
-    def __init__(self, data_path: Optional[Path] = None):
-        self.data_path = data_path or Path(__file__).resolve().parents[3] / "training_manager" / "experiments" / "results" / "main.csv"
+    def __init__(self, data_path: Optional[Path] = None, target: Optional[str] = None):
+        self.data_path = data_path or Path(__file__).resolve().parents[2] / "training_manager" / "experiments" / "results" / "main.csv"
+        self.target = target or "time_to_convergence"
 
     def build_model(self):
         """Override in subclasses to return an instantiated sklearn regressor."""
         raise NotImplementedError
+
+    def load_and_encode(self, target: Optional[str] = None) -> Tuple[pd.DataFrame, pd.Series]:
+        target = target or self.target
+        if not target:
+            raise ValueError("Target must be provided to load_and_encode.")
+
+        from prediction_models.dataset_encoder import DatasetEncoder
+
+        encoder = DatasetEncoder(target=target, data_path=self.data_path)
+        return encoder.load_and_encode(target)
 
 
     def cross_validate_with_scaling(self, X, y, n_splits: int = 5, seed: int = 42, transform_log: bool = False) -> dict:
