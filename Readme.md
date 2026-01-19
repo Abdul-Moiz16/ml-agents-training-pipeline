@@ -142,6 +142,11 @@ Results are saved in training_manager/experiments/results
 
 ## Running prediction models
 
+### 0) Rebuild Main (Optinal is already present)
+
+```bash
+mlrun --rebuild-main
+```
 ### 1) Holdout
 
 This select runs form the main CSV which will not be used in training for model and will be used to compare Actual vs Predicted values.
@@ -228,6 +233,18 @@ python prediction_models/predictors/build_accessor.py time_to_convergence predic
 
 python prediction_models/predictors/build_accessor.py avg_ram_usage prediction_models/predictors/configs_to_predict/<yaml_file>
 ```
+
+### 9) Predict with custom hardware
+
+Put configs (with a `hardware:` block) in prediction_models/predictors/custom_configs_with_hw/ and run:
+
+```bash
+python prediction_models/predictors/build_accessor.py time_to_convergence prediction_models/predictors/custom_configs_with_hw
+
+python prediction_models/predictors/build_accessor.py avg_ram_usage prediction_models/predictors/custom_configs_with_hw
+```
+
+Combined outputs are saved to prediction_models/predictors/predicted_custom_hw/.
 
 ## Data collection
 The data are stored as the CSV files. Data include hardware used, environment specs, DRL algorithm, [hyperparameters configuration](https://unity-technologies.github.io/ml-agents/Training-Configuration-File/) together with runtime and performance outcomes. Proper documentation of parameters that we collect can be found in the repository mentioned below under the **Group 8** directory.
