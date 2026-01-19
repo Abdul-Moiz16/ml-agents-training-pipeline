@@ -3,13 +3,13 @@ behaviors:
   3DBall:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 256
-      buffer_size: 5632
-      learning_rate: 0.0009276171639859511
-      beta: 0.009788716024222458
-      epsilon: 0.2778751181149779
-      lambd: 0.9341504102880491
-      num_epoch: 4
+      batch_size: 32
+      buffer_size: 864
+      learning_rate: 0.0006432862998521494
+      beta: 0.0021911701666305033
+      epsilon: 0.18557916427336274
+      lambd: 0.9294997983807611
+      num_epoch: 5
       shared_critic: false
       learning_rate_schedule: linear
       beta_schedule: linear
@@ -17,7 +17,7 @@ behaviors:
     checkpoint_interval: 500000
     network_settings:
       normalize: false
-      hidden_units: 256
+      hidden_units: 128
       num_layers: 3
       vis_encode_type: simple
       memory: null
@@ -25,7 +25,7 @@ behaviors:
       deterministic: false
     reward_signals:
       extrinsic:
-        gamma: 0.9034811093739543
+        gamma: 0.8974067765375332
         strength: 1.0
         network_settings:
           normalize: false
@@ -39,7 +39,7 @@ behaviors:
     keep_checkpoints: 5
     even_checkpoints: false
     max_steps: 10000000
-    time_horizon: 64
+    time_horizon: 128
     summary_freq: 10000
     threaded: false
     self_play: null
@@ -66,11 +66,11 @@ engine_settings:
   no_graphics_monitor: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: nimkita_Linux_ppo_1981f979dc
+  run_id: nimkita_Linux_ppo_1985ef4413
   initialize_from: null
   load_model: false
-  resume: true
-  force: false
+  resume: false
+  force: true
   train_model: false
   inference: false
   results_dir: /app/training_manager/experiments/results/nimkita_Linux

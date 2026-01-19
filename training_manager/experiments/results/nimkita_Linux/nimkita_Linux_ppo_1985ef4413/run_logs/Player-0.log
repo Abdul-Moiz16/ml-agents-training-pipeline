@@ -27,10 +27,10 @@ icall.c:1842:
 icall.c:1842:
 icall.c:1842:
 icall.c:1842:
-- Loaded All Assemblies, in  0.052 seconds
+- Loaded All Assemblies, in  0.047 seconds
 icall.c:1842:
 icall.c:1842:
-- Finished resetting the current domain, in  0.002 seconds
+- Finished resetting the current domain, in  0.001 seconds
 ERROR: Shader Sprites/Default shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
 ERROR: Shader Sprites/Mask shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
 ERROR: Shader Legacy Shaders/VertexLit shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
@@ -48,7 +48,7 @@ ERROR: Shader Autodesk Interactive shader is not supported on this GPU (none of 
 WARNING: Shader Unsupported: 'Autodesk Interactive' - All subshaders removed
 WARNING: Shader Did you use #pragma only_renderers and omit this platform?
 WARNING: Shader If subshaders removal was intentional, you may have forgotten turning Fallback off?
-UnloadTime: 0.551284 ms
+UnloadTime: 0.510187 ms
 Registered Communicator in Agent.
 ERROR: Shader UI/Default shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
 requesting resize 84 x 84
@@ -58,7 +58,7 @@ Memory Statistics:
 [ALLOC_TEMP_TLS] TLS Allocator
   StackAllocators : 
     [ALLOC_TEMP_MAIN]
-      Peak usage frame count: [1.0 KB-2.0 KB]: 162296 frames, [2.0 MB-4.0 MB]: 1 frames
+      Peak usage frame count: [1.0 KB-2.0 KB]: 124771 frames, [2.0 MB-4.0 MB]: 1 frames
       Initial Block Size 4.0 MB
       Current Block Size 4.0 MB
       Peak Allocated Bytes 2.1 MB
@@ -108,7 +108,7 @@ Memory Statistics:
       Current Block Size 32.0 KB
       Peak Allocated Bytes 0 B
       Overflow Count 0
-    [ALLOC_TEMP_Background Job.worker 10]
+    [ALLOC_TEMP_Background Job.worker 9]
       Initial Block Size 32.0 KB
       Current Block Size 32.0 KB
       Peak Allocated Bytes 0 B
@@ -133,7 +133,7 @@ Memory Statistics:
       Current Block Size 256.0 KB
       Peak Allocated Bytes 0 B
       Overflow Count 0
-    [ALLOC_TEMP_Background Job.worker 15]
+    [ALLOC_TEMP_Background Job.worker 10]
       Initial Block Size 32.0 KB
       Current Block Size 32.0 KB
       Peak Allocated Bytes 0 B
@@ -157,11 +157,6 @@ Memory Statistics:
       Initial Block Size 256.0 KB
       Current Block Size 256.0 KB
       Peak Allocated Bytes 215 B
-      Overflow Count 0
-    [ALLOC_TEMP_Background Job.worker 9]
-      Initial Block Size 32.0 KB
-      Current Block Size 32.0 KB
-      Peak Allocated Bytes 0 B
       Overflow Count 0
     [ALLOC_TEMP_Job.worker 3]
       Initial Block Size 256.0 KB
@@ -189,6 +184,11 @@ Memory Statistics:
       Peak Allocated Bytes 0 B
       Overflow Count 0
     [ALLOC_TEMP_Background Job.worker 13]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 15]
       Initial Block Size 32.0 KB
       Current Block Size 32.0 KB
       Peak Allocated Bytes 0 B
@@ -250,13 +250,13 @@ Memory Statistics:
       Used Block count 1
       Peak Allocated bytes 1.0 MB
     [ALLOC_DEFAULT_MAIN]
-      Peak usage frame count: [16.0 MB-32.0 MB]: 162297 frames
+      Peak usage frame count: [16.0 MB-32.0 MB]: 124772 frames
       Requested Block Size 16.0 MB
       Peak Block count 1
       Peak Allocated memory 29.3 MB
       Peak Large allocation bytes 16.0 MB
     [ALLOC_DEFAULT_THREAD]
-      Peak usage frame count: [1.0 MB-2.0 MB]: 162297 frames
+      Peak usage frame count: [1.0 MB-2.0 MB]: 124772 frames
       Requested Block Size 16.0 MB
       Peak Block count 1
       Peak Allocated memory 1.3 MB
@@ -288,16 +288,16 @@ Memory Statistics:
       Used Block count 1
       Peak Allocated bytes 1.0 MB
     [ALLOC_GFX_MAIN]
-      Peak usage frame count: [32.0 KB-64.0 KB]: 162296 frames, [64.0 KB-128.0 KB]: 1 frames
+      Peak usage frame count: [32.0 KB-64.0 KB]: 124771 frames, [64.0 KB-128.0 KB]: 1 frames
       Requested Block Size 16.0 MB
       Peak Block count 1
       Peak Allocated memory 69.7 KB
       Peak Large allocation bytes 0 B
     [ALLOC_GFX_THREAD]
-      Peak usage frame count: [32.0 KB-64.0 KB]: 162297 frames
+      Peak usage frame count: [32.0 KB-64.0 KB]: 124772 frames
       Requested Block Size 16.0 MB
       Peak Block count 1
-      Peak Allocated memory 32.4 KB
+      Peak Allocated memory 32.6 KB
       Peak Large allocation bytes 0 B
 [ALLOC_CACHEOBJECTS] Dual Thread Allocator
   Peak main deferred allocation count 0
@@ -306,13 +306,13 @@ Memory Statistics:
       Used Block count 1
       Peak Allocated bytes 1.0 MB
     [ALLOC_CACHEOBJECTS_MAIN]
-      Peak usage frame count: [0.5 MB-1.0 MB]: 162297 frames
+      Peak usage frame count: [0.5 MB-1.0 MB]: 124772 frames
       Requested Block Size 4.0 MB
       Peak Block count 1
       Peak Allocated memory 0.7 MB
       Peak Large allocation bytes 0 B
     [ALLOC_CACHEOBJECTS_THREAD]
-      Peak usage frame count: [256.0 KB-0.5 MB]: 162296 frames, [2.0 MB-4.0 MB]: 1 frames
+      Peak usage frame count: [256.0 KB-0.5 MB]: 124771 frames, [2.0 MB-4.0 MB]: 1 frames
       Requested Block Size 4.0 MB
       Peak Block count 1
       Peak Allocated memory 2.7 MB
@@ -324,13 +324,13 @@ Memory Statistics:
       Used Block count 1
       Peak Allocated bytes 1.0 MB
     [ALLOC_TYPETREE_MAIN]
-      Peak usage frame count: [0-1.0 KB]: 162297 frames
+      Peak usage frame count: [0-1.0 KB]: 124772 frames
       Requested Block Size 2.0 MB
       Peak Block count 1
       Peak Allocated memory 128 B
       Peak Large allocation bytes 0 B
     [ALLOC_TYPETREE_THREAD]
-      Peak usage frame count: [1.0 KB-2.0 KB]: 162297 frames
+      Peak usage frame count: [1.0 KB-2.0 KB]: 124772 frames
       Requested Block Size 2.0 MB
       Peak Block count 1
       Peak Allocated memory 1.9 KB
