@@ -6,6 +6,14 @@ from typing import List, Optional
 
 import numpy as np
 import pandas as pd
+import yaml
+
+def is_valid_yaml(path: Path) -> bool:
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        return isinstance(data, dict)  # you expect a mapping
+    except Exception:
+        return False
 
 
 def resolve_config_path(results_root: Path, machine_id: str, run_id: str) -> Optional[Path]:
@@ -125,12 +133,20 @@ def main() -> None:
     )
 
     copied = 0
+    skipped_bad = 0
     for _, row in holdout_df.iterrows():
         src = Path(row["config_path"])
         dst = configs_dir / f"{row['run_id']}.yaml"
-        if src.exists():
-            dst.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
-            copied += 1
+        if not src.exists():
+            continue
+
+        if not is_valid_yaml(src):
+            print(f"~! skipping invalid YAML: {src}")
+            skipped_bad += 1
+            continue
+
+        dst.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+        copied += 1
 
     print(f"~i selected {len(holdout_df)} holdout runs")
     print(f"~i wrote {holdout_csv}")
