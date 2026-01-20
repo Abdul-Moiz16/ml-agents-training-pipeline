@@ -40,11 +40,11 @@ def main():
         y = encoded_dataset[target]
 
         comparison = pd.read_csv(comparison_path)
-        if "median_ae" not in comparison.columns or "model" not in comparison.columns:
-            raise ValueError("Model comparison CSV must include 'model' and 'median_ae' columns.")
+        if "mean_ae" not in comparison.columns or "model" not in comparison.columns:
+            raise ValueError("Model comparison CSV must include 'model' and 'mean_ae' columns.")
 
-        comparison["median_ae"] = pd.to_numeric(comparison["median_ae"], errors="coerce")
-        best_row = comparison.sort_values("median_ae").iloc[0]
+        comparison["mean_ae"] = pd.to_numeric(comparison["mean_ae"], errors="coerce")
+        best_row = comparison.sort_values("mean_ae").iloc[0]
         best_model_name = str(best_row["model"])
 
         model_map = {
@@ -76,7 +76,7 @@ def main():
         path.parent.mkdir(parents=True, exist_ok=True)
         joblib.dump(model, path)
 
-        print(f"Selected model: {best_model_name} (median_ae={best_row['median_ae']})")
+        print(f"Selected model: {best_model_name} (mean_ae={best_row['mean_ae']})")
         print(f"Saved predictor to {path}")
 
     else:
