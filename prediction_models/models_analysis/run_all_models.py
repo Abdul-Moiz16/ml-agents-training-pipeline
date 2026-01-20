@@ -23,7 +23,16 @@ def main():
     # Get encoded dataset specific to target
     # If it does not exist yet, generate it
     if len(sys.argv) > 1:
-        target_argv = sys.argv[1]
+        use_defaults = "--use-defaults" in sys.argv
+        target_argv = next(
+            (arg for arg in sys.argv[1:] if not arg.startswith("-")),
+            None,
+        )
+        if not target_argv:
+            print("Provide target")
+            print("Usage example: python run_all_models.py time_to_convergence")
+            print("Usage example: python run_all_models.py avg_ram_usage --use-defaults")
+            return
         try:
             filename = f"encoded_{target_argv}.csv"
             encoded_dataset_path = Path(__file__).resolve().parents[1] / "encoded_datasets" / filename
@@ -49,7 +58,7 @@ def main():
                 LinearRegressionModel,
                 KNNModel,
             ]:
-                model_instance = cls()
+                model_instance = cls(target=target_argv, use_defaults=use_defaults)
 
                 transform_log = (target_argv == "time_to_convergence")
                 cv = model_instance.cross_validate_with_scaling(X, y, n_splits=5, transform_log=transform_log)
@@ -62,7 +71,12 @@ def main():
                 })
 
             df = pd.DataFrame(results).sort_values("mean_ae")
-            out = Path(__file__).resolve().parent / f"models_comparisons/model_comparison_{target_argv}.csv"
+            df.insert(0, "mode", "default" if use_defaults else "tuned")
+            suffix = "default" if use_defaults else "tuned"
+            out = (
+                Path(__file__).resolve().parent
+                / f"models_comparisons/model_comparison_{target_argv}_{suffix}.csv"
+            )
             df.to_csv(out, index=False)
             print("Saved model comparison to:", out)
             print(df)

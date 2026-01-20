@@ -184,17 +184,27 @@ Outputs are written to prediction_models/feature-selection/results/.
 
 ### 4) Model analysis
 
-Compute mean_ae, r2, and median_ae per model and gives best model to use:
+Compute mean_ae, r2, and median_ae per model. You can run tuned (default) or baseline defaults:
 
 ```bash
 python prediction_models/models_analysis/run_all_models.py time_to_convergence
 
 python prediction_models/models_analysis/run_all_models.py avg_ram_usage
 ```
+To compare against sklearn defaults:
 
-### 5) Grid search (optional, this might take long time)
+```bash
+python prediction_models/models_analysis/run_all_models.py time_to_convergence --use-defaults
 
-Gives best paramters to be used for each model.
+python prediction_models/models_analysis/run_all_models.py avg_ram_usage --use-defaults
+```
+Outputs:
+- prediction_models/models_analysis/models_comparisons/model_comparison_<target>_tuned.csv
+- prediction_models/models_analysis/models_comparisons/model_comparison_<target>_default.csv
+
+### 5) Grid search (optional, this might take long time. The best has already been selected)
+
+Generates best hyperparameters per target. Results are picked up automatically by model analysis and predictor build.
 
 ```bash
 python prediction_models/gridsearch/run_all_gridsearch.py time_to_convergence

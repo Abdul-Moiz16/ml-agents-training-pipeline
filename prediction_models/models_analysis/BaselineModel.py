@@ -19,9 +19,15 @@ from sklearn.preprocessing import StandardScaler
 
 class BaseModel:
 
-    def __init__(self, data_path: Optional[Path] = None, target: Optional[str] = None):
+    def __init__(
+        self,
+        data_path: Optional[Path] = None,
+        target: Optional[str] = None,
+        use_defaults: bool = False,
+    ):
         self.data_path = data_path or Path(__file__).resolve().parents[2] / "training_manager" / "experiments" / "results" / "main.csv"
         self.target = target or "time_to_convergence"
+        self.use_defaults = use_defaults
 
     def build_model(self):
         """Override in subclasses to return an instantiated sklearn regressor."""

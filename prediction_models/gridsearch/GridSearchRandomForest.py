@@ -18,10 +18,11 @@ class GridSearchRandomForest(BaseModel):
             ('rf', RandomForestRegressor(random_state=42, n_jobs=-1))
         ])
         param_grid = {
-            'rf__n_estimators': [100, 200, 300, 400, 500, 600, 700, 800],
-            'rf__max_depth': [None, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 20],
-            'rf__min_samples_leaf': [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 20]
+            'rf__n_estimators': [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+            'rf__max_depth': [None, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 20, 22, 24, 26, 28, 30],
+            'rf__min_samples_leaf': [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 20, 22, 24, 26, 28, 30]
         }
+
         return GridSearchCV(pipe, param_grid, scoring='neg_mean_absolute_error', cv=5, n_jobs=-1, verbose=1)
 
     def run_optimization(self):

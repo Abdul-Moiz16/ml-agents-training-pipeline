@@ -18,7 +18,7 @@ class GridSearchKNN(BaseModel):
             ('knn', KNeighborsRegressor(n_jobs=-1))
         ])
         param_grid = {
-            'knn__n_neighbors':[3, 5, 7, 9, 11, 15, 21, 25, 31],
+            'knn__n_neighbors':[3, 5, 7, 9, 11, 15, 21, 25, 31, 34, 38],
             'knn__weights': ['uniform', 'distance'],
             'knn__p': [1, 2] # 1: Manhattan, 2: Euclidean
         }

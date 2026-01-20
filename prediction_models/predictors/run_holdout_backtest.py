@@ -170,11 +170,25 @@ def main() -> None:
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     results_df = pd.DataFrame(results)
-    results_df.to_csv(out_path, index=False)
 
     mae = mean_absolute_error(actual_vals, pred_vals)
     med_ae = median_absolute_error(actual_vals, pred_vals)
     r2 = r2_score(actual_vals, pred_vals)
+
+    summary_row = {
+        "run_id": "SUMMARY",
+        "machine_id": "ALL",
+        "algo": "ALL",
+        f"actual_{args.target}": "",
+        f"predicted_{args.target}": "",
+        "abs_error": "",
+        "mae": mae,
+        "median_ae": med_ae,
+        "r2": r2,
+    }
+
+    results_df = pd.concat([pd.DataFrame([summary_row]), results_df], ignore_index=True)
+    results_df.to_csv(out_path, index=False)
 
     print(f"Saved backtest results to: {out_path}")
     print(f"MAE: {mae:.3f}")

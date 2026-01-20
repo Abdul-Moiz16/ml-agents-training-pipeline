@@ -23,12 +23,12 @@ def main():
         target = sys.argv[1]
         base_dir = Path(__file__).resolve().parents[1]
         encoded_path = base_dir / f"encoded_datasets/encoded_{target}.csv"
-        comparison_path = (
-            base_dir
-            / "models_analysis"
-            / "models_comparisons"
-            / f"model_comparison_{target}.csv"
-        )
+        comparisons_dir = base_dir / "models_analysis" / "models_comparisons"
+        comparison_path = comparisons_dir / f"model_comparison_{target}_tuned.csv"
+        if not comparison_path.exists():
+            legacy_path = comparisons_dir / f"model_comparison_{target}.csv"
+            if legacy_path.exists():
+                comparison_path = legacy_path
 
         if not encoded_path.exists():
             raise FileNotFoundError(f"Encoded dataset not found: {encoded_path}")
@@ -59,7 +59,7 @@ def main():
         if best_model_name not in model_map:
             raise ValueError(f"Unknown model in comparison file: {best_model_name}")
 
-        model_instance = model_map[best_model_name]()
+        model_instance = model_map[best_model_name](target=target)
         model = model_instance.build_model()
         if not isinstance(model, Pipeline):
             model = Pipeline(

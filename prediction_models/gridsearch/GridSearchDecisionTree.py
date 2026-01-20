@@ -27,9 +27,9 @@ class GridSearchDecisionTree(BaseModel):
         # 2. Define the Parameter Grid
         # NOTE: Use 'tree__' prefix to match the pipeline step name
         param_grid = {
-            'tree__max_depth': [None, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 20],
-            'tree__min_samples_split': [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 20],
-            'tree__min_samples_leaf': [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 20]
+            'tree__max_depth': [None, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 20, 22, 24, 26, 28, 30],
+            'tree__min_samples_split':  [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 20, 22, 24, 26, 28, 30],
+            'tree__min_samples_leaf':  [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 20, 22, 24, 26, 28, 30]
         }
 
         # 3. Setup GridSearchCV
