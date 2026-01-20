@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_absolute_error, median_absolute_error, r2_score
 
-from build_accessor import get_hardware_specs, get_yaml_params
+from .build_accessor import get_hardware_specs, get_yaml_params
 
 
 def parse_args() -> argparse.Namespace:
