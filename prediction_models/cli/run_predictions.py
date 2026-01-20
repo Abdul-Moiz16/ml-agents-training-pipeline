@@ -94,7 +94,7 @@ def main():
 
         if not args.skip_feature_select:
             for tgt in ["time_to_convergence", "avg_ram_usage"]:
-                rc = _run_module("prediction_models.feature-selection.feature_selection_runner", ["--target", tgt])
+                rc = _run_module("prediction_models.feature_selection.feature_selection_runner", ["--target", tgt])
                 if rc: return rc
 
         if not args.skip_gridsearch:
