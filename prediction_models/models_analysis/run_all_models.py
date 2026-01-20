@@ -3,7 +3,7 @@ Train/test evaluation for multiple models using the shared preprocessing in Base
 """
 
 import pandas as pd
-from models import (
+from .models import (
     DecisionTreeModel,
     RandomForestModel,
     ExtraTreesModel,

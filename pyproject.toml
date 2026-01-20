@@ -2,16 +2,24 @@
 requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
+
 [project]
-name = "training-manager"
-version = "0.1.0"
+name = "Group8-pipeline"
+version = "1.0"
 description = "MLAgents training with monitoring and result tracking"
 authors = [{ name = "Group 8" }]
 
-dependencies = ["mlagents", "psutil","onnx"]
+dependencies = ["mlagents", "psutil", "onnx", "pandas", "scikit-learn"]
+
+
+[tool.setuptools]
+package-dir = { "" = "." }
+
+
+[tool.setuptools.packages.find]
+where = ["training_manager", "prediction_models"]
+
 
 [project.scripts]
 mlrun = "training_pipeline.cli.run_experiment:main"
-
-[tool.setuptools.packages.find]
-where = ["training_manager"]
+predrun = "cli.run_predictions:main"

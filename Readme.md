@@ -9,14 +9,13 @@ maybe add research question here
 
 ## Requirements
 
-- **Python 3.10.12** - optional if using Docker
+- **Python 3.10.12**
 - **Unity Editor 2023.2.12f1**
-- **ML-Agents 21** - optional if using Docker
 
 Recommended:
 
 - **Visual Studio Code**
-- **Miniconda** - optional if using Docker
+- **Any conda**
 
 
 ## ML-Agents Setup with Conda and Unity
@@ -64,80 +63,6 @@ mlrun --batch --rebuild-main
 ```
 Stop at anytime using `Ctrl+c`
 
-Results are saved in training_manager/experiments/results
-
-## ML-Agents Setup with Dokcer
-
-### 1. Download and install [Docker Desktop](https://docs.docker.com/desktop/)
-
-If on Windows: ensure **WSL 2** is enabled - Docker Desktop will guide you.
-
-If on Linux: Install Docker using your distro’s package manager and start the daemon. Optionally you can add your user to the `docker` group to avoid `sudo`. Note that you have to logout and log back in or reboot.
-
-On all OSs: Ensure the Docker service is running
-
-You can verify using this bash commands:
-```bash
-docker --version
-docker run --rm hello-world
-```
-
-### 2. Setup run scripts
-
-All commands below must be run from the repository root
-
-#### Linux/macOs
-Make sure run.sh is executable:
-```bash
-chmod +x scripts/run.sh
-```
-
-#### Windows
-Run commands from PowerShell (no chmod needed).
-
-### 3. Run the training
-All commands below must be run from the repository root
-#### 3.1. Start continuous training (batch mode) ***and*** rebuild aggregated results (main.csv) after every run
-
- Linux/macOS
-```bash
-./scripts/run.sh --batch
-```
-
- Windows
-```powershell
-.\scripts\run.ps1 --batch
-```
-
-Stop at anytime using `Ctrl+c`
-
-
-#### 3.2. Start continuous training (batch mode) ***without*** rebuilding aggregated results (main.csv)
-
-Linux/macOS
-```bash
-./scripts/run.sh --batch
-```
-
-Windows
-```powershell
-.\scripts\run.ps1 --batch
-```
-
-Stop at anytime using `Ctrl+c`
-
-
-#### 3.3. Rebuild aggregated results (main.csv)
-
-Linux/macOS
-```bash
-./scripts/run.sh --rebuild-main
-```
-
-Windows
-```powershell
-.\scripts\run.ps1 --rebuild-main
-```
 Results are saved in training_manager/experiments/results
 
 ## Running prediction models
