@@ -142,14 +142,14 @@ Results are saved in training_manager/experiments/results
 
 ## Running prediction models
 
-### 0) Rebuild Main (Optinal is already present)
+### 0) Rebuild Main (Optinal if already present)
 
 ```bash
 mlrun --rebuild-main
 ```
 ### 1) Holdout
 
-This select runs form the main CSV which will not be used in training for model and will be used to compare Actual vs Predicted values.
+This select runs form the main CSV which will NOT be used in training for model and will be used to compare Actual vs Predicted values.
 
 Defaults to 1 per machine and only converged + complete:
 
@@ -163,7 +163,7 @@ This writes:
 
 ### 2) Dataset encoding
 
-Create encoded datasets. Make sure you exclude holdouts.
+Create encoded datasets. Make SURE you exclude holdouts.
 
 ```bash
 python prediction_models/dataset_encoder.py time_to_convergence --exclude prediction_models/predictors/actual_and_predicted/holdout_run_ids.txt
@@ -171,7 +171,7 @@ python prediction_models/dataset_encoder.py time_to_convergence --exclude predic
 python prediction_models/dataset_encoder.py avg_ram_usage --exclude prediction_models/predictors/actual_and_predicted/holdout_run_ids.txt
 ```
 
-### 3) Feature selection (optional)
+### 3) Feature selection (optional, The best has already been selected.)
 
 This will generate best features that works best together for a given target feature to be used for prediction.
 
