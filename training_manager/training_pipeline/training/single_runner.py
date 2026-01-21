@@ -71,7 +71,7 @@ def popen_in_own_group(cmd: list[str], **kwargs) -> subprocess.Popen:
 
 def send_interrupt(proc: subprocess.Popen) -> None:
     if IS_WINDOWS:
-        # Avoid CTRL_BREAK_EVENT to prevent Fortran runtime abort; use terminate instead
+        # terminate
         proc.terminate()
     else:
         os.killpg(proc.pid, signal.SIGINT)
@@ -113,9 +113,9 @@ class Runner:
         max_steps: int = 10_000_000,
         # convergence = mean >= target AND stable
         target_mean: float = 99.5,
-        window_rows: int = 5,          # consecutive stats lines required
-        cv_max: float = 0.10,          # std/mean <= 10%  (stability)
-        mean_jitter: float = 2,      # max(mean)-min(mean) within window
+        window_rows: int = 5, # consecutive stats lines required
+        cv_max: float = 0.10, # std/mean <= 10%  (stability)
+        mean_jitter: float = 2, # max(mean)-min(mean) within window
         min_steps_before_check: int = 200_000,
         # stopping behavior
         graceful_timeout_s: int = 120,  # wait after SIGINT before escalating
@@ -328,12 +328,12 @@ class Runner:
                     except Exception:
                         pass
 
-                    # ---- STOP 1: hard cap ----
+                    # STOP 1: hard cap
                     if (not stop_signal_sent) and (step_num >= self.max_steps):
                         request_stop("max_steps")
-                        # Don't break - drain remaining output
+                        # dont break
 
-                    # ---- STOP 2: convergence (mean>=target AND stable) ----
+                    # STOP 2: convergence (mean>=target AND stable)
                     mean_win.append(mean_r)
                     std_win.append(std_r)
 
@@ -348,7 +348,7 @@ class Runner:
                             steps_to_convergence = step_num
                             time_to_convergence = t_elapsed
                             request_stop("converged")
-                            # Don't break - drain remaining output
+                            # dont break
 
                 # After EOF (process closed stdout), wait for process to exit
                 try:
@@ -392,8 +392,8 @@ class Runner:
         # Exit codes that indicate successful/intentional termination:
         # 0: normal exit
         # 130, -2: SIGINT (Ctrl+C or our interrupt)
-        # 143, -15: SIGTERM (our terminate)
-        # 137, -9: SIGKILL (our kill - last resort but still "successful" if we triggered it)
+        # 143, -15: SIGTERM (terminate)
+        # 137, -9: SIGKILL (kill - last resort)
         ok_exit_codes = {0, 130, -2, 143, -15, 137, -9}
 
         # Treat intentional stops (converged/max_steps) as success even if rc is non-zero
@@ -425,7 +425,7 @@ class Runner:
             print("-----------------------------------------------------------------")
             return  # Don't write to main.csv for incomplete runs
 
-        # === ONLY REACHED IF RUN COMPLETED SUCCESSFULLY ===
+        # ONLY REACHED IF RUN COMPLETED SUCCESSFULLY
         
         # Write completion markers
         (run_folder / "complete.flag").write_text("ok", encoding="utf-8")

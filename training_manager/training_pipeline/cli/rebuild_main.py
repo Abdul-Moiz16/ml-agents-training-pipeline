@@ -23,8 +23,8 @@ from training_pipeline.io_utils.paths import Paths
 def stats_from_run_log(path: Path) -> Dict[str, float]:
     cpu_vals = []
     ram_vals = []
-    rows = []           # all rows
-    conv_rows = []      # rows considered for convergence (skip baseline step 0)
+    rows = [] # all rows
+    conv_rows = [] # rows considered for convergence (skip baseline step 0)
     last = {}
     with path.open(encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -60,7 +60,7 @@ def stats_from_run_log(path: Path) -> Dict[str, float]:
     time_to_convergence = "NA"
     TARGET_MEAN = 100 # configurable: reward target to consider "converged"
     STD_RATIO = 1  # controls how much reward variability you allow relative to the mean. We compute std_of_reward / mean_reward for rows in the window; if that ratio is below STD_RATIO, the rewards are considered “stable enough.” A lower value means stricter stability (less noise allowed), a higher value means you’ll accept noisier rewards when deciding the run has converged.
-    WINDOW_ROWS = 3     # require this many consecutive rows to meet target/noise
+    WINDOW_ROWS = 3 # require this many consecutive rows to meet target/noise
 
     if len(conv_rows) > 1:
         for i in range(WINDOW_ROWS - 1, len(conv_rows)):

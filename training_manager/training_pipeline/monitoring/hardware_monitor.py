@@ -61,7 +61,7 @@ class HardwareMonitor:
             except Exception as e:
                 print(f"? Warning: Could not trim CSV on resume: {e}")
         elif file_exists:
-            # Not a resume but file exists - read last row for time offset
+            # Not a resume but file exists. read last row for time offset
             try:
                 with self._csv_path.open('r', newline='', encoding='utf-8') as f:
                     reader = csv.DictReader(f)
@@ -132,7 +132,7 @@ class HardwareMonitor:
             except (ValueError, IndexError):
                 continue
 
-        # Safety check: if no checkpoint found, don't trim anything
+        # if no checkpoint found, don't trim anything
         if max_checkpoint_step == 0:
             print("? resume: no checkpoint in csv, keeping all data")
             if rows:
@@ -159,7 +159,7 @@ class HardwareMonitor:
                     if step == max_checkpoint_step:
                         checkpoint_row = row
             except (ValueError, IndexError):
-                # Keep rows we can't parse (just in case)
+                # Keep rows that can't be parsed (just in case)
                 trimmed_rows.append(row)
 
         trimmed_count = len(rows) - len(trimmed_rows)
