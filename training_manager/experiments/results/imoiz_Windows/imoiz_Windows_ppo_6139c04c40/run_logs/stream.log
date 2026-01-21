@@ -1,0 +1,151 @@
+C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\torch\__init__.py:1264: UserWarning: torch.set_default_tensor_type() is deprecated as of PyTorch 2.1, please use torch.set_default_dtype() and torch.set_default_device() as alternatives. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\tensor\python_tensor.cpp:436.)
+  _C._set_default_tensor_type(t)
+C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\torch\__init__.py:1264: UserWarning: torch.set_default_tensor_type() is deprecated as of PyTorch 2.1, please use torch.set_default_dtype() and torch.set_default_device() as alternatives. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\tensor\python_tensor.cpp:436.)
+  _C._set_default_tensor_type(t)
+[INFO] Connected to Unity environment with package version 3.0.0-exp.1 and communication version 1.5.0
+[INFO] Connected new brain: 3DBall?team=0
+
+
+	Unity Technologies
+
+ Version information:
+  ml-agents: 1.1.0.dev0,
+  ml-agents-envs: 1.1.0.dev0,
+  Communicator API: 1.5.0,
+  PyTorch: 2.8.0+cpu
+[INFO] Hyperparameters for behavior name 3DBall: 
+	trainer_type:	ppo
+	hyperparameters:	
+	  batch_size:	128
+	  buffer_size:	2688
+	  learning_rate:	0.000187773742434295
+	  beta:	0.0034701408333064586
+	  epsilon:	0.135405470140404
+	  lambd:	0.9279707765214473
+	  num_epoch:	3
+	  shared_critic:	False
+	  learning_rate_schedule:	linear
+	  beta_schedule:	linear
+	  epsilon_schedule:	linear
+	checkpoint_interval:	500000
+	network_settings:	
+	  normalize:	False
+	  hidden_units:	64
+	  num_layers:	1
+	  vis_encode_type:	simple
+	  memory:	None
+	  goal_conditioning_type:	hyper
+	  deterministic:	False
+	reward_signals:	
+	  extrinsic:	
+	    gamma:	0.8782466176904447
+	    strength:	1.0
+	    network_settings:	
+	      normalize:	False
+	      hidden_units:	128
+	      num_layers:	2
+	      vis_encode_type:	simple
+	      memory:	None
+	      goal_conditioning_type:	hyper
+	      deterministic:	False
+	init_path:	None
+	keep_checkpoints:	5
+	even_checkpoints:	False
+	max_steps:	10000000
+	time_horizon:	128
+	summary_freq:	10000
+	threaded:	False
+	self_play:	None
+	behavioral_cloning:	None
+[INFO] 3DBall. Step: 10000. Time Elapsed: 16.203 s. Mean Reward: 1.166. Std of Reward: 0.727. Training.
+[INFO] 3DBall. Step: 20000. Time Elapsed: 27.974 s. Mean Reward: 1.151. Std of Reward: 0.658. Training.
+[INFO] 3DBall. Step: 30000. Time Elapsed: 38.450 s. Mean Reward: 1.224. Std of Reward: 0.741. Training.
+[INFO] 3DBall. Step: 40000. Time Elapsed: 48.878 s. Mean Reward: 1.205. Std of Reward: 0.682. Training.
+[INFO] 3DBall. Step: 50000. Time Elapsed: 60.610 s. Mean Reward: 1.327. Std of Reward: 0.809. Training.
+[INFO] 3DBall. Step: 60000. Time Elapsed: 71.866 s. Mean Reward: 1.442. Std of Reward: 0.796. Training.
+[INFO] 3DBall. Step: 70000. Time Elapsed: 81.753 s. Mean Reward: 1.590. Std of Reward: 0.893. Training.
+[INFO] 3DBall. Step: 80000. Time Elapsed: 92.471 s. Mean Reward: 1.681. Std of Reward: 0.988. Training.
+[INFO] 3DBall. Step: 90000. Time Elapsed: 103.001 s. Mean Reward: 1.812. Std of Reward: 0.948. Training.
+[INFO] 3DBall. Step: 100000. Time Elapsed: 113.451 s. Mean Reward: 1.991. Std of Reward: 1.082. Training.
+[INFO] 3DBall. Step: 110000. Time Elapsed: 124.650 s. Mean Reward: 2.016. Std of Reward: 1.071. Training.
+[INFO] 3DBall. Step: 120000. Time Elapsed: 135.049 s. Mean Reward: 2.339. Std of Reward: 1.368. Training.
+[INFO] 3DBall. Step: 130000. Time Elapsed: 145.755 s. Mean Reward: 2.238. Std of Reward: 1.362. Training.
+[INFO] 3DBall. Step: 140000. Time Elapsed: 155.617 s. Mean Reward: 2.412. Std of Reward: 1.497. Training.
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "C:\Users\imoiz\AppData\Local\Programs\Python\Python310\lib\threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\summary\writer\event_file_writer.py", line 244, in run
+    self._run()
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\summary\writer\event_file_writer.py", line 275, in _run
+    self._record_writer.write(data)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\summary\writer\record_writer.py", line 40, in write
+    self._writer.write(header + header_crc + data + footer_crc)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\compat\tensorflow_stub\io\gfile.py", line 775, in write
+[INFO] Exported C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\training_manager\experiments\results\imoiz_Windows\imoiz_Windows_ppo_6139c04c40\3DBall\3DBall-149979.onnx
+    self.fs.append(self.filename, file_content, self.binary_mode)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\compat\tensorflow_stub\io\gfile.py", line 167, in append
+    self._write(filename, file_content, "ab" if binary_mode else "a")
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\compat\tensorflow_stub\io\gfile.py", line 171, in _write
+    with io.open(filename, mode, encoding=encoding) as f:
+PermissionError: [Errno 13] Permission denied: b'C:\\Users\\imoiz\\OneDrive\\Desktop\\Group8-AI-ML\\training_manager\\experiments\\results\\imoiz_Windows\\imoiz_Windows_ppo_6139c04c40/3DBall\\events.out.tfevents.1768731207.AbdulMoiz.33160.0'
+[INFO] Copied C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\training_manager\experiments\results\imoiz_Windows\imoiz_Windows_ppo_6139c04c40\3DBall\3DBall-149979.onnx to C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\training_manager\experiments\results\imoiz_Windows\imoiz_Windows_ppo_6139c04c40\3DBall.onnx.
+Traceback (most recent call last):
+  File "C:\Users\imoiz\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\imoiz\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\Scripts\mlagents-learn.exe\__main__.py", line 6, in <module>
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents\mlagents\trainers\learn.py", line 270, in main
+    run_cli(parse_command_line())
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents\mlagents\trainers\learn.py", line 266, in run_cli
+    run_training(run_seed, options, num_areas)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents\mlagents\trainers\learn.py", line 138, in run_training
+    tc.start_learning(env_manager)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents-envs\mlagents_envs\timers.py", line 305, in wrapped
+    return func(*args, **kwargs)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents\mlagents\trainers\trainer_controller.py", line 175, in start_learning
+    n_steps = self.advance(env_manager)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents-envs\mlagents_envs\timers.py", line 305, in wrapped
+    return func(*args, **kwargs)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents\mlagents\trainers\trainer_controller.py", line 250, in advance
+    trainer.advance()
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents\mlagents\trainers\trainer\rl_trainer.py", line 293, in advance
+    self._process_trajectory(t)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents\mlagents\trainers\ppo\trainer.py", line 74, in _process_trajectory
+    super()._process_trajectory(trajectory)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents\mlagents\trainers\trainer\rl_trainer.py", line 223, in _process_trajectory
+    self._maybe_write_summary(self.get_step + len(trajectory.steps))
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents\mlagents\trainers\trainer\rl_trainer.py", line 236, in _maybe_write_summary
+    self._write_summary(self._next_summary_step)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents\mlagents\trainers\trainer\rl_trainer.py", line 215, in _write_summary
+    self.stats_reporter.write_stats(int(step))
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents\mlagents\trainers\stats.py", line 376, in write_stats
+    writer.write_stats(self.category, values, step)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\ml-agents\mlagents\trainers\stats.py", line 249, in write_stats
+    self.summary_writers[category].flush()
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\torch\utils\tensorboard\writer.py", line 1194, in flush
+    writer.flush()
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\torch\utils\tensorboard\writer.py", line 153, in flush
+    self.event_writer.flush()
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\summary\writer\event_file_writer.py", line 125, in flush
+    self._async_writer.flush()
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\summary\writer\event_file_writer.py", line 194, in flush
+    self._check_worker_status()
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\summary\writer\event_file_writer.py", line 212, in _check_worker_status
+    raise exception
+  File "C:\Users\imoiz\AppData\Local\Programs\Python\Python310\lib\threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\summary\writer\event_file_writer.py", line 244, in run
+    self._run()
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\summary\writer\event_file_writer.py", line 275, in _run
+    self._record_writer.write(data)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\summary\writer\record_writer.py", line 40, in write
+    self._writer.write(header + header_crc + data + footer_crc)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\compat\tensorflow_stub\io\gfile.py", line 775, in write
+    self.fs.append(self.filename, file_content, self.binary_mode)
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\compat\tensorflow_stub\io\gfile.py", line 167, in append
+    self._write(filename, file_content, "ab" if binary_mode else "a")
+  File "C:\Users\imoiz\OneDrive\Desktop\Group8-AI-ML\venv\lib\site-packages\tensorboard\compat\tensorflow_stub\io\gfile.py", line 171, in _write
+    with io.open(filename, mode, encoding=encoding) as f:
+PermissionError: [Errno 13] Permission denied: b'C:\\Users\\imoiz\\OneDrive\\Desktop\\Group8-AI-ML\\training_manager\\experiments\\results\\imoiz_Windows\\imoiz_Windows_ppo_6139c04c40/3DBall\\events.out.tfevents.1768731207.AbdulMoiz.33160.0'
