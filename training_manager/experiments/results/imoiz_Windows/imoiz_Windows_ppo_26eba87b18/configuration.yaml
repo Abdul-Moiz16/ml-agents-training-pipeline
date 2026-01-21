@@ -1,0 +1,43 @@
+behaviors:
+  3DBall:
+    trainer_type: ppo
+    hyperparameters:
+<<<<<<<< HEAD:training_manager/experiments/results/nico_Windows/nico_Windows_ppo_9d5051ed2b/configuration.yaml
+      batch_size: 64
+      buffer_size: 1472
+      learning_rate: 7.620864636116961e-05
+      beta: 0.005415488240874194
+      epsilon: 3
+      lambd: 95
+      num_epoch: 5
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: false
+      hidden_units: 256
+========
+      batch_size: 32
+      buffer_size: 576
+      learning_rate: 0.00021891688771389977
+      beta: 0.007936764697179468
+      epsilon: 0.2824061530317845
+      lambd: 0.9370940726860448
+      num_epoch: 3
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: false
+      hidden_units: 64
+>>>>>>>> 99046897a4dfbef0dae7fca6eacd27d765d32239:training_manager/experiments/results/imoiz_Windows/imoiz_Windows_ppo_26eba87b18/configuration.yaml
+      num_layers: 3
+      vis_encode_type: simple
+    reward_signals:
+      extrinsic:
+<<<<<<<< HEAD:training_manager/experiments/results/nico_Windows/nico_Windows_ppo_9d5051ed2b/configuration.yaml
+        gamma: 0
+========
+        gamma: 0.9884529113323808
+>>>>>>>> 99046897a4dfbef0dae7fca6eacd27d765d32239:training_manager/experiments/results/imoiz_Windows/imoiz_Windows_ppo_26eba87b18/configuration.yaml
+        strength: 1
+    keep_checkpoints: 5
+    max_steps: 10000000
+    time_horizon: 128
+    summary_freq: 10000
