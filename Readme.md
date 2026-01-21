@@ -69,11 +69,6 @@ To rebuild the main csv and add newly collected data to it, type:
 mlrun --batch --rebuild-main
 ```
 
-<<<<<<< HEAD
-## How to run training
-
-Training can be run from feture/training-pipeline branch, where the updated Readme with inctructions can be found 
-=======
 Also a lot of changes that are tied to the way the program classifies a run as converged can be changed like:
 ```bash
 mlrun --batch --max-steps
@@ -83,7 +78,6 @@ mlrun --batch --cv-max
 mlrun --batch --mean-jitter
 mlrun --batch --min-steps-before-check
 ```
->>>>>>> origin/feature/training-pipeline
 
 Results are saved in `training_manager/experiments/results`
 
@@ -228,21 +222,3 @@ predrun predict-hw avg_ram_usage prediction_models/predictors/custom_configs_wit
 ```
 
 Combined outputs are saved to `prediction_models/predictors/predicted_custom_hw/.`
-
-## Data collection
-The data are stored as the CSV files. Data include hardware used, environment specs, DRL algorithm, [hyperparameters configuration](https://unity-technologies.github.io/ml-agents/Training-Configuration-File/) together with runtime and performance outcomes. Proper documentation of parameters that we collect can be found in the repository mentioned below under the **Group 8** directory.
-
-<<<<<<< HEAD
-Right now we are developing the tool to automate the process of running the tests and storing data afterwards. 
-
-The data will be stored as the CSV files. Data include hardware used, environment specs, DRL algorithm, [hyperparameters configuration](https://unity-technologies.github.io/ml-agents/Training-Configuration-File/) together with runtime and performance outcomes. Proper documentation of parameters that we aim to collect can be found in the repositories mentioned below under the **Group 8** directory.
-
-Firstly, group members add the generated data to the [forked repository](https://github.com/qba24qba/BCS2720-project-data-collection-2025-2026.git). When they are ready to be shared for use by the rest of the groups we submit a **pull request** to the [collaborative collection repository](https://github.com/DennisSoemers/BCS2720-project-data-collection-2025-2026). 
-
-Description of how to run the trainining+collecting to be added
-
-
-## Project Status
-In development. Wokring on the training + data collection...
-=======
->>>>>>> origin/feature/training-pipeline
